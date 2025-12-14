@@ -1,20 +1,172 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
+import Logo from '@/components/ui/Logo'
+import Link from 'next/link'
 
 export default function Header() {
+  const [isServicesOpen, setIsServicesOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
   return (
-    <header className="w-full border-b">
-      <nav className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          <div className="text-xl font-bold">
-            Scandi Commerce
+    <header className="w-full bg-white sticky top-0 z-50 shadow-header">
+      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          <div className="flex-shrink-0">
+            <Link href="/">
+              <Logo />
+            </Link>
           </div>
-          <div className="hidden md:flex space-x-6">
-            <a href="#" className="hover:text-gray-600">Home</a>
-            <a href="#" className="hover:text-gray-600">About</a>
-            <a href="#" className="hover:text-gray-600">Services</a>
-            <a href="#" className="hover:text-gray-600">Contact</a>
+
+          <div className="hidden lg:flex items-center space-x-8">
+            <div className="relative">
+              <button
+                onClick={() => setIsServicesOpen(!isServicesOpen)}
+                className="flex items-center gap-1 text-gray-900 hover:text-teal transition-colors font-medium"
+              >
+                Services
+                <svg
+                  className={`w-4 h-4 transition-transform ${
+                    isServicesOpen ? 'rotate-180' : ''
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+            </div>
+            <Link
+              href="/work"
+              className="text-gray-900 hover:text-teal transition-colors font-medium"
+            >
+              Work
+            </Link>
+            <Link
+              href="/about"
+              className="text-gray-900 hover:text-teal transition-colors font-medium"
+            >
+              About
+            </Link>
+            <Link
+              href="/resources"
+              className="text-gray-900 hover:text-teal transition-colors font-medium"
+            >
+              Resources
+            </Link>
+            <Link
+              href="/partners"
+              className="text-gray-900 hover:text-teal transition-colors font-medium"
+            >
+              Partners
+            </Link>
+            <Link
+              href="/contact"
+              className="text-gray-900 hover:text-teal transition-colors font-medium"
+            >
+              Contact
+            </Link>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <Link
+              href="/get-started"
+              className="hidden sm:inline-block bg-teal text-white px-6 py-2.5 font-semibold hover:bg-teal-dark transition-colors shadow-button"
+            >
+              GET STARTED
+            </Link>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="lg:hidden text-gray-900"
+              aria-label="Toggle menu"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                {isMobileMenuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
           </div>
         </div>
+
+        {isMobileMenuOpen && (
+          <div className="lg:hidden pb-4 border-t border-gray-200 mt-2">
+            <div className="flex flex-col space-y-4 pt-4">
+              <Link
+                href="/services"
+                className="text-gray-900 hover:text-teal transition-colors font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Services
+              </Link>
+              <Link
+                href="/work"
+                className="text-gray-900 hover:text-teal transition-colors font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Work
+              </Link>
+              <Link
+                href="/about"
+                className="text-gray-900 hover:text-teal transition-colors font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                About
+              </Link>
+              <Link
+                href="/resources"
+                className="text-gray-900 hover:text-teal transition-colors font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Resources
+              </Link>
+              <Link
+                href="/partners"
+                className="text-gray-900 hover:text-teal transition-colors font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Partners
+              </Link>
+              <Link
+                href="/contact"
+                className="text-gray-900 hover:text-teal transition-colors font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
+              <Link
+                href="/get-started"
+                className="bg-teal text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-teal-dark transition-colors text-center shadow-button"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                GET STARTED
+              </Link>
+            </div>
+          </div>
+        )}
       </nav>
     </header>
   )

@@ -1,20 +1,28 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import Hero from '@/components/sections/Hero'
+import TrustedBy from '@/components/sections/TrustedBy'
+import PainPoints from '@/components/sections/PainPoints'
+import ServicesPackaged from '@/components/sections/ServicesPackaged'
+import Results from '@/components/sections/Results'
+import HowWeWork from '@/components/sections/HowWeWork'
+import Partners from '@/components/sections/Partners'
+import CTA from '@/components/sections/CTA'
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <div className="flex-grow">
-        <div className="container mx-auto px-4 py-8">
-          <h1 className="text-4xl font-bold text-center">
-            Welcome to Scandi Commerce
-          </h1>
-          <p className="text-center mt-4 text-gray-600">
-            Start building your website by converting the Figma design components
-          </p>
-        </div>
-      </div>
+      <main className="flex-grow">
+        <Hero />
+        <TrustedBy />
+        <PainPoints />
+        <ServicesPackaged />
+        <Results />
+        <HowWeWork />
+        <Partners />
+        <CTA />
+      </main>
       <Footer />
     </div>
   )

@@ -9,10 +9,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // primary: {
-        //   DEFAULT: '#000000',
-        //   light: '#333333',
-        // },
+        teal: {
+          DEFAULT: '#03C1CA',
+          light: '#5EEAD4',
+          dark: '#0D9488',
+          
+        },
+        defaultText: {
+          DEFAULT: '#03C1CA',
+        },
+        badge: {
+          DEFAULT: '#1DEFFA1A',
+        },
+      },
+      boxShadow: {
+        'button': '0px 8px 14px 0px rgba(141, 141, 141, 0.2)',
+        'header': '0px 4px 18px 0px rgba(0, 0, 0, 0.05)',
       },
       fontFamily: {
         // sans: ['Inter', 'sans-serif'],

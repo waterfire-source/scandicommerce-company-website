@@ -65,8 +65,10 @@ scandicommerce-company-website/
    - Use Next.js App Router conventions
 
 4. **Add Assets**:
-   - Place images in `public/` directory
-   - Reference them using `/image-name.png`
+   - Place images in `public/images/` directory
+   - Place icons in `public/icons/` directory
+   - Reference them using `/images/image-name.png` or `/icons/icon-name.svg`
+   - Use Next.js `Image` component for optimized images (see examples below)
 
 ## 🛠️ Available Scripts
 
@@ -81,6 +83,7 @@ scandicommerce-company-website/
 - **Next.js 14** - React framework with App Router
 - **TypeScript** - Type safety
 - **Tailwind CSS** - Utility-first CSS framework
+- **React Icons** - Icon library (react-icons)
 - **ESLint** - Code linting
 
 ## 🎯 Next Steps
@@ -90,6 +93,57 @@ scandicommerce-company-website/
 3. Build out pages and sections
 4. Add animations and interactions
 5. Optimize for performance and SEO
+
+## 📁 Asset Organization
+
+### Where to Add Assets
+
+All static assets should be placed in the `public/` directory:
+
+```
+public/
+├── images/          # Images (photos, banners, etc.)
+│   ├── logo.png
+│   ├── hero-banner.jpg
+│   └── about-us.jpg
+├── icons/           # Icon files (SVG, PNG)
+│   └── favicon.ico
+└── ...
+```
+
+### How to Use Images
+
+**Option 1: Using Next.js Image Component (Recommended)**
+```tsx
+import Image from 'next/image'
+
+<Image
+  src="/images/logo.png"
+  alt="Scandi Commerce Logo"
+  width={200}
+  height={50}
+/>
+```
+
+**Option 2: Using Regular HTML img tag**
+```tsx
+<img src="/images/logo.png" alt="Scandi Commerce Logo" />
+```
+
+**Option 3: Using CSS Background**
+```tsx
+<div 
+  className="bg-cover bg-center"
+  style={{ backgroundImage: 'url(/images/hero-banner.jpg)' }}
+>
+</div>
+```
+
+### Important Notes:
+- Files in `public/` are served from the root URL (`/`)
+- Always use paths starting with `/` (e.g., `/images/logo.png`)
+- Next.js `Image` component provides automatic optimization, lazy loading, and responsive images
+- For the `Image` component, you need to specify `width` and `height` (or use `fill` for responsive images)
 
 ## 📝 Notes
 
