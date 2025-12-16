@@ -1,7 +1,9 @@
+'use client'
+
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import ServiceCard from '@/components/ui/ServiceCard'
+import LiquidBlob from '@/components/ui/LiquidBlob'
 
 export default function Hero() {
   const services = [
@@ -13,14 +15,8 @@ export default function Hero() {
 
   return (
     <section className="relative bg-gray-50 py-16 lg:py-24 overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 xl:w-2/3 md:w-3/4 w-[95%] h-7/10">
-        <img
-          src="/images/hero-ellipse-bg.png"
-          alt="Hero background shape"
-          className="w-full h-full"
-        />
-      </div>
-
+      <LiquidBlob className="hidden lg:block right-[-20%] top-[-30%] w-[80%] h-[160%]" />
+      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12 lg:gap-16">
           <div className="relative space-y-14 w-full lg:w-3/5">
