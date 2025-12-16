@@ -26,29 +26,29 @@ export default function PainPoints() {
         }}
       />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-56">
-        <div className="text-center mb-12 lg:mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-56">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight px-2">
             Tired of <span className="text-teal">proposal ping-pong</span> with agencies?
           </h2>
         </div>
 
-        <div className="flex justify-between items-center gap-6 mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16 lg:mb-20">
           {painPoints.map((point, index) => (
             <div
               key={index}
-              className="bg-white p-6 shadow-md hover:shadow-lg transition-shadow flex flex-col items-center justify-around gap-4 w-1/4 h-40"
+              className="bg-white p-4 sm:p-6 shadow-md hover:shadow-lg transition-shadow flex flex-col items-center justify-center gap-3 sm:gap-4 min-h-[140px] sm:h-40"
             >
-              <div className="flex items-center justify-center w-12 h-12 bg-teal rounded-full">
-                <HiXMark className="w-6 h-6 text-white" />
+              <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-teal rounded-full flex-shrink-0">
+                <HiXMark className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <p className="text-[#565454] font-semibold text-sm text-center">{point.text}</p>
+              <p className="text-[#565454] font-semibold text-xs sm:text-sm text-center leading-tight">{point.text}</p>
             </div>
           ))}
         </div>
 
-        <div className="text-center mb-6">
-          <p className="text-lg lg:text-xl text-gray-900">
+        <div className="text-center mb-4 sm:mb-6">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-900">
             We built something different.
           </p>
         </div>
@@ -56,7 +56,7 @@ export default function PainPoints() {
         <div className="text-center">
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 text-defaultText font-semibold text-lg hover:text-teal-dark transition-colors"
+            className="inline-flex items-center gap-2 text-defaultText font-semibold text-base sm:text-lg hover:text-teal-dark transition-colors"
           >
             Explore our product-style services
             <svg

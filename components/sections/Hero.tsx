@@ -13,24 +13,17 @@ export default function Hero() {
 
   return (
     <section className="relative bg-gray-50 py-16 lg:py-24 overflow-hidden">
-      <div className="absolute top-20 left-1/4 w-64 h-64 bg-teal/10 rounded-full blur-3xl -z-10 opacity-50" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-teal/5 rounded-full blur-3xl -z-10 opacity-50" />
+      <div className="absolute top-1/2 left-1/2 xl:w-2/3 md:w-3/4 w-[95%] h-7/10">
+        <img
+          src="/images/hero-ellipse-bg.png"
+          alt="Hero background shape"
+          className="w-full h-full"
+        />
+      </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12 lg:gap-16">
           <div className="relative space-y-14 w-full lg:w-3/5">
-            <div className="absolute inset-0 -z-10 overflow-visible pointer-events-none">
-              <div className="absolute -left-10 -top-10 w-[120%] h-[120%]">
-                <Image
-                  src="/images/hero-ellipse-bg.png"
-                  alt="Hero background shape"
-                  fill
-                  className="object-contain"
-                  style={{ objectPosition: 'left top' }}
-                  priority
-                />
-              </div>
-            </div>
 
             <div
               className="inline-block px-5 py-4 shadow-button relative z-10"
@@ -41,28 +34,28 @@ export default function Hero() {
               </span>
             </div>
 
-            <h1 className="text-[36px] sm:text-[48px] lg:text-[64px] font-bold text-gray-900 leading-[130%] tracking-[0%] pr-[78px] relative z-10">
+            <h1 className="text-[32px] sm:text-[42px] md:text-[48px] lg:text-[64px] font-bold text-gray-900 leading-[130%] tracking-[0%] pr-0 sm:pr-8 lg:pr-[78px] relative z-10">
               Shop for Shopify{' '}
               <span className="text-teal">services</span> like you shop for
               products
             </h1>
 
-            <p className="text-lg text-gray-600 leading-relaxed pr-12 relative z-10">
+            <p className="text-base sm:text-lg text-gray-600 leading-relaxed pr-0 sm:pr-8 lg:pr-12 relative z-10">
               Transparent pricing. Productized packages. No proposal ping-pong.
               Browse, select, and book Shopify services as easily as buying
               online.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-7 relative z-10">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-7 relative z-10">
               <Link
                 href="/services"
-                className="bg-teal text-white px-[53px] py-[18px] font-semibold hover:bg-teal-dark transition-colors shadow-button text-center"
+                className="bg-teal text-white px-8 sm:px-[53px] py-4 sm:py-[18px] font-semibold hover:bg-teal-dark transition-colors shadow-button text-center"
               >
                 Browse Services
               </Link>
               <Link
                 href="/work"
-                className="bg-white text-gray-900 px-[70px] py-[18px] font-semibold transition-colors shadow-button text-center"
+                className="bg-white text-gray-900 px-8 sm:px-[70px] py-4 sm:py-[18px] font-semibold transition-colors shadow-button text-center"
               >
                 See Our Work
               </Link>
@@ -73,7 +66,7 @@ export default function Hero() {
             </p>
           </div>
 
-          <div className="space-y-4 w-full lg:w-2/5">
+          <div className="space-y-4 w-full lg:w-2/5 z-10">
             {services.map((service, index) => (
               <ServiceCard
                 key={index}
