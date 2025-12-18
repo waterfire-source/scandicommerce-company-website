@@ -11,7 +11,7 @@ export default function GetShopifyInsitesDelivered() {
             </h2>
 
             <p className="lg:text-[24px] sm:text-lg text-base text-white">
-              Let's discuss your project and how we can help you grow
+              Let&apos;s discuss your project and how we can help you grow
             </p>
           </div>
 

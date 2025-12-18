@@ -1,17 +1,21 @@
+import Image from 'next/image'
+
 export default function Hero() {
   return (
     <section className="relative bg-[#F8F8F8] py-16 lg:py-24 overflow-hidden min-h-[calc(100vh-80px)] flex items-center justify-center">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 xl:w-2/3 md:w-3/4 w-[95%] h-7/10">
-        <img
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 xl:w-2/3 md:w-3/4 w-[95%] h-[70%]">
+        <Image
           src="/images/work/hero/animation1.png"
           alt="animation1"
+          fill
           className="w-full h-full"
         />
       </div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 xl:w-[70%] md:w-[80%] w-[95%] h-7/10">
-        <img
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 xl:w-[70%] md:w-[80%] w-[95%] h-[70%]">
+        <Image
           src="/images/work/hero/animation2.png"
           alt="animation2"
+          fill
           className="w-full h-full"
         />
       </div>

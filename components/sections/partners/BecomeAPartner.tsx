@@ -7,7 +7,7 @@ export default function BecomeAPartner() {
         <div className="text-center flex flex-col items-center justify-start lg:gap-[91px] gap-16">
           <div className="flex flex-col items-center justify-start lg:gap-7 gap-4 max-w-5xl">
             <h2 className="lg:text-[48px] sm:text-4xl text-2xl font-bold text-white mb-4 lg:mb-6">
-              Need a tool we don't partner with?
+              Need a tool we don&apos;t partner with?
             </h2>
 
             <p className="lg:text-[24px] sm:text-lg text-sm text-white">

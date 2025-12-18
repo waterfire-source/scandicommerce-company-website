@@ -15,8 +15,8 @@ export default function OurStory() {
               traditional agency models. Too many proposals, unclear pricing,
               and scope creep were the norm. We asked ourselves: What if buying
               agency services felt like buying products? Clear features,
-              transparent pricing, and no BS. Today, we're Norway's most
-              transparent Shopify agency. Our clients know exactly what they're
+              transparent pricing, and no BS. Today, we&apos;re Norway&apos;s most
+              transparent Shopify agency. Our clients know exactly what they&apos;re
               getting, what it costs, and when it will be delivered. No
               surprises, just results.
             </p>

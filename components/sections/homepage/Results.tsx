@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface CaseStudy {
   clientName: string
@@ -67,10 +68,11 @@ export default function Results() {
             >
               <div className="flex items-start justify-between mb-6">
                 <div className="relative w-16 h-16 rounded-lg overflow-hidden">
-                  <img
+                  <Image
                     src={study.image}
                     alt={study.clientName}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
                   />
                 </div>
                 <span className="text-sm text-gray-400">{study.clientName}</span>

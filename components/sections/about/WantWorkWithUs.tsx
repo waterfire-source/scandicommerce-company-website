@@ -11,8 +11,8 @@ export default function WantWorkWithUs() {
             </h2>
 
             <p className="lg:text-[24px] sm:text-lg text-sm text-white">
-              We're selective about who we work with. Let's chat and see if
-              we're a good fit.
+              We&apos;re selective about who we work with. Let&apos;s chat and see if
+              we&apos;re a good fit.
             </p>
           </div>
 

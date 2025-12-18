@@ -52,7 +52,7 @@ const features = [
       </svg>
     ),
     title: 'Certified Expertise',
-    description: `We're trained and certified on best practices`,
+    description: `We&apos;re trained and certified on best practices`,
   },
   {
     icon: (
@@ -92,6 +92,7 @@ export default function WhyOurPartnership() {
           {features.map((feature, index) => {
             return (
               <div
+                key={index}
                 className={`flex flex-col items-center text-center md:border-r py-5 border-[#565454] ${
                   index === 0 && 'md:border-l'
                 }`}
