@@ -1,15 +1,32 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Logo from '@/components/ui/Logo'
 import Link from 'next/link'
 
 export default function Header() {
   const [isServicesOpen, setIsServicesOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <header className="w-full bg-white sticky top-0 z-50 shadow-header">
+    <header
+      className={`w-full sticky top-0 z-50 transition-all duration-300 ${isScrolled
+          ? 'bg-white/75 backdrop-blur-sm shadow-header'
+          : 'bg-white shadow-header'
+        }`}
+    >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0">
@@ -26,9 +43,8 @@ export default function Header() {
               >
                 Services
                 <svg
-                  className={`w-4 h-4 transition-transform ${
-                    isServicesOpen ? 'rotate-180' : ''
-                  }`}
+                  className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''
+                    }`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

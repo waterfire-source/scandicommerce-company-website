@@ -15,7 +15,6 @@ export default function Hero() {
         <div className="w-full h-full rounded-[50%] bg-[#1DEFFA40]" />
       </div>
       
-      {/* Inner teal ellipse - main blob */}
       <div 
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] md:w-[75%] lg:w-[65%] xl:w-[55%]"
         style={{ 
@@ -26,7 +25,6 @@ export default function Hero() {
         <div className="w-full h-full rounded-[50%] bg-[#03C1CA]" />
       </div>
       
-      {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col items-center justify-center text-center">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 lg:mb-6">

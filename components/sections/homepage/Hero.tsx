@@ -3,7 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import ServiceCard from '@/components/ui/ServiceCard'
-import LiquidBlob from '@/components/ui/LiquidBlob'
+import Image from 'next/image'
 
 export default function Hero() {
   const services = [
@@ -14,9 +14,23 @@ export default function Hero() {
   ]
 
   return (
-    <section className="relative bg-gray-50 py-16 lg:py-24 overflow-hidden">
-      <LiquidBlob className="hidden lg:block right-[-20%] top-[-30%] w-[80%] h-[160%]" />
-      
+    <section className="relative bg-[#F8F8F8] py-16 lg:py-24 overflow-hidden min-h-[calc(100vh-80px)] flex items-center justify-center">
+      <div className="absolute top-0 right-0 w-[34%] aspect-[405/412] z-0 flex justify-end items-start">
+        <Image
+          src="/images/homepage/hero/animation1.png"
+          alt="animation1"
+          fill
+          className="w-full h-full object-contain"
+        />
+      </div>
+      <div className="absolute top-0 right-0 w-[50%] aspect-[1204/875] z-[1] flex justify-end items-start">
+        <Image
+          src="/images/homepage/hero/animation2.png"
+          alt="animation2"
+          fill
+          className="w-full h-full object-contain"
+        />
+      </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12 lg:gap-16">
           <div className="relative space-y-14 w-full lg:w-3/5">
