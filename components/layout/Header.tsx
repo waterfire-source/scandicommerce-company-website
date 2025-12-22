@@ -83,6 +83,12 @@ export default function Header() {
               Partners
             </Link>
             <Link
+              href="/merch"
+              className="text-gray-900 hover:text-teal transition-colors font-medium"
+            >
+              Merch
+            </Link>
+            <Link
               href="/contact"
               className="text-gray-900 hover:text-teal transition-colors font-medium"
             >
@@ -165,6 +171,13 @@ export default function Header() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Partners
+              </Link>
+              <Link
+                href="/merch"
+                className="text-gray-900 hover:text-teal transition-colors font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Merch
               </Link>
               <Link
                 href="/contact"

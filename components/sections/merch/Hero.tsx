@@ -6,9 +6,9 @@ export default function Hero() {
   return (
     <section className="relative bg-[#F8F8F8] py-16 lg:py-24 overflow-hidden min-h-[calc(100vh-80px)] flex items-center justify-center">
       <LiquidBlob
-        page="partners"
+        page="merch"
         rotation={-3}
-        className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] md:w-[120%] lg:w-[115%] xl:w-[110%] h-[130%] hidden lg:block"
+        className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550%] md:w-[480%] lg:w-[420%] xl:w-[380%] h-[95%] hidden lg:block"
         enableMouseFollow={true}
       />
 
@@ -18,14 +18,13 @@ export default function Hero() {
       <div className="container flex flex-col justify-center items-center mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-[960px]">
         <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-4 sm:mb-6">
           <span className="xl:text-[#FFFFFF] text-[#222222] leading-[130%]">
-            Partnering with the tools that
+            ScandiCommerce
           </span>{' '}
-          <span className="text-[#1DEFFA] leading-[130%]">grow your store</span>
+          <span className="text-[#1DEFFA] leading-[130%]">Merch</span>
         </h1>
         <p className="text-base lg:text-lg xl:text-xl xl:text-[#FFFFFF] text-[#222222] text-center leading-relaxed px-4">
-          We&apos;re certified partners with the best e-commerce tools. These
-          partnerships mean better pricing, priority support, and deeper
-          integrations for your store.
+          Wear the brand behind high-performance Shopify builds. Premium quality,
+          minimal design, maximum comfort.
         </p>
       </div>
     </section>

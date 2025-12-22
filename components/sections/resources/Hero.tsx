@@ -1,29 +1,22 @@
-import Image from 'next/image'
+'use client'
+
+import LiquidBlob from '@/components/ui/LiquidBlob'
 
 export default function Hero() {
   return (
     <section className="relative bg-[#F8F8F8] py-16 lg:py-24 overflow-hidden min-h-[calc(100vh-80px)] flex items-center justify-center">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 xl:w-2/3 md:w-3/4 w-[95%] h-[70%]">
-        <Image
-          src="/images/resources/hero/animation1.png"
-          alt="animation1"
-          fill
-          className="w-full h-full"
-        />
-      </div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 xl:w-[80%] md:w-[90%] w-[95%] h-[70%]">
-        <Image
-          src="/images/resources/hero/animation2.png"
-          alt="animation2"
-          fill
-          className="w-full h-full"
-        />
-      </div>
+      <LiquidBlob
+        page="resources"
+        rotation={5}
+        className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] md:w-[120%] lg:w-[115%] xl:w-[110%] h-[130%] hidden lg:block"
+        enableMouseFollow={true}
+      />
+
       <div className="absolute top-[35%] left-[25%] xl:block hidden w-40 h-40 rounded-full bg-[#1DEFFA33]"></div>
       <div className="absolute bottom-[44%] right-[32%] xl:block hidden w-[60px] h-[60px] rounded-full bg-[#1DEFFA33]"></div>
+
       <div className="container flex flex-col justify-center items-center mx-auto px-4 sm:px-6 lg:px-8 relative z-10 gap-[42px]">
         <div className="flex flex-col justify-start items-center gap-[53px] sm:w-3/4 2xl:w-1/2 w-full">
-          {/* Main Headline */}
           <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-4 sm:mb-6">
             <span className="text-[#1DEFFA]">Resources, </span>
             <span className="xl:text-[#FFFFFF] text-[#222222]">
@@ -31,16 +24,13 @@ export default function Hero() {
             </span>
           </h1>
 
-          {/* Description */}
           <p className="text-base lg:text-lg xl:text-xl xl:text-[#FFFFFF] text-[#222222] text-center leading-relaxed px-4">
             Deep dives, case studies, and actionable guides to help you master
             e-commerce on Shopify.
           </p>
         </div>
 
-        {/* Search Input */}
         <div className="w-full max-w-4xl">
-          {/* Search Input Field */}
           <div className="relative">
             <div className="absolute left-4 top-1/2 -translate-y-1/2">
               <svg

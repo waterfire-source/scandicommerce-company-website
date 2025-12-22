@@ -1,25 +1,8 @@
+import { BadgeCheck } from 'lucide-react'
+
 const features = [
   {
-    icon: (
-      <svg
-        width="42"
-        height="42"
-        viewBox="0 0 42 42"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M8.72559 34.6336C15.8795 41.7875 27.4795 41.7875 34.6334 34.6336L26.8603 26.8605C26.1799 27.541 25.372 28.0808 24.4829 28.4491C23.5939 28.8174 22.6409 29.0069 21.6786 29.0069C20.7162 29.0069 19.7633 28.8174 18.8742 28.4491C17.9851 28.0808 17.1773 27.541 16.4968 26.8605L8.72559 34.6336ZM34.6316 8.72576C27.4795 1.57188 15.8795 1.57188 8.72559 8.72576L16.495 16.4988C17.1755 15.8183 17.9833 15.2785 18.8724 14.9103C19.7615 14.542 20.7144 14.3524 21.6768 14.3524C22.6391 14.3524 23.592 14.542 24.4811 14.9103C25.3702 15.2785 26.178 15.8183 26.8585 16.4988L34.6316 8.72576Z"
-          stroke="white"
-          strokeWidth="3"
-        />
-        <path
-          d="M8.72576 8.72754C1.57188 15.8814 1.57188 27.4815 8.72576 34.6354L16.4988 26.8623C15.8183 26.1818 15.2785 25.374 14.9103 24.4849C14.542 23.5958 14.3524 22.6429 14.3524 21.6805C14.3524 20.7182 14.542 19.7653 14.9103 18.8762C15.2785 17.9871 15.8183 17.1793 16.4988 16.4988L8.72576 8.72754ZM34.6336 34.6354C41.7875 27.4815 41.7875 15.8814 34.6336 8.72754L26.8605 16.4988C27.541 17.1793 28.0808 17.9871 28.4491 18.8762C28.8174 19.7653 29.0069 20.7182 29.0069 21.6805C29.0069 22.6429 28.8174 23.5958 28.4491 24.4849C28.0808 25.374 27.541 26.1818 26.8605 26.8623L34.6336 34.6354Z"
-          stroke="white"
-          strokeWidth="3"
-        />
-      </svg>
-    ),
+    icon: <BadgeCheck size={42} className="text-white" />,
     title: 'Priority Support',
     description: 'Direct lines to support teams when you need help',
   },
@@ -80,34 +63,28 @@ export default function WhyOurPartnership() {
   return (
     <section className="bg-white py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <div className="text-center mb-12 lg:mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#222222] mb-4">
             Why our partnerships matter
           </h2>
         </div>
 
-        {/* Feature Columns */}
         <div className="grid grid-cols-1 md:grid-cols-3 relative">
           {features.map((feature, index) => {
             return (
               <div
                 key={index}
-                className={`flex flex-col items-center text-center md:border-r py-5 border-[#565454] ${
-                  index === 0 && 'md:border-l'
-                }`}
+                className={`flex flex-col items-center text-center md:border-r py-5 border-[#565454] ${index === 0 && 'md:border-l'
+                  }`}
               >
-                {/* Icon */}
                 <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-[#03C1CA] flex items-center justify-center mb-6">
                   {feature.icon}
                 </div>
 
-                {/* Title */}
                 <h3 className="text-xl lg:text-[32px] font-bold text-[#222222] mb-4">
                   {feature.title}
                 </h3>
 
-                {/* Description */}
                 <p className="text-base lg:text-base text-[#555555] leading-relaxed">
                   {feature.description}
                 </p>
