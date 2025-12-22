@@ -11,7 +11,7 @@ export default function ReadyForOmnichannel() {
             </h2>
 
             <p className="lg:text-[24px] sm:text-lg text-base text-white">
-              Let's discuss how Shopify POS fits your retail strategy
+              Let&apos;s discuss how Shopify POS fits your retail strategy
             </p>
           </div>
 

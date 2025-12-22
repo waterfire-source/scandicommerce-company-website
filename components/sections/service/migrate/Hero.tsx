@@ -25,8 +25,9 @@ export default function Hero() {
           </h1>
 
           <p className="text-base lg:text-lg xl:text-xl xl:text-[#FFFFFF] text-[#222222] text-center leading-relaxed px-4">
-            We've been building on Shopify since 2018. Over 50 Norwegian brands
-            trust us to create stores that convert, scale, and deliver results.
+            We&apos;ve been building on Shopify since 2018. Over 50 Norwegian
+            brands trust us to create stores that convert, scale, and deliver
+            results.
           </p>
         </div>
 
