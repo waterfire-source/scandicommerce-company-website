@@ -23,12 +23,14 @@ export default function Header() {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement
-      if (isServicesOpen && !target.closest('.services-menu')) {
+      const isDesktop = window.innerWidth >= 1024
+      if (isServicesOpen && isDesktop && !target.closest('.services-menu')) {
         setIsServicesOpen(false)
       }
     }
 
-    if (isServicesOpen) {
+    const isDesktop = window.innerWidth >= 1024
+    if (isServicesOpen && isDesktop) {
       document.addEventListener('mousedown', handleClickOutside)
     }
 
@@ -217,7 +219,8 @@ export default function Header() {
                     <Link
                       href="/services/shopify_development"
                       className="text-gray-600 hover:text-teal transition-colors text-sm"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation()
                         setIsMobileMenuOpen(false)
                         setIsServicesOpen(false)
                       }}
@@ -227,7 +230,8 @@ export default function Header() {
                     <Link
                       href="/services/migrate"
                       className="text-gray-600 hover:text-teal transition-colors text-sm"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation()
                         setIsMobileMenuOpen(false)
                         setIsServicesOpen(false)
                       }}
@@ -237,7 +241,8 @@ export default function Header() {
                     <Link
                       href="/services/shopify_pos"
                       className="text-gray-600 hover:text-teal transition-colors text-sm"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation()
                         setIsMobileMenuOpen(false)
                         setIsServicesOpen(false)
                       }}
@@ -247,7 +252,8 @@ export default function Header() {
                     <Link
                       href="/services/all_packages"
                       className="text-gray-600 hover:text-teal transition-colors text-sm"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation()
                         setIsMobileMenuOpen(false)
                         setIsServicesOpen(false)
                       }}
