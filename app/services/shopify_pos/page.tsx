@@ -1,9 +1,9 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
-import Hero from '@/components/sections/service/shopify_pos/Hero'
-import OmnichannelFeatures from '@/components/sections/service/shopify_pos/OmnichannelFeatures'
-import PerfectFor from '@/components/sections/service/shopify_pos/PerfectFor'
-import ReadyForOmnichannel from '@/components/sections/service/shopify_pos/ReadyForOmnichannel'
+import Hero from '@/components/sections/services/shopify_pos/Hero'
+import OmnichannelFeatures from '@/components/sections/services/shopify_pos/OmnichannelFeatures'
+import PerfectFor from '@/components/sections/services/shopify_pos/PerfectFor'
+import ReadyForOmnichannel from '@/components/sections/services/shopify_pos/ReadyForOmnichannel'
 
 const ShopifyPOSPage = () => {
   return (
