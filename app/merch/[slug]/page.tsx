@@ -6,7 +6,6 @@ import ProductDetails from '@/components/sections/merch/ProductDetails'
 import SizeGuide from '@/components/sections/merch/SizeGuide'
 import RelatedProducts from '@/components/sections/merch/RelatedProducts'
 
-// Mock product data - in a real app, this would come from a CMS or API
 const products: Record<string, {
   name: string
   subtitle: string

@@ -20,11 +20,28 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement
+      if (isServicesOpen && !target.closest('.services-menu')) {
+        setIsServicesOpen(false)
+      }
+    }
+
+    if (isServicesOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isServicesOpen])
+
   return (
     <header
       className={`w-full sticky top-0 z-50 transition-all duration-300 ${isScrolled
-          ? 'bg-white/75 backdrop-blur-sm shadow-header'
-          : 'bg-white shadow-header'
+        ? 'bg-white/75 backdrop-blur-sm shadow-header'
+        : 'bg-white shadow-header'
         }`}
     >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,9 +53,10 @@ export default function Header() {
           </div>
 
           <div className="hidden lg:flex items-center space-x-8">
-            <div className="relative">
+            <div className="relative services-menu">
               <button
                 onClick={() => setIsServicesOpen(!isServicesOpen)}
+                onMouseEnter={() => setIsServicesOpen(true)}
                 className="flex items-center gap-1 text-gray-900 hover:text-teal transition-colors font-medium"
               >
                 Services
@@ -57,6 +75,42 @@ export default function Header() {
                   />
                 </svg>
               </button>
+
+              {isServicesOpen && (
+                <div
+                  className="absolute top-full left-0 mt-2 w-[400px] bg-white rounded-lg shadow-lg border border-gray-200 py-4 z-50"
+                  onMouseLeave={() => setIsServicesOpen(false)}
+                >
+                  <div className="px-4 py-2">
+                    <Link
+                      href="/services/shopify_pos"
+                      onClick={() => setIsServicesOpen(false)}
+                      className="block p-4 rounded-lg hover:bg-gray-50 transition-colors group"
+                    >
+                      <h3 className="text-lg font-semibold text-gray-900 group-hover:text-teal transition-colors mb-2">
+                        Shopify POS
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        Unify your online store with retail locations, pop-ups, and events. One platform, one inventory, zero headaches.
+                      </p>
+                    </Link>
+                  </div>
+                  <div className="px-4 py-2">
+                    <Link
+                      href="/services/migrate"
+                      onClick={() => setIsServicesOpen(false)}
+                      className="block p-4 rounded-lg hover:bg-gray-50 transition-colors group"
+                    >
+                      <h3 className="text-lg font-semibold text-gray-900 group-hover:text-teal transition-colors mb-2">
+                        Migration to Shopify
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        Migrate to Shopify without the risk. Over 50 Norwegian brands trust us to create stores that convert, scale, and deliver results.
+                      </p>
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
             <Link
               href="/work"
@@ -137,13 +191,52 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="lg:hidden pb-4 border-t border-gray-200 mt-2">
             <div className="flex flex-col space-y-4 pt-4">
-              <Link
-                href="/services"
-                className="text-gray-900 hover:text-teal transition-colors font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Services
-              </Link>
+              <div className="flex flex-col space-y-2">
+                <button
+                  onClick={() => setIsServicesOpen(!isServicesOpen)}
+                  className="flex items-center justify-between text-gray-900 hover:text-teal transition-colors font-medium"
+                >
+                  Services
+                  <svg
+                    className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''
+                      }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                {isServicesOpen && (
+                  <div className="pl-4 flex flex-col space-y-2">
+                    <Link
+                      href="/service/shopify_pos"
+                      className="text-gray-600 hover:text-teal transition-colors text-sm"
+                      onClick={() => {
+                        setIsMobileMenuOpen(false)
+                        setIsServicesOpen(false)
+                      }}
+                    >
+                      Shopify POS
+                    </Link>
+                    <Link
+                      href="/service/migrate"
+                      className="text-gray-600 hover:text-teal transition-colors text-sm"
+                      onClick={() => {
+                        setIsMobileMenuOpen(false)
+                        setIsServicesOpen(false)
+                      }}
+                    >
+                      Migration to Shopify
+                    </Link>
+                  </div>
+                )}
+              </div>
               <Link
                 href="/work"
                 className="text-gray-900 hover:text-teal transition-colors font-medium"

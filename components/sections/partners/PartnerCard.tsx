@@ -48,9 +48,7 @@ export default function PartnerCard({
         )}
       </div>
 
-      {/* Partner Content */}
       <div className="p-6 border border-[#565454] flex-grow flex flex-col justify-center h-[300px]">
-        {/* Title and Category */}
         <div className="flex items-center justify-between gap-3 mb-5 flex-wrap w-full">
           <h3 className="text-xl lg:text-2xl font-bold text-[#03C1CA]">
             {partner.name}
@@ -60,12 +58,10 @@ export default function PartnerCard({
           </span>
         </div>
 
-        {/* Description */}
         <p className="text-xs lg:text-sm text-[#565454] mb-6 leading-relaxed">
           {partner.description}
         </p>
 
-        {/* Key Benefits */}
         <div>
           <h4 className="text-sm lg:text-base font-semibold text-[#1F1D1D] mb-3">
             Key benefits:
