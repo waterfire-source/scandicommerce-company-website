@@ -78,37 +78,37 @@ export default function Header() {
 
               {isServicesOpen && (
                 <div
-                  className="absolute top-full left-0 mt-2 w-[400px] bg-white rounded-lg shadow-lg border border-gray-200 py-4 z-50"
+                  className="absolute top-full left-0 mt-2 w-[280px] bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50"
                   onMouseLeave={() => setIsServicesOpen(false)}
                 >
-                  <div className="px-4 py-2">
-                    <Link
-                      href="/services/shopify_pos"
-                      onClick={() => setIsServicesOpen(false)}
-                      className="block p-4 rounded-lg hover:bg-gray-50 transition-colors group"
-                    >
-                      <h3 className="text-lg font-semibold text-gray-900 group-hover:text-teal transition-colors mb-2">
-                        Shopify POS
-                      </h3>
-                      <p className="text-sm text-gray-600">
-                        Unify your online store with retail locations, pop-ups, and events. One platform, one inventory, zero headaches.
-                      </p>
-                    </Link>
-                  </div>
-                  <div className="px-4 py-2">
-                    <Link
-                      href="/services/migrate"
-                      onClick={() => setIsServicesOpen(false)}
-                      className="block p-4 rounded-lg hover:bg-gray-50 transition-colors group"
-                    >
-                      <h3 className="text-lg font-semibold text-gray-900 group-hover:text-teal transition-colors mb-2">
-                        Migration to Shopify
-                      </h3>
-                      <p className="text-sm text-gray-600">
-                        Migrate to Shopify without the risk. Over 50 Norwegian brands trust us to create stores that convert, scale, and deliver results.
-                      </p>
-                    </Link>
-                  </div>
+                  <Link
+                    href="/services/shopify_development"
+                    onClick={() => setIsServicesOpen(false)}
+                    className="block px-6 py-3 text-gray-900 hover:text-teal hover:bg-gray-50 transition-colors font-medium"
+                  >
+                    Shopify Development
+                  </Link>
+                  <Link
+                    href="/services/migrate"
+                    onClick={() => setIsServicesOpen(false)}
+                    className="block px-6 py-3 text-gray-900 hover:text-teal hover:bg-gray-50 transition-colors font-medium"
+                  >
+                    Migration to Shopify
+                  </Link>
+                  <Link
+                    href="/services/shopify_pos"
+                    onClick={() => setIsServicesOpen(false)}
+                    className="block px-6 py-3 text-gray-900 hover:text-teal hover:bg-gray-50 transition-colors font-medium"
+                  >
+                    Shopify POS
+                  </Link>
+                  <Link
+                    href="/services/all_packages"
+                    onClick={() => setIsServicesOpen(false)}
+                    className="block px-6 py-3 text-gray-900 hover:text-teal hover:bg-gray-50 transition-colors font-medium"
+                  >
+                    All Packages
+                  </Link>
                 </div>
               )}
             </div>
@@ -215,7 +215,27 @@ export default function Header() {
                 {isServicesOpen && (
                   <div className="pl-4 flex flex-col space-y-2">
                     <Link
-                      href="/service/shopify_pos"
+                      href="/services/shopify_development"
+                      className="text-gray-600 hover:text-teal transition-colors text-sm"
+                      onClick={() => {
+                        setIsMobileMenuOpen(false)
+                        setIsServicesOpen(false)
+                      }}
+                    >
+                      Shopify Development
+                    </Link>
+                    <Link
+                      href="/services/migrate"
+                      className="text-gray-600 hover:text-teal transition-colors text-sm"
+                      onClick={() => {
+                        setIsMobileMenuOpen(false)
+                        setIsServicesOpen(false)
+                      }}
+                    >
+                      Migration to Shopify
+                    </Link>
+                    <Link
+                      href="/services/shopify_pos"
                       className="text-gray-600 hover:text-teal transition-colors text-sm"
                       onClick={() => {
                         setIsMobileMenuOpen(false)
@@ -225,14 +245,14 @@ export default function Header() {
                       Shopify POS
                     </Link>
                     <Link
-                      href="/service/migrate"
+                      href="/services/all_packages"
                       className="text-gray-600 hover:text-teal transition-colors text-sm"
                       onClick={() => {
                         setIsMobileMenuOpen(false)
                         setIsServicesOpen(false)
                       }}
                     >
-                      Migration to Shopify
+                      All Packages
                     </Link>
                   </div>
                 )}
