@@ -1,31 +1,39 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
+import { Product } from '@/components/sections/merch/ProductCard'
 
-const featuredProducts = [
-  {
-    id: 1,
-    name: 'Baby Onesie',
-    image: '/images/merch/onesie.svg',
-  },
-  {
-    id: 2,
-    name: 'Classic Crewneck',
-    image: '/images/merch/crewneck.svg',
-  },
-  {
-    id: 3,
-    name: 'Classic T-Shirt',
-    image: '/images/merch/tshirt.svg',
-  },
-  {
-    id: 4,
-    name: 'Classic Hoodie',
-    image: '/images/merch/hoodie-white.svg',
-  },
-]
+interface QualityShowcaseProps {
+  products?: Product[]
+}
 
-export default function QualityShowcase() {
+export default function QualityShowcase({ products = [] }: QualityShowcaseProps) {
+  const featuredProducts = products
+    .filter(product => {
+      if (!product.availableForSale || !product.image) return false
+
+      const tags = product.tags || []
+      const isFeatured = tags.some(tag =>
+        tag.toLowerCase() === 'featured' ||
+        tag.toLowerCase() === 'quality-showcase' ||
+        tag.toLowerCase() === 'quality'
+      )
+
+      return isFeatured
+    })
+    .slice(0, 4)
+
+  const displayProducts = featuredProducts.length > 0
+    ? featuredProducts
+    : products
+      .filter(product => product.availableForSale && product.image)
+      .slice(0, 4)
+
+  if (displayProducts.length === 0) {
+    return null
+  }
+
   return (
     <section className="bg-[#F8F8F8] py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,10 +47,11 @@ export default function QualityShowcase() {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-          {featuredProducts.map((product, index) => (
-            <div
+          {displayProducts.map((product, index) => (
+            <Link
               key={product.id}
-              className="group relative bg-white rounded-lg overflow-hidden aspect-square"
+              href={`/merch/${product.slug}`}
+              className="group relative bg-white rounded-lg overflow-hidden aspect-square block"
             >
               <Image
                 src={product.image}
@@ -53,12 +62,17 @@ export default function QualityShowcase() {
                 priority={index < 4}
                 unoptimized={product.image.endsWith('.svg')}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
-                <span className="text-white font-medium text-sm">
-                  {product.name}
-                </span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4 px-4">
+                <div className="w-full text-center">
+                  <span
+                    className="text-white font-medium text-sm block line-clamp-2 leading-tight"
+                    title={product.name}
+                  >
+                    {product.name}
+                  </span>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

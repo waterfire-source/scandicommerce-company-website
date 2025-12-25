@@ -28,7 +28,7 @@ const badges = [
 
 export default function ProductHero({ product }: ProductHeroProps) {
   const [selectedSize, setSelectedSize] = useState<string | null>(null)
-  const [quantity, setQuantity] = useState(2)
+  const [quantity, setQuantity] = useState(1)
   const [activeImage, setActiveImage] = useState(0)
 
   const handleQuantityChange = (delta: number) => {

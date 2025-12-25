@@ -64,15 +64,12 @@ const articles = [
 export default function ArticlesGrid() {
   const [isXlAndAbove, setIsXlAndAbove] = useState<boolean>(true)
 
-  // Calculate grid layout based on articles length
   const fullRowsOfThree = Math.floor(articles.length / 3)
   const remainingCards = articles.length % 3
 
-  // Split articles into full rows and remaining
   const fullRowsArticles = articles.slice(0, fullRowsOfThree * 3)
   const remainingArticles = articles.slice(fullRowsOfThree * 3)
 
-  // Determine grid class for remaining cards
   const getRemainingGridClass = () => {
     if (remainingCards === 0) return ''
     if (remainingCards === 1) return 'grid-cols-1 md:grid-cols-1 lg:grid-cols-1'
@@ -83,17 +80,13 @@ export default function ArticlesGrid() {
   useEffect(() => {
     const updateItemsPerPage = () => {
       const width = window.innerWidth
-      // Tailwind breakpoints: sm = 640px, md = 768px
       setIsXlAndAbove(width >= 1280)
     }
 
-    // Set initial value
     updateItemsPerPage()
 
-    // Listen for resize events
     window.addEventListener('resize', updateItemsPerPage)
 
-    // Cleanup
     return () => window.removeEventListener('resize', updateItemsPerPage)
   }, [])
 

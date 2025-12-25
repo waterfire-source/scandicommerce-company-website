@@ -4,15 +4,23 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { HiArrowRight } from 'react-icons/hi2'
 
+export interface Collection {
+  id: string
+  title: string
+  handle: string
+}
+
 export interface Product {
-  id: number
+  id: string
   name: string
   description: string
   price: number
   currency: string
   image: string
-  category: 'hoodies' | 'tees' | 'accessories'
+  collections: Collection[]
   slug: string
+  availableForSale?: boolean
+  tags?: string[]
 }
 
 interface ProductCardProps {
@@ -43,7 +51,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             {product.price} {product.currency}
           </span>
         </div>
-        <p className="text-sm text-[#666666] mb-3">{product.description}</p>
+        <p className="text-sm text-[#666666] mb-3 line-clamp-3">{product.description}</p>
         <Link
           href={`/merch/${product.slug}`}
           className="inline-flex items-center text-sm font-medium text-[#03C1CA] hover:text-[#02A8B0] transition-colors group/link"

@@ -3,7 +3,16 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: [],
-    remotePatterns: [],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.myshopify.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.shopify.com',
+      },
+    ],
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -11,4 +20,3 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
-
