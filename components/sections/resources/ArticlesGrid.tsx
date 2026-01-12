@@ -2,64 +2,19 @@
 
 import { useEffect, useState } from 'react'
 import ArticleCard from './ArticleCard'
+import { articles as allArticles } from '@/lib/articles'
 
-const articles = [
-  {
-    id: 1,
-    title: 'How We Migrated 50,000 Products from Magento to Shopify in 2 Weeks',
-    description:
-      'A detailed case study of our largest migration project and the lessons we learned.',
-    category: 'Migration',
-    date: 'Jan 15, 2025',
-    readTime: '12 min',
-    image: '/images/resources/articles/1.jpg',
-    slug: 'migrated-50000-products-magento-shopify',
-  },
-  {
-    id: 2,
-    title: 'Shopify POS vs Traditional Retail Systems: Complete Comparison',
-    description:
-      'Everything you need to know about choosing the right POS system for your retail business.',
-    category: 'POS',
-    date: 'Jan 10, 2025',
-    readTime: '10 min',
-    image: '/images/resources/articles/2.png',
-    slug: 'shopify-pos-vs-traditional-retail-systems',
-  },
-  {
-    id: 3,
-    title: 'AI-Powered Product Recommendations: Increase AOV by 40%',
-    description:
-      'Learn how to implement AI-driven product recommendations and boost your average order value.',
-    category: 'AI & Automation',
-    date: 'Jan 8, 2025',
-    readTime: '6 min',
-    image: '/images/resources/articles/3.jpg',
-    slug: 'ai-powered-product-recommendations',
-  },
-  {
-    id: 4,
-    title: 'From Zero to 1M NOK: Building a Fashion Brand on Shopify',
-    description:
-      'A complete case study showing how we helped a Norwegian fashion brand achieve their first million.',
-    category: 'Case Studies',
-    date: 'Jan 5, 2025',
-    readTime: '15 min',
-    image: '/images/resources/articles/4.jpg',
-    slug: 'zero-to-1m-nok-fashion-brand-shopify',
-  },
-  {
-    id: 5,
-    title: 'Complete Guide to Shopify Markets for Nordic E-commerce',
-    description:
-      'Master multi-market selling with Shopify Markets and expand across the Nordic region.',
-    category: 'Shopify Tips',
-    date: 'Jan 3, 2025',
-    readTime: '9 min',
-    image: '/images/resources/articles/5.jpg',
-    slug: 'shopify-markets-nordic-ecommerce-guide',
-  },
-]
+// Transform articles from lib format to ArticleCard format
+const articles = allArticles.map((article) => ({
+  id: article.id,
+  title: article.title,
+  description: article.description,
+  category: article.category,
+  date: article.date,
+  readTime: article.readTime.replace(' read', ''),
+  image: article.image,
+  slug: article.slug,
+}))
 
 export default function ArticlesGrid() {
   const [isXlAndAbove, setIsXlAndAbove] = useState<boolean>(true)

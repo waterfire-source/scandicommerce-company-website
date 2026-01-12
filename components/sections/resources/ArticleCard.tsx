@@ -21,7 +21,7 @@ interface ArticleCardProps {
 export default function ArticleCard({ article }: ArticleCardProps) {
   return (
     <Link
-      href={`/articles/${article.slug}`}
+      href={`/resources/${article.slug}`}
       className="bg-white overflow-hidden"
     >
       {/* Article Image */}

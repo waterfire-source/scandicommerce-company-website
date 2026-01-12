@@ -37,7 +37,7 @@ const packages: Package[] = [
       'Payment & shipping setup',
       '2 weeks post-launch support',
     ],
-    href: '/service/shopify_development',
+    href: '/services/all_packages/foundation',
   },
   {
     title: 'Growth',
@@ -60,7 +60,7 @@ const packages: Package[] = [
       'Performance optimization',
       '4 weeks post-launch support',
     ],
-    href: '/service/shopify_development',
+    href: '/services/all_packages/growth',
   },
   {
     title: 'Premium',
@@ -83,7 +83,7 @@ const packages: Package[] = [
       'Headless commerce options',
       '8 weeks post-launch support',
     ],
-    href: '/service/shopify_development',
+    href: '/services/all_packages/premium',
   },
   {
     title: 'Enterprise',
@@ -106,7 +106,7 @@ const packages: Package[] = [
       'White-glove migration',
       'Ongoing support retainer',
     ],
-    href: '/service/shopify_development',
+    href: '/services/all_packages/enterprise',
   },
 ]
 

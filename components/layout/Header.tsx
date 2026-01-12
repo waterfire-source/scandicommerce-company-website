@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 export default function Header() {
   const [isServicesOpen, setIsServicesOpen] = useState(false)
+  const [isShopifyOpen, setIsShopifyOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -27,17 +28,20 @@ export default function Header() {
       if (isServicesOpen && isDesktop && !target.closest('.services-menu')) {
         setIsServicesOpen(false)
       }
+      if (isShopifyOpen && isDesktop && !target.closest('.shopify-menu')) {
+        setIsShopifyOpen(false)
+      }
     }
 
     const isDesktop = window.innerWidth >= 1024
-    if (isServicesOpen && isDesktop) {
+    if ((isServicesOpen || isShopifyOpen) && isDesktop) {
       document.addEventListener('mousedown', handleClickOutside)
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [isServicesOpen])
+  }, [isServicesOpen, isShopifyOpen])
 
   return (
     <header
@@ -114,6 +118,79 @@ export default function Header() {
                 </div>
               )}
             </div>
+            <div className="relative shopify-menu">
+              <button
+                onClick={() => setIsShopifyOpen(!isShopifyOpen)}
+                onMouseEnter={() => setIsShopifyOpen(true)}
+                className="flex items-center gap-1 text-gray-900 hover:text-teal transition-colors font-medium"
+              >
+                Shopify
+                <svg
+                  className={`w-4 h-4 transition-transform ${isShopifyOpen ? 'rotate-180' : ''
+                    }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              {isShopifyOpen && (
+                <div
+                  className="absolute top-full left-0 mt-2 w-[280px] bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50"
+                  onMouseLeave={() => setIsShopifyOpen(false)}
+                >
+                  <Link
+                    href="/shopify/shopify_platform"
+                    onClick={() => setIsShopifyOpen(false)}
+                    className="block px-6 py-3 text-gray-900 hover:text-teal hover:bg-gray-50 transition-colors font-medium"
+                  >
+                    Shopify
+                  </Link>
+                  <Link
+                    href="/shopify/shopify_POS"
+                    onClick={() => setIsShopifyOpen(false)}
+                    className="block px-6 py-3 text-gray-900 hover:text-teal hover:bg-gray-50 transition-colors font-medium"
+                  >
+                    Shopify POS
+                  </Link>
+                  <Link
+                    href="/shopify/shopify_TCO_calculator"
+                    onClick={() => setIsShopifyOpen(false)}
+                    className="block px-6 py-3 text-gray-900 hover:text-teal hover:bg-gray-50 transition-colors font-medium"
+                  >
+                    Shopify TCO calculator
+                  </Link>
+                  <Link
+                    href="/shopify/shopify_x_PIM"
+                    onClick={() => setIsShopifyOpen(false)}
+                    className="block px-6 py-3 text-gray-900 hover:text-teal hover:bg-gray-50 transition-colors font-medium"
+                  >
+                    Shopify x PIM
+                  </Link>
+                  <Link
+                    href="/shopify/shopify_x_AI"
+                    onClick={() => setIsShopifyOpen(false)}
+                    className="block px-6 py-3 text-gray-900 hover:text-teal hover:bg-gray-50 transition-colors font-medium"
+                  >
+                    Shopify X AI
+                  </Link>
+                  <Link
+                    href="/shopify/why_shopify"
+                    onClick={() => setIsShopifyOpen(false)}
+                    className="block px-6 py-3 text-gray-900 hover:text-teal hover:bg-gray-50 transition-colors font-medium"
+                  >
+                    Why Shopify?
+                  </Link>
+                </div>
+              )}
+            </div>
             <Link
               href="/work"
               className="text-gray-900 hover:text-teal transition-colors font-medium"
@@ -127,22 +204,10 @@ export default function Header() {
               About
             </Link>
             <Link
-              href="/resources"
-              className="text-gray-900 hover:text-teal transition-colors font-medium"
-            >
-              Resources
-            </Link>
-            <Link
               href="/partners"
               className="text-gray-900 hover:text-teal transition-colors font-medium"
             >
               Partners
-            </Link>
-            <Link
-              href="/merch"
-              className="text-gray-900 hover:text-teal transition-colors font-medium"
-            >
-              Merch
             </Link>
             <Link
               href="/contact"
@@ -263,6 +328,98 @@ export default function Header() {
                   </div>
                 )}
               </div>
+              <div className="flex flex-col space-y-2">
+                <button
+                  onClick={() => setIsShopifyOpen(!isShopifyOpen)}
+                  className="flex items-center justify-between text-gray-900 hover:text-teal transition-colors font-medium"
+                >
+                  Shopify
+                  <svg
+                    className={`w-4 h-4 transition-transform ${isShopifyOpen ? 'rotate-180' : ''
+                      }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                {isShopifyOpen && (
+                  <div className="pl-4 flex flex-col space-y-2">
+                    <Link
+                      href="/shopify/shopify_platform"
+                      className="text-gray-600 hover:text-teal transition-colors text-sm"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setIsMobileMenuOpen(false)
+                        setIsShopifyOpen(false)
+                      }}
+                    >
+                      Shopify
+                    </Link>
+                    <Link
+                      href="/shopify/shopify_POS"
+                      className="text-gray-600 hover:text-teal transition-colors text-sm"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setIsMobileMenuOpen(false)
+                        setIsShopifyOpen(false)
+                      }}
+                    >
+                      Shopify POS
+                    </Link>
+                    <Link
+                      href="/shopify/shopify_TCO_calculator"
+                      className="text-gray-600 hover:text-teal transition-colors text-sm"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setIsMobileMenuOpen(false)
+                        setIsShopifyOpen(false)
+                      }}
+                    >
+                      Shopify TCO calculator
+                    </Link>
+                    <Link
+                      href="/shopify/shopify_x_PIM"
+                      className="text-gray-600 hover:text-teal transition-colors text-sm"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setIsMobileMenuOpen(false)
+                        setIsShopifyOpen(false)
+                      }}
+                    >
+                      Shopify x PIM
+                    </Link>
+                    <Link
+                      href="/shopify/shopify_x_AI"
+                      className="text-gray-600 hover:text-teal transition-colors text-sm"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setIsMobileMenuOpen(false)
+                        setIsShopifyOpen(false)
+                      }}
+                    >
+                      Shopify X AI
+                    </Link>
+                    <Link
+                      href="/shopify/why_shopify"
+                      className="text-gray-600 hover:text-teal transition-colors text-sm"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setIsMobileMenuOpen(false)
+                        setIsShopifyOpen(false)
+                      }}
+                    >
+                      Why Shopify?
+                    </Link>
+                  </div>
+                )}
+              </div>
               <Link
                 href="/work"
                 className="text-gray-900 hover:text-teal transition-colors font-medium"
@@ -278,25 +435,11 @@ export default function Header() {
                 About
               </Link>
               <Link
-                href="/resources"
-                className="text-gray-900 hover:text-teal transition-colors font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Resources
-              </Link>
-              <Link
                 href="/partners"
                 className="text-gray-900 hover:text-teal transition-colors font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Partners
-              </Link>
-              <Link
-                href="/merch"
-                className="text-gray-900 hover:text-teal transition-colors font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Merch
               </Link>
               <Link
                 href="/contact"

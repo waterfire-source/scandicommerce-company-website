@@ -59,7 +59,7 @@ export default function FeaturedArticle() {
 
                 {/* CTA Button */}
                 <Link
-                  href="/articles/shopify-apps-norway-2025"
+                  href="/resources/10-essential-shopify-apps-norwegian-ecommerce-2025"
                   className="inline-block bg-black text-base text-white px-6 py-3 lg:px-8 lg:py-4 font-semibold hover:bg-gray-800 transition-colors"
                 >
                   Read Article

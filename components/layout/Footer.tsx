@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="w-full bg-black text-white mt-auto">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-12 mb-12">
           <div className="lg:col-span-1">
             <Logo logoPath='/images/footer-logo.png' />
           </div>
@@ -27,18 +27,18 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/case-studies"
-                  className="text-white hover:text-teal transition-colors"
-                >
-                  Case Studies
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/partners"
                   className="text-white hover:text-teal transition-colors"
                 >
                   Partners
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/careers"
+                  className="text-white hover:text-teal transition-colors"
+                >
+                  Careers
                 </Link>
               </li>
               <li>
@@ -59,6 +59,14 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li>
                 <Link
+                  href="/all_services"
+                  className="text-white hover:text-teal transition-colors"
+                >
+                  All services
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/services"
                   className="text-white hover:text-teal transition-colors"
                 >
@@ -67,26 +75,18 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services/shopify-development"
+                  href="/pricing"
                   className="text-white hover:text-teal transition-colors"
                 >
-                  Shopify Development
+                  Pricing
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/services/migration"
+                  href="/downloads"
                   className="text-white hover:text-teal transition-colors"
                 >
-                  Migration Services
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/shopify-pos"
-                  className="text-white hover:text-teal transition-colors"
-                >
-                  Shopify POS
+                  Downloads
                 </Link>
               </li>
             </ul>
@@ -99,7 +99,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li>
                 <Link
-                  href="/blog"
+                  href="/resources/blog"
                   className="text-white hover:text-teal transition-colors"
                 >
                   Blog & Articles
@@ -107,18 +107,34 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/tco-calculator"
+                  href="/case-studies"
                   className="text-white hover:text-teal transition-colors"
                 >
-                  TCO Calculator
+                  Case Studies
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/why-shopify"
+                  href="/faq"
                   className="text-white hover:text-teal transition-colors"
                 >
-                  Why Shopify
+                  FAQ
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-semibold text-base mb-4 pb-2 border-b border-gray-700">
+              Merch
+            </h3>
+            <ul className="space-y-3 text-sm">
+              <li>
+                <Link
+                  href="/merch"
+                  className="text-white hover:text-teal transition-colors"
+                >
+                  Merch
                 </Link>
               </li>
             </ul>
@@ -145,14 +161,6 @@ export default function Footer() {
                   +47 123 45 678
                 </a>
               </p>
-              <div className="pt-2">
-                <Link
-                  href="/why-shopify"
-                  className="text-white hover:text-teal transition-colors"
-                >
-                  Why Shopify
-                </Link>
-              </div>
             </div>
             <div className="mt-6">
               <SocialIcons />
