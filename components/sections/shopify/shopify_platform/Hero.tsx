@@ -29,7 +29,7 @@ export default function Hero() {
           </h1>
 
           <p className="text-base lg:text-lg xl:text-xl xl:text-[#FFFFFF] text-[#222222] text-center leading-relaxed px-4">
-            We're one of only 3 Shopify-exclusive agencies in Norway. No WordPress. No Magento. Just pure Shopify mastery that gets results.
+            We&apos;re one of only 3 Shopify-exclusive agencies in Norway. No WordPress. No Magento. Just pure Shopify mastery that gets results.
           </p>
         </div>
       </div>
