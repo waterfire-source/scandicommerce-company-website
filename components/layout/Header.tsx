@@ -61,8 +61,14 @@ export default function Header() {
           <div className="hidden lg:flex items-center space-x-8">
             <div className="relative services-menu">
               <button
-                onClick={() => setIsServicesOpen(!isServicesOpen)}
-                onMouseEnter={() => setIsServicesOpen(true)}
+                onClick={() => {
+                  setIsServicesOpen(!isServicesOpen)
+                  setIsShopifyOpen(false)
+                }}
+                onMouseEnter={() => {
+                  setIsServicesOpen(true)
+                  setIsShopifyOpen(false)
+                }}
                 className="flex items-center gap-1 text-gray-900 hover:text-teal transition-colors font-medium"
               >
                 Services
@@ -120,8 +126,14 @@ export default function Header() {
             </div>
             <div className="relative shopify-menu">
               <button
-                onClick={() => setIsShopifyOpen(!isShopifyOpen)}
-                onMouseEnter={() => setIsShopifyOpen(true)}
+                onClick={() => {
+                  setIsShopifyOpen(!isShopifyOpen)
+                  setIsServicesOpen(false)
+                }}
+                onMouseEnter={() => {
+                  setIsShopifyOpen(true)
+                  setIsServicesOpen(false)
+                }}
                 className="flex items-center gap-1 text-gray-900 hover:text-teal transition-colors font-medium"
               >
                 Shopify
@@ -260,7 +272,10 @@ export default function Header() {
             <div className="flex flex-col space-y-4 pt-4">
               <div className="flex flex-col space-y-2">
                 <button
-                  onClick={() => setIsServicesOpen(!isServicesOpen)}
+                  onClick={() => {
+                    setIsServicesOpen(!isServicesOpen)
+                    setIsShopifyOpen(false)
+                  }}
                   className="flex items-center justify-between text-gray-900 hover:text-teal transition-colors font-medium"
                 >
                   Services
@@ -330,7 +345,10 @@ export default function Header() {
               </div>
               <div className="flex flex-col space-y-2">
                 <button
-                  onClick={() => setIsShopifyOpen(!isShopifyOpen)}
+                  onClick={() => {
+                    setIsShopifyOpen(!isShopifyOpen)
+                    setIsServicesOpen(false)
+                  }}
                   className="flex items-center justify-between text-gray-900 hover:text-teal transition-colors font-medium"
                 >
                   Shopify
