@@ -35,7 +35,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/careers"
+                  href="/resources/blog"
                   className="text-white hover:text-teal transition-colors"
                 >
                   Careers
@@ -59,34 +59,10 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li>
                 <Link
-                  href="/all_services"
-                  className="text-white hover:text-teal transition-colors"
-                >
-                  All services
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services"
+                  href="/services/all_packages"
                   className="text-white hover:text-teal transition-colors"
                 >
                   All Packages
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/pricing"
-                  className="text-white hover:text-teal transition-colors"
-                >
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/downloads"
-                  className="text-white hover:text-teal transition-colors"
-                >
-                  Downloads
                 </Link>
               </li>
             </ul>
@@ -103,22 +79,6 @@ export default function Footer() {
                   className="text-white hover:text-teal transition-colors"
                 >
                   Blog & Articles
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/case-studies"
-                  className="text-white hover:text-teal transition-colors"
-                >
-                  Case Studies
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/faq"
-                  className="text-white hover:text-teal transition-colors"
-                >
-                  FAQ
                 </Link>
               </li>
             </ul>
