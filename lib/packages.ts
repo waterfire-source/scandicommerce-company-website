@@ -24,6 +24,7 @@ export interface Package {
   included: string[]
   includedCategories?: IncludedCategory[]
   highlights: string[]
+  moreDeliverablesCount?: number
   idealFor: string[]
   process?: string[]
   processSteps?: ProcessStep[]

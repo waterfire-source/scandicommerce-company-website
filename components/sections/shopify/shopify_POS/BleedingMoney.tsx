@@ -4,30 +4,29 @@ import React from 'react'
 import Image from 'next/image'
 import { HiXMark } from 'react-icons/hi2'
 
-interface PainPoint {
-  text: string
-  rotate: number
-  translateX: number
+interface BleedingMoneyData {
+  title?: string
+  leftPoints?: string[]
+  rightPoints?: string[]
 }
 
-const leftPoints: PainPoint[] = [
-  { text: 'Separate online and offline systems creating inventory nightmares', rotate: 0, translateX: 0 },
-  { text: 'Manual reconciliation eating up 10+ hours per week', rotate: 1, translateX: 20 },
-  { text: 'Missing out on omnichannel customers who spend 4x more', rotate: -2, translateX: 10 },
-]
+interface BleedingMoneyProps {
+  bleedingMoney?: BleedingMoneyData
+}
 
-const rightPoints: PainPoint[] = [
-  { text: 'Lost sales because customers can\'t find products in-store', rotate: 0, translateX: 0 },
-  { text: 'Disconnected customer data means no personalization', rotate: -2, translateX: -20 },
-  { text: 'Complex POS systems that require expensive training', rotate: 2, translateX: -10 },
-]
+export default function BleedingMoney({ bleedingMoney }: BleedingMoneyProps) {
+  const title = bleedingMoney?.title
+  const leftPoints = bleedingMoney?.leftPoints || []
+  const rightPoints = bleedingMoney?.rightPoints || []
 
-export default function BleedingMoney() {
+  const rotations = [0, 1, -2]
+  const leftTranslateX = [0, 20, 10]
+  const rightTranslateX = [0, -20, -10]
+
   return (
     <section className="relative py-16 lg:py-24 overflow-hidden min-h-[700px] lg:min-h-[800px]">
       {/* Background image with dark overlay */}
       <div className="absolute inset-0 z-0">
-        {/* Background image - money/broom/dustpan */}
         <Image
           src="/images/shopify/shopify_POS/R (1).jpg"
           alt="Background"
@@ -36,7 +35,6 @@ export default function BleedingMoney() {
           style={{ filter: 'grayscale(100%)' }}
           priority
         />
-        {/* Dark overlay */}
         <div className="absolute inset-0"></div>
       </div>
 
@@ -44,11 +42,13 @@ export default function BleedingMoney() {
       <div className="relative z-10 py-12 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Title */}
-          <div className="text-center mb-16 lg:mb-20">
-            <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight">
-              Your Current Setup Is Bleeding Money
-            </h2>
-          </div>
+          {title && (
+            <div className="text-center mb-16 lg:mb-20">
+              <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight">
+                {title}
+              </h2>
+            </div>
+          )}
 
           {/* Cards Layout */}
           <div className="max-w-6xl mx-auto relative">
@@ -62,7 +62,7 @@ export default function BleedingMoney() {
                     className="flex items-center gap-4 px-4 py-4 lg:px-6 lg:py-5 backdrop-blur-sm"
                     style={{
                       background: 'rgba(80, 80, 80, 0.5)',
-                      transform: `rotate(${point.rotate}deg) translateX(${point.translateX}px)`,
+                      transform: `rotate(${rotations[index % 3]}deg) translateX(${leftTranslateX[index % 3]}px)`,
                       boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
                     }}
                   >
@@ -70,7 +70,7 @@ export default function BleedingMoney() {
                       <HiXMark className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
                     <p className="text-white font-semibold text-sm sm:text-base">
-                      {point.text}
+                      {point}
                     </p>
                   </div>
                 ))}
@@ -84,7 +84,7 @@ export default function BleedingMoney() {
                     className="flex items-center gap-4 px-4 py-4 lg:px-6 lg:py-5 backdrop-blur-sm"
                     style={{
                       background: 'rgba(80, 80, 80, 0.5)',
-                      transform: `rotate(${point.rotate}deg) translateX(${point.translateX}px)`,
+                      transform: `rotate(${rotations[index % 3]}deg) translateX(${rightTranslateX[index % 3]}px)`,
                       boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
                     }}
                   >
@@ -92,7 +92,7 @@ export default function BleedingMoney() {
                       <HiXMark className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
                     <p className="text-white font-semibold text-sm sm:text-base">
-                      {point.text}
+                      {point}
                     </p>
                   </div>
                 ))}
@@ -104,4 +104,3 @@ export default function BleedingMoney() {
     </section>
   )
 }
-

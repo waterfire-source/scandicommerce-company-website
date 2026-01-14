@@ -1,32 +1,49 @@
-const values = [
+'use client'
+
+interface Value {
+  title?: string
+  description?: string
+}
+
+interface OurValuesData {
+  title?: string
+  values?: Value[]
+}
+
+interface OurValuesProps {
+  ourValues?: OurValuesData
+}
+
+// Default values
+const defaultValues: Value[] = [
   {
     title: 'Transparency',
-    description: `No hidden fees, no surprise costs. You know exactly what you're getting and what it costs.`,
+    description: "No hidden fees, no surprise costs. You know exactly what you're getting and what it costs.",
   },
   {
     title: 'Results First',
-    description:
-      "We're measured by your success. Conversions, revenue, and customer satisfaction matter most.",
+    description: "We're measured by your success. Conversions, revenue, and customer satisfaction matter most.",
   },
   {
     title: 'No BS',
-    description:
-      'We tell you what you need to hear, not what you want to hear. Honest advice always.',
+    description: 'We tell you what you need to hear, not what you want to hear. Honest advice always.',
   },
   {
     title: 'Long-term Partnerships',
-    description:
-      "We're not project-hopping. We build relationships and grow with our clients.",
+    description: "We're not project-hopping. We build relationships and grow with our clients.",
   },
 ]
 
-export default function OurValues() {
+export default function OurValues({ ourValues }: OurValuesProps) {
+  const title = ourValues?.title || 'Our values'
+  const values = ourValues?.values && ourValues.values.length > 0 ? ourValues.values : defaultValues
+
   return (
     <section className="bg-white py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title */}
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#222222] text-center mb-12 lg:mb-16">
-          Our values
+          {title}
         </h2>
 
         {/* Values Cards */}

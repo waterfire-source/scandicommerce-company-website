@@ -3,6 +3,48 @@
 import React, { useState } from 'react'
 import { FiClock, FiCheck } from 'react-icons/fi'
 
+interface MeetingTypeData {
+  title?: string
+  description?: string
+}
+
+interface BookingSectionData {
+  label?: string
+  title?: string
+  description?: string
+  meetingTypes?: MeetingTypeData[]
+  confirmButtonText?: string
+}
+
+interface MessageSectionData {
+  label?: string
+  title?: string
+  description?: string
+  submitButtonText?: string
+}
+
+interface BenefitData {
+  icon?: string
+  text?: string
+}
+
+interface BookingSectionProps {
+  bookingSection?: BookingSectionData
+  messageSection?: MessageSectionData
+  benefits?: BenefitData[]
+}
+
+// Defaults
+const defaultMeetingTypes: MeetingTypeData[] = [
+  { title: '30-Minute Discovery Call', description: 'Learn about our services' },
+  { title: '60-Minute Strategy Session', description: 'Deep dive into your needs' },
+]
+
+const defaultBenefits: BenefitData[] = [
+  { icon: 'check', text: 'No commitment required' },
+  { icon: 'clock', text: 'Instant confirmation' },
+]
+
 function Calendar() {
   const [selectedDate, setSelectedDate] = useState<number | null>(null)
   const [currentMonth] = useState(new Date(2025, 11))
@@ -126,7 +168,11 @@ function TimeSlots() {
   )
 }
 
-function ContactForm() {
+interface ContactFormProps {
+  submitButtonText?: string
+}
+
+function ContactForm({ submitButtonText }: ContactFormProps) {
   return (
     <form className="bg-white">
       <div className="px-9 py-6 flex flex-col justify-between gap-9">
@@ -187,15 +233,41 @@ function ContactForm() {
           type="submit"
           className="w-full bg-[#03C1CA] text-white py-3  font-semibold hover:bg-[#02a8b0] transition-colors"
         >
-          Send Message
+          {submitButtonText || 'Send Message'}
         </button>
       </div>
     </form>
   )
 }
 
-export default function BookingSection() {
+const getBenefitIcon = (iconName?: string) => {
+  switch (iconName) {
+    case 'check':
+      return <FiCheck className="text-[#03C1CA]" size={16} />
+    case 'clock':
+      return <FiClock className="text-[#03C1CA]" size={16} />
+    default:
+      return <FiCheck className="text-[#03C1CA]" size={16} />
+  }
+}
+
+export default function BookingSection({ bookingSection, messageSection, benefits }: BookingSectionProps) {
   const [meetingType, setMeetingType] = useState('discovery')
+
+  const bookingLabel = bookingSection?.label || 'Preferred Method'
+  const bookingTitle = bookingSection?.title || 'Book a Free Consultation'
+  const bookingDescription = bookingSection?.description || "Choose a time that works for you. We'll discuss your goals and create a custom plan."
+  const meetingTypes = bookingSection?.meetingTypes && bookingSection.meetingTypes.length > 0
+    ? bookingSection.meetingTypes
+    : defaultMeetingTypes
+  const confirmButtonText = bookingSection?.confirmButtonText || 'Confirm Booking'
+
+  const messageLabel = messageSection?.label || 'Alternative'
+  const messageTitle = messageSection?.title || 'Send Us a Message'
+  const messageDescription = messageSection?.description || "Prefer to write? Fill out the form and we'll get back to you within 2 hours."
+  const submitButtonText = messageSection?.submitButtonText || 'Send Message'
+
+  const benefitsList = benefits && benefits.length > 0 ? benefits : defaultBenefits
 
   return (
     <section className="py-12 lg:py-16 bg-white">
@@ -209,37 +281,34 @@ export default function BookingSection() {
           >
             <div className="p-[50px_29px_34px_29px]">
               <span className="inline-block text-xs font-semibold text-white bg-[#03C1CA] px-3 py-1 mb-4">
-                Preferred Method
+                {bookingLabel}
               </span>
               <h2 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2">
-                Book a Free Consultation
+                {bookingTitle}
               </h2>
               <p className="text-sm text-gray-500 mb-6">
-                Choose a time that works for you. We&apos;ll discuss your goals and create a custom plan.
+                {bookingDescription}
               </p>
 
               <div className="bg-white p-4">
                 <div className="space-y-4 mb-6">
                   <h4 className="text-sm font-semibold text-gray-900">Meeting Type</h4>
-                  <MeetingType
-                    title="30-Minute Discovery Call"
-                    description="Learn about our services"
-                    selected={meetingType === 'discovery'}
-                    onSelect={() => setMeetingType('discovery')}
-                  />
-                  <MeetingType
-                    title="60-Minute Strategy Session"
-                    description="Deep dive into your needs"
-                    selected={meetingType === 'strategy'}
-                    onSelect={() => setMeetingType('strategy')}
-                  />
+                  {meetingTypes.map((mt, index) => (
+                    <MeetingType
+                      key={index}
+                      title={mt.title || ''}
+                      description={mt.description || ''}
+                      selected={meetingType === `type-${index}`}
+                      onSelect={() => setMeetingType(`type-${index}`)}
+                    />
+                  ))}
                 </div>
 
                 <Calendar />
                 <TimeSlots />
 
                 <button className="w-full mt-6 bg-[#03C1CA] text-white py-3 font-semibold hover:bg-[#02a8b0] transition-colors">
-                  Confirm Booking
+                  {confirmButtonText}
                 </button>
               </div>
             </div>
@@ -249,32 +318,28 @@ export default function BookingSection() {
             <div className="bg-[#F5F5F5B2] shadow-lg border border-[#5654544D] overflow-hidden">
               <div className="p-[50px_29px_34px_29px]">
                 <span className="inline-block text-xs font-semibold text-white bg-[#03C1CA] px-3 py-1  mb-4">
-                  Alternative
+                  {messageLabel}
                 </span>
                 <h2 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2">
-                  Send Us a Message
+                  {messageTitle}
                 </h2>
                 <p className="text-sm text-gray-500 mb-6">
-                  Prefer to write? Fill out the form and we&apos;ll get back to you within 2 hours.
+                  {messageDescription}
                 </p>
-                <ContactForm />
+                <ContactForm submitButtonText={submitButtonText} />
               </div>
             </div>
 
             <div className="bg-white shadow-lg border border-[#5654544D] p-6">
               <div className="flex flex-col gap-3">
-                <div className="flex items-center gap-3 text-sm text-gray-600">
-                  <div className="w-8 h-8  bg-gray-100 flex items-center justify-center">
-                    <FiCheck className="text-[#03C1CA]" size={16} />
+                {benefitsList.map((benefit, index) => (
+                  <div key={index} className="flex items-center gap-3 text-sm text-gray-600">
+                    <div className="w-8 h-8  bg-gray-100 flex items-center justify-center">
+                      {getBenefitIcon(benefit.icon)}
+                    </div>
+                    <span>{benefit.text}</span>
                   </div>
-                  <span>No commitment required</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm text-gray-600">
-                  <div className="w-8 h-8  bg-gray-100 flex items-center justify-center">
-                    <FiClock className="text-[#03C1CA]" size={16} />
-                  </div>
-                  <span>Instant confirmation</span>
-                </div>
+                ))}
               </div>
             </div>
           </div>

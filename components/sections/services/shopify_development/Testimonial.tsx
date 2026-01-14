@@ -2,7 +2,28 @@
 
 import Link from 'next/link'
 
-export default function Testimonial() {
+interface TestimonialData {
+  testimonialRating?: number
+  testimonialQuote?: string
+  testimonialAuthorName?: string
+  testimonialAuthorTitle?: string
+  testimonialButtonText?: string
+  testimonialButtonLink?: string
+}
+
+interface TestimonialProps {
+  testimonial?: TestimonialData
+}
+
+export default function Testimonial({ testimonial }: TestimonialProps) {
+  // Content variables from Sanity
+  const rating = testimonial?.testimonialRating || 5
+  const quote = testimonial?.testimonialQuote
+  const authorName = testimonial?.testimonialAuthorName
+  const authorTitle = testimonial?.testimonialAuthorTitle
+  const buttonText = testimonial?.testimonialButtonText
+  const buttonLink = testimonial?.testimonialButtonLink
+
   return (
     <section className="bg-[#F8F8F8] py-12 sm:py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,7 +36,9 @@ export default function Testimonial() {
                 {[1, 2, 3, 4, 5].map((star) => (
                   <svg
                     key={star}
-                    className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400"
+                    className={`w-5 h-5 sm:w-6 sm:h-6 ${
+                      star <= rating ? 'text-amber-400' : 'text-gray-300'
+                    }`}
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -25,31 +48,43 @@ export default function Testimonial() {
               </div>
 
               {/* Quote */}
-              <p className="text-gray-600 text-sm sm:text-lg lg:text-xl leading-relaxed mb-5 sm:mb-8">
-                &quot;ScandiCommerce migrated us from WooCommerce to Shopify in 8 weeks. Our load times went
-                from 6 seconds to under 2 seconds. Conversions are up 89%.&quot;
-              </p>
+              {quote && (
+                <p className="text-gray-600 text-sm sm:text-lg lg:text-xl leading-relaxed mb-5 sm:mb-8">
+                  &quot;{quote}&quot;
+                </p>
+              )}
 
               {/* Author */}
-              <div>
-                <p className="font-bold text-gray-900 text-base sm:text-lg">Kristine Larsen</p>
-                <p className="text-gray-500 text-sm sm:text-base">E-commerce Director, Nordic Lifestyle AS</p>
-              </div>
+              {(authorName || authorTitle) && (
+                <div>
+                  {authorName && (
+                    <p className="font-bold text-gray-900 text-base sm:text-lg">
+                      {authorName}
+                    </p>
+                  )}
+                  {authorTitle && (
+                    <p className="text-gray-500 text-sm sm:text-base">
+                      {authorTitle}
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Right Content - Button */}
-            <div className="lg:flex-shrink-0">
-              <Link
-                href="/work"
-                className="inline-block w-full sm:w-auto text-center bg-[#03C1CA] hover:bg-[#02a9b1] text-white font-semibold py-3 sm:py-4 px-8 sm:px-10 transition-colors duration-200"
-              >
-                View Case Study
-              </Link>
-            </div>
+            {buttonText && buttonLink && (
+              <div className="lg:flex-shrink-0">
+                <Link
+                  href={buttonLink}
+                  className="inline-block w-full sm:w-auto text-center bg-[#03C1CA] hover:bg-[#02a9b1] text-white font-semibold py-3 sm:py-4 px-8 sm:px-10 transition-colors duration-200"
+                >
+                  {buttonText}
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
     </section>
   )
 }
-

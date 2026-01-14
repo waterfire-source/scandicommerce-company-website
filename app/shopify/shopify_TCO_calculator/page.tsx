@@ -1,13 +1,46 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Hero from '@/components/sections/shopify/shopify_TCO_calculator/Hero'
 import CalculatorForm from '@/components/sections/shopify/shopify_TCO_calculator/CalculatorForm'
+import { client } from '@/sanity/lib/client'
+import { shopifyTcoCalculatorPageQuery } from '@/sanity/lib/queries'
+
+interface ShopifyTcoCalculatorPageData {
+  _id: string
+  pageTitle: string
+  slug: string
+  hero?: {
+    heroTitle?: {
+      text?: string
+      highlight?: string
+    }
+    heroDescription?: string
+    platforms?: string[]
+  }
+}
 
 export default function ShopifyTCOCalculatorPage() {
   const [selectedPlatform, setSelectedPlatform] = useState<string>('WooCommerce')
+  const [pageData, setPageData] = useState<ShopifyTcoCalculatorPageData | null>(null)
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await client.fetch<ShopifyTcoCalculatorPageData>(
+          shopifyTcoCalculatorPageQuery,
+          {},
+          { next: { revalidate: 0 } }
+        )
+        setPageData(data)
+      } catch (error) {
+        console.error('Error fetching TCO Calculator page:', error)
+      }
+    }
+    fetchData()
+  }, [])
 
   const handlePlatformSelect = (platform: string) => {
     setSelectedPlatform(platform)
@@ -22,7 +55,7 @@ export default function ShopifyTCOCalculatorPage() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-grow">
-        <Hero onPlatformSelect={handlePlatformSelect} />
+        <Hero hero={pageData?.hero} onPlatformSelect={handlePlatformSelect} />
         <div id="calculator-form">
           <CalculatorForm selectedPlatform={selectedPlatform} />
         </div>

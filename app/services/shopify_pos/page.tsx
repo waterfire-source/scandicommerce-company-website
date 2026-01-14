@@ -4,20 +4,76 @@ import Hero from '@/components/sections/services/shopify_pos/Hero'
 import OmnichannelFeatures from '@/components/sections/services/shopify_pos/OmnichannelFeatures'
 import PerfectFor from '@/components/sections/services/shopify_pos/PerfectFor'
 import ReadyForOmnichannel from '@/components/sections/services/shopify_pos/ReadyForOmnichannel'
+import { client } from '@/sanity/lib/client'
+import { shopifyPosPageQuery } from '@/sanity/lib/queries'
 
-const ShopifyPOSPage = () => {
+// Disable caching - always fetch fresh data from Sanity
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
+interface ShopifyPosPageData {
+  _id: string
+  pageTitle: string
+  slug: string
+  hero?: {
+    heroTitle?: {
+      text?: string
+      highlight?: string
+    }
+    heroDescription?: string
+    heroButtonText?: string
+    heroButtonLink?: string
+  }
+  features?: {
+    featuresTitle?: string
+    featuresItems?: Array<{
+      title: string
+      description: string
+      icon?: string
+    }>
+  }
+  perfectFor?: {
+    perfectForTitle?: string
+    perfectForItems?: Array<{
+      title: string
+      description: string
+    }>
+  }
+  cta?: {
+    ctaTitle?: string
+    ctaDescription?: string
+    ctaButtonText?: string
+    ctaButtonLink?: string
+  }
+}
+
+async function getPageData(): Promise<ShopifyPosPageData | null> {
+  try {
+    const data = await client.fetch<ShopifyPosPageData>(
+      shopifyPosPageQuery,
+      {},
+      { next: { revalidate: 0 } }
+    )
+    return data
+  } catch (error) {
+    console.error('Error fetching Shopify POS page:', error)
+    return null
+  }
+}
+
+export default async function ShopifyPOSPage() {
+  const pageData = await getPageData()
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-grow">
-        <Hero />
-        <OmnichannelFeatures />
-        <PerfectFor />
-        <ReadyForOmnichannel />
+        <Hero hero={pageData?.hero} />
+        <OmnichannelFeatures features={pageData?.features} />
+        <PerfectFor perfectFor={pageData?.perfectFor} />
+        <ReadyForOmnichannel cta={pageData?.cta} />
         <Footer />
       </main>
     </div>
   )
 }
-
-export default ShopifyPOSPage

@@ -2,13 +2,57 @@
 
 import LiquidBlob from '@/components/ui/LiquidBlob'
 
-export default function Hero() {
+interface Stat {
+  value?: string
+  label?: string
+}
+
+interface HeroData {
+  heroTitle?: {
+    text?: string
+    highlight?: string
+  }
+  heroDescription?: string
+  stats?: Stat[]
+}
+
+interface HeroProps {
+  hero?: HeroData
+}
+
+// Default stats
+const defaultStats: Stat[] = [
+  { value: '50+', label: 'Norwegian brands served' },
+  { value: '6', label: 'Years Shopify-only' },
+  { value: '€12M+', label: 'Revenue generated for clients' },
+]
+
+export default function Hero({ hero }: HeroProps) {
+  const titleText = hero?.heroTitle?.text || 'We make Shopify feel like it was built for you'
+  const titleHighlight = hero?.heroTitle?.highlight || 'built for you'
+  const description = hero?.heroDescription || 'A Norwegian Shopify agency that treats clients like customers, not just projects. We build e-commerce solutions for brands ready to grow.'
+  const stats = hero?.stats && hero.stats.length > 0 ? hero.stats : defaultStats
+
+  const renderTitle = () => {
+    if (!titleHighlight || !titleText.includes(titleHighlight)) {
+      return <span className="xl:text-[#FFFFFF] text-[#222222]">{titleText}</span>
+    }
+    const parts = titleText.split(titleHighlight)
+    return (
+      <>
+        <span className="xl:text-[#FFFFFF] text-[#222222]">{parts[0]}</span>
+        <span className="text-[#1DEFFA]">{titleHighlight}</span>
+        <span className="xl:text-[#FFFFFF] text-[#222222]">{parts[1]}</span>
+      </>
+    )
+  }
+
   return (
     <section className="relative bg-[#F8F8F8] py-16 lg:py-24 overflow-hidden min-h-[calc(100vh-80px)] flex items-center justify-center">
       <LiquidBlob
-        page="about"
+        page="homepage"
         rotation={0}
-        className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] md:w-[120%] lg:w-[115%] xl:w-[110%] h-[130%] hidden lg:block"
+        className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] md:w-[100%] lg:w-[95%] xl:w-[90%] h-[110%] hidden lg:block"
         enableMouseFollow={true}
       />
 
@@ -18,46 +62,25 @@ export default function Hero() {
       <div className="container flex flex-col justify-center items-center mx-auto px-4 sm:px-6 lg:px-8 relative z-10 gap-[42px]">
         <div className="flex flex-col justify-start items-center gap-[53px] sm:w-3/4 2xl:w-1/2 w-full">
           <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-4 sm:mb-6">
-            <span className="xl:text-[#FFFFFF] text-[#222222]">
-              We make Shopify feel like it was
-            </span>{' '}
-            <span className="text-[#1DEFFA]">built for you</span>
+            {renderTitle()}
           </h1>
 
           <p className="text-base lg:text-lg xl:text-xl xl:text-[#FFFFFF] text-[#222222] text-center leading-relaxed px-4">
-            A Norwegian Shopify agency that treats clients like customers, not
-            just projects. We build e-commerce solutions for brands ready to
-            grow.
+            {description}
           </p>
         </div>
 
         <div className="flex flex-row gap-3 sm:gap-12 lg:gap-16 items-start justify-center bg-white sm:px-8 px-3 py-4">
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-bold text-[#03C1CA] mb-2">
-              50+
+          {stats.map((stat, index) => (
+            <div key={index} className="text-center">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-bold text-[#03C1CA] mb-2">
+                {stat.value}
+              </div>
+              <div className="text-xs sm:text-sm md:text-base xl:text-lg text-[#565454]">
+                {stat.label}
+              </div>
             </div>
-            <div className="text-xs sm:text-sm md:text-base xl:text-lg text-[#565454]">
-              Norwegian brands served
-            </div>
-          </div>
-
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-bold text-[#03C1CA] mb-2">
-              6
-            </div>
-            <div className="text-xs sm:text-sm md:text-base xl:text-lg text-[#565454]">
-              Years Shopify-only
-            </div>
-          </div>
-
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-bold text-[#03C1CA] mb-2">
-              €12M+
-            </div>
-            <div className="text-xs sm:text-sm md:text-base xl:text-lg text-[#565454]">
-              Revenue generated for clients
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

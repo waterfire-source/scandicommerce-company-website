@@ -4,22 +4,33 @@ import React, { useState } from 'react'
 import { FiChevronDown } from 'react-icons/fi'
 
 interface FAQItem {
-  question: string
-  answer: string
+  question?: string
+  answer?: string
 }
 
-const faqData: FAQItem[] = [
+interface FAQData {
+  title?: string
+  subtitle?: string
+  faqs?: FAQItem[]
+}
+
+interface FAQProps {
+  faq?: FAQData
+}
+
+// Default FAQs
+const defaultFaqs: FAQItem[] = [
   {
     question: 'What happens during the free consultation?',
-    answer: 'During our free consultation, we\'ll discuss your current e-commerce setup, understand your business goals, identify challenges you\'re facing, and explore how Shopify can help you grow. We\'ll also provide initial recommendations and outline potential next steps.',
+    answer: "During our free consultation, we'll discuss your current e-commerce setup, understand your business goals, identify challenges you're facing, and explore how Shopify can help you grow. We'll also provide initial recommendations and outline potential next steps.",
   },
   {
     question: 'How long does a typical project take?',
-    answer: 'Project timelines vary based on complexity. A simple Shopify store setup typically takes 2-4 weeks. Custom development projects usually range from 4-8 weeks. Large enterprise migrations can take 8-16 weeks. We\'ll provide a detailed timeline during our consultation.',
+    answer: "Project timelines vary based on complexity. A simple Shopify store setup typically takes 2-4 weeks. Custom development projects usually range from 4-8 weeks. Large enterprise migrations can take 8-16 weeks. We'll provide a detailed timeline during our consultation.",
   },
   {
     question: 'Do you work with businesses outside Norway?',
-    answer: 'Yes! While we\'re based in Oslo, Norway, we work with clients across Scandinavia and Europe. We\'ve successfully delivered projects for businesses in Sweden, Denmark, Finland, Germany, and the UK. Our team is fluent in English and Norwegian.',
+    answer: "Yes! While we're based in Oslo, Norway, we work with clients across Scandinavia and Europe. We've successfully delivered projects for businesses in Sweden, Denmark, Finland, Germany, and the UK. Our team is fluent in English and Norwegian.",
   },
   {
     question: 'What if I need ongoing support after launch?',
@@ -52,21 +63,25 @@ function FAQAccordionItem({ question, answer }: FAQItem) {
   )
 }
 
-export default function FAQ() {
+export default function FAQ({ faq }: FAQProps) {
+  const title = faq?.title || 'Quick Questions?'
+  const subtitle = faq?.subtitle || "Choose a time that works for you. We'll discuss your goals and create a custom plan."
+  const faqs = faq?.faqs && faq.faqs.length > 0 ? faq.faqs : defaultFaqs
+
   return (
     <section className="py-12 md:py-16 lg:py-24 bg-[#03C1CA]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 md:mb-10">
           <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2">
-            Quick Questions?
+            {title}
           </h2>
           <p className="text-xs sm:text-sm text-white/80 max-w-md mx-auto">
-            Choose a time that works for you. We&apos;ll discuss your goals and create a custom plan.
+            {subtitle}
           </p>
         </div>
 
         <div className="max-w-5xl mx-auto flex flex-col gap-3 md:gap-4 lg:gap-5">
-          {faqData.map((item, index) => (
+          {faqs.map((item, index) => (
             <FAQAccordionItem key={index} {...item} />
           ))}
         </div>

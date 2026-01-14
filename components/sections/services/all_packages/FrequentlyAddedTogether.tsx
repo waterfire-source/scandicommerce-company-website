@@ -1,12 +1,23 @@
 'use client'
 
 interface AddOn {
-  title: string
-  description: string
-  price: string
+  title?: string
+  description?: string
+  price?: string
 }
 
-const addOns: AddOn[] = [
+interface AddOnsData {
+  sectionTitle?: string
+  sectionSubtitle?: string
+  items?: AddOn[]
+}
+
+interface FrequentlyAddedTogetherProps {
+  addOns?: AddOnsData
+}
+
+// Default add-ons
+const defaultAddOns: AddOn[] = [
   {
     title: 'CRO Audit',
     description: 'Comprehensive conversion optimization analysis',
@@ -19,20 +30,24 @@ const addOns: AddOn[] = [
   },
 ]
 
-export default function FrequentlyAddedTogether() {
+export default function FrequentlyAddedTogether({ addOns }: FrequentlyAddedTogetherProps) {
+  const sectionTitle = addOns?.sectionTitle || 'Frequently added together'
+  const sectionSubtitle = addOns?.sectionSubtitle || 'Enhance your package with these popular add-ons'
+  const items = addOns?.items && addOns.items.length > 0 ? addOns.items : defaultAddOns
+
   return (
     <section className="bg-[#F8F8F8] py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 text-center mb-3">
-            Frequently added together
+            {sectionTitle}
           </h2>
           <p className="text-base text-gray-500 text-center mb-10">
-            Enhance your package with these popular add-ons
+            {sectionSubtitle}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {addOns.map((addOn, index) => (
+            {items.map((addOn, index) => (
               <div
                 key={index}
                 className="bg-white p-6 border border-gray-100 shadow-sm relative"
@@ -62,4 +77,3 @@ export default function FrequentlyAddedTogether() {
     </section>
   )
 }
-

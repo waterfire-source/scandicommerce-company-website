@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  compiler: {
+    styledComponents: true,
+  },
+  transpilePackages: ['@sanity/ui', 'sanity', 'motion'],
   images: {
     domains: [],
     remotePatterns: [
@@ -11,6 +15,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'cdn.shopify.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
       },
     ],
     dangerouslyAllowSVG: true,

@@ -3,18 +3,41 @@
 import React from 'react'
 import LiquidBlob from '@/components/ui/LiquidBlob'
 
+interface HeroData {
+  heroTitle?: {
+    text?: string
+    highlight?: string
+  }
+  heroDescription?: string
+  platforms?: string[]
+}
+
 interface HeroProps {
+  hero?: HeroData
   onPlatformSelect: (platform: string) => void
 }
 
-const platforms = [
-  'Woocommerce',
-  'Adobe (Magento)',
-  'Bigcommerce',
-  'Salesforce commerce cloud'
-]
+export default function Hero({ hero, onPlatformSelect }: HeroProps) {
+  const titleText = hero?.heroTitle?.text
+  const titleHighlight = hero?.heroTitle?.highlight
+  const description = hero?.heroDescription
+  const platforms = hero?.platforms || []
 
-export default function Hero({ onPlatformSelect }: HeroProps) {
+  const renderTitle = () => {
+    if (!titleText) return null
+    if (!titleHighlight || !titleText.includes(titleHighlight)) {
+      return <span className="xl:text-white text-[#222222]">{titleText}</span>
+    }
+    const parts = titleText.split(titleHighlight)
+    return (
+      <>
+        <span className="xl:text-white text-[#222222]">{parts[0]}</span>
+        <span className="text-[#1DEFFA]">{titleHighlight}</span>
+        <span className="xl:text-white text-[#222222]">{parts[1]}</span>
+      </>
+    )
+  }
+
   return (
     <section className="relative bg-[#F8F8F8] overflow-hidden min-h-[calc(100vh-80px)] flex flex-col">
       {/* Main content area */}
@@ -29,18 +52,17 @@ export default function Hero({ onPlatformSelect }: HeroProps) {
         <div className="container flex flex-col justify-center items-center mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Hero Content */}
           <div className="flex flex-col justify-start items-center gap-6 sm:w-3/4 2xl:w-1/2 w-full text-center">
-            <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold">
-              <span className="xl:text-white text-[#222222]">
-                Try our TCO/ROI{' '}
-              </span>
-              <span className="text-[#1DEFFA]">
-                calculator
-              </span>
-            </h1>
+            {titleText && (
+              <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold">
+                {renderTitle()}
+              </h1>
+            )}
 
-            <p className="text-base lg:text-lg xl:text-xl xl:text-white text-[#222222] leading-relaxed px-4 max-w-3xl">
-              We make it easy for you to calculate your TCO/ROI when making the move to shopify. Just put in your data in our calculator and we will give you a detailed report based on well researched data. You can see the research below.
-            </p>
+            {description && (
+              <p className="text-base lg:text-lg xl:text-xl xl:text-white text-[#222222] leading-relaxed px-4 max-w-3xl">
+                {description}
+              </p>
+            )}
           </div>
         </div>
       </div>
@@ -48,23 +70,25 @@ export default function Hero({ onPlatformSelect }: HeroProps) {
       {/* Bottom section with buttons and teal bar */}
       <div className="relative z-20">
         {/* Platform Selection Buttons */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-16">
-          <div className="w-full max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
-              {platforms.map((platform) => (
-                <button
-                  key={platform}
-                  onClick={() => onPlatformSelect(platform)}
-                  className="bg-white py-4 lg:py-5 px-6 text-center hover:bg-gray-50 transition-colors duration-200"
-                >
-                  <span className="text-base lg:text-lg font-medium text-gray-900">
-                    {platform}
-                  </span>
-                </button>
-              ))}
+        {platforms.length > 0 && (
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-16">
+            <div className="w-full max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
+                {platforms.map((platform) => (
+                  <button
+                    key={platform}
+                    onClick={() => onPlatformSelect(platform)}
+                    className="bg-white py-4 lg:py-5 px-6 text-center hover:bg-gray-50 transition-colors duration-200"
+                  >
+                    <span className="text-base lg:text-lg font-medium text-gray-900">
+                      {platform}
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Teal bar at bottom */}
         <div className="h-3 bg-[#00BFC8] w-full"></div>

@@ -2,11 +2,24 @@
 
 import Link from 'next/link'
 
-interface CaseStudiesBannerProps {
-  packageName: string
+interface CaseStudiesBannerData {
+  title?: string
+  description?: string
+  buttonText?: string
+  buttonLink?: string
 }
 
-export default function CaseStudiesBanner({ packageName }: CaseStudiesBannerProps) {
+interface CaseStudiesBannerProps {
+  packageName: string
+  caseStudiesBanner?: CaseStudiesBannerData
+}
+
+export default function CaseStudiesBanner({ packageName, caseStudiesBanner }: CaseStudiesBannerProps) {
+  const title = caseStudiesBanner?.title || 'See how others succeeded with this package'
+  const description = caseStudiesBanner?.description || `Read real case studies from brands that chose the ${packageName} package`
+  const buttonText = caseStudiesBanner?.buttonText || 'View Case Studies'
+  const buttonLink = caseStudiesBanner?.buttonLink || '/work'
+
   return (
     <section className="bg-[#F8F8F8] py-12 lg:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,16 +27,16 @@ export default function CaseStudiesBanner({ packageName }: CaseStudiesBannerProp
           {/* Teal banner with rounded corners */}
           <div className="bg-[#03C1CA] rounded-lg py-16 lg:py-20 px-8 text-center">
             <h2 className="text-2xl lg:text-3xl font-bold text-white mb-4">
-              See how others succeeded with this package
+              {title}
             </h2>
             <p className="text-base lg:text-lg text-white/90 mb-8">
-              Read real case studies from brands that chose the {packageName} package
+              {description}
             </p>
             <Link
-              href="/work"
+              href={buttonLink}
               className="inline-block bg-white hover:bg-gray-50 text-gray-700 font-medium py-3 px-8 border border-gray-200 transition-colors duration-200"
             >
-              View Case Studies
+              {buttonText}
             </Link>
           </div>
         </div>
@@ -31,4 +44,3 @@ export default function CaseStudiesBanner({ packageName }: CaseStudiesBannerProp
     </section>
   )
 }
-

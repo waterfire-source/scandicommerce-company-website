@@ -3,7 +3,29 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 
-export default function RevenueForm() {
+interface RevenueFormData {
+  title?: string
+  subtitle?: string
+  testimonial?: {
+    quote?: string
+    authorName?: string
+    authorRole?: string
+    authorCompany?: string
+    authorImageUrl?: string
+  }
+  form?: {
+    formTitle?: string
+    formSubtitle?: string
+    formDescription?: string
+    submitButtonText?: string
+  }
+}
+
+interface RevenueFormProps {
+  revenueForm?: RevenueFormData
+}
+
+export default function RevenueForm({ revenueForm }: RevenueFormProps) {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -24,6 +46,11 @@ export default function RevenueForm() {
     })
   }
 
+  const title = revenueForm?.title
+  const subtitle = revenueForm?.subtitle
+  const testimonial = revenueForm?.testimonial
+  const form = revenueForm?.form
+
   return (
     <section className="relative overflow-hidden">
       {/* Full teal background */}
@@ -33,43 +60,59 @@ export default function RevenueForm() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             {/* Title */}
             <div className="text-center mb-10">
-              <h2 className="text-3xl lg:text-4xl xl:text-[42px] font-bold text-white mb-4">
-                Ready To 2X Your Revenue?
-              </h2>
-              <p className="text-white/90 max-w-2xl mx-auto leading-relaxed" style={{ fontSize: '0.99rem' }}>
-                Stop losing money to disconnected systems. Get your complete Shopify POS<br />setup in 24 hours and start seeing results immediately.
-              </p>
+              {title && (
+                <h2 className="text-3xl lg:text-4xl xl:text-[42px] font-bold text-white mb-4">
+                  {title}
+                </h2>
+              )}
+              {subtitle && (
+                <p className="text-white/90 max-w-2xl mx-auto leading-relaxed" style={{ fontSize: '0.99rem' }}>
+                  {subtitle}
+                </p>
+              )}
             </div>
 
             {/* Testimonial Card */}
-            <div className="w-full max-w-5xl lg:w-[75%] mx-auto">
-              <div className="flex flex-col sm:flex-row items-center gap-6 lg:gap-8 bg-[#00A8B0] px-6 py-5">
-                {/* Profile photo with teal border */}
-                <div className="w-24 h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden flex-shrink-0 border-4 border-[#00BFC8]">
-                  <Image
-                    src="/images/shopify/shopify_platform/Ellipse 12.png"
-                    alt="Chris Willy Jensen"
-                    width={112}
-                    height={112}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                
-                {/* Name and title */}
-                <div className="flex-shrink-0 text-center sm:text-left">
-                  <h4 className="text-[#1DEFFA] font-semibold text-lg mb-1">Chris Willy Jensen</h4>
-                  <p className="text-white/80 text-sm">Co-founder</p>
-                  <p className="text-white font-bold text-sm">Scandicommerce AS</p>
-                </div>
+            {testimonial && (
+              <div className="w-full max-w-5xl lg:w-[75%] mx-auto">
+                <div className="flex flex-col sm:flex-row items-center gap-6 lg:gap-8 bg-[#00A8B0] px-6 py-5">
+                  {/* Profile photo with teal border */}
+                  {testimonial.authorImageUrl && (
+                    <div className="w-24 h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden flex-shrink-0 border-4 border-[#00BFC8]">
+                      <Image
+                        src={testimonial.authorImageUrl}
+                        alt={testimonial.authorName || 'Author'}
+                        width={112}
+                        height={112}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+                  
+                  {/* Name and title */}
+                  <div className="flex-shrink-0 text-center sm:text-left">
+                    {testimonial.authorName && (
+                      <h4 className="text-[#1DEFFA] font-semibold text-lg mb-1">{testimonial.authorName}</h4>
+                    )}
+                    {testimonial.authorRole && (
+                      <p className="text-white/80 text-sm">{testimonial.authorRole}</p>
+                    )}
+                    {testimonial.authorCompany && (
+                      <p className="text-white font-bold text-sm">{testimonial.authorCompany}</p>
+                    )}
+                  </div>
 
-                {/* Quote */}
-                <div className="flex-1">
-                  <p className="text-white text-sm lg:text-base text-center sm:text-left leading-relaxed">
-                    &quot;With shopify POS you can finally unify your commerce. A seamless experience that truly make your online and in-store experience one.&quot;
-                  </p>
+                  {/* Quote */}
+                  {testimonial.quote && (
+                    <div className="flex-1">
+                      <p className="text-white text-sm lg:text-base text-center sm:text-left leading-relaxed">
+                        &quot;{testimonial.quote}&quot;
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
 
@@ -79,15 +122,21 @@ export default function RevenueForm() {
             <div className="w-full max-w-5xl lg:w-[75%] mx-auto bg-white shadow-2xl px-8 py-10 lg:px-16 lg:py-16">
               {/* Form header */}
               <div className="text-center mb-10">
-                <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">
-                  Get Your Free POS Implementation Quote
-                </h3>
-                <p className="text-gray-400 text-sm mb-4">
-                  <span>No consultations. No endless meetings.</span> Just results.
-                </p>
-                <p className="text-gray-600 text-sm">
-                  Fill out the form and get shopify POS fast and pain free.
-                </p>
+                {form?.formTitle && (
+                  <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">
+                    {form.formTitle}
+                  </h3>
+                )}
+                {form?.formSubtitle && (
+                  <p className="text-gray-400 text-sm mb-4">
+                    {form.formSubtitle}
+                  </p>
+                )}
+                {form?.formDescription && (
+                  <p className="text-gray-600 text-sm">
+                    {form.formDescription}
+                  </p>
+                )}
               </div>
 
               {/* Form */}
@@ -198,7 +247,7 @@ export default function RevenueForm() {
                     type="submit"
                     className="w-full sm:w-[70%] lg:w-[60%] bg-[#00BFC8] text-white py-4 px-6 rounded font-semibold text-lg hover:bg-[#00A8B0] transition-colors"
                   >
-                    Submit
+                    {form?.submitButtonText || 'Submit'}
                   </button>
                 </div>
               </form>
@@ -250,4 +299,3 @@ export default function RevenueForm() {
     </section>
   )
 }
-

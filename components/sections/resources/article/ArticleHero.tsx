@@ -25,17 +25,12 @@ export default function ArticleHero({ article }: ArticleHeroProps) {
 
   return (
     <section className="relative bg-[#F8F8F8] py-16 lg:py-24 overflow-hidden min-h-[calc(100vh-80px)] flex items-center">
-      {/* Blob Background - positioned like homepage hero */}
+      {/* Blob Background - same style as homepage hero */}
       <LiquidBlob
         page="homepage"
         rotation={10}
-        className="top-[-30%] right-[-35%] w-[110%] h-[160%] hidden lg:block"
-        enableMouseFollow={true}
+        className="top-[-5%] right-[-10%] w-[75%] h-[110%] hidden lg:block"
       />
-
-      {/* Decorative teal circles - matching design */}
-      <div className="absolute top-[25%] right-[18%] xl:block hidden w-40 h-40 rounded-full bg-[#1DEFFA33]"></div>
-      <div className="absolute bottom-[15%] right-[30%] xl:block hidden w-[60px] h-[60px] rounded-full bg-[#1DEFFA33]"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="w-full lg:w-3/5">

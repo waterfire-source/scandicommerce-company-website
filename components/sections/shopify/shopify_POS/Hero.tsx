@@ -2,19 +2,51 @@
 
 import LiquidBlob from '@/components/ui/LiquidBlob'
 
-const stats = [
-  { value: '30%', label: 'Conversion rate' },
-  { value: '24H', label: 'Setup time' },
-  { value: '∞', label: 'Growth potential' },
-]
+interface Stat {
+  value?: string
+  label?: string
+}
 
-export default function Hero() {
+interface HeroData {
+  heroTitle?: {
+    text?: string
+    highlight?: string
+  }
+  heroDescription?: string
+  stats?: Stat[]
+}
+
+interface HeroProps {
+  hero?: HeroData
+}
+
+export default function Hero({ hero }: HeroProps) {
+  const titleText = hero?.heroTitle?.text
+  const titleHighlight = hero?.heroTitle?.highlight
+  const description = hero?.heroDescription
+  const stats = hero?.stats || []
+
+  const renderTitle = () => {
+    if (!titleText) return null
+    if (!titleHighlight || !titleText.includes(titleHighlight)) {
+      return <span className="xl:text-[#FFFFFF] text-[#222222]">{titleText}</span>
+    }
+    const parts = titleText.split(titleHighlight)
+    return (
+      <>
+        <span className="xl:text-[#FFFFFF] text-[#222222]">{parts[0]}</span>
+        <span className="text-[#1DEFFA]">{titleHighlight}</span>
+        <span className="xl:text-[#FFFFFF] text-[#222222]">{parts[1]}</span>
+      </>
+    )
+  }
+
   return (
     <section className="relative bg-[#F8F8F8] py-16 lg:py-24 overflow-hidden min-h-[calc(100vh-80px)] flex items-center justify-center">
       <LiquidBlob
         page="homepage"
         rotation={0}
-        className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] md:w-[120%] lg:w-[115%] xl:w-[110%] h-[130%] hidden lg:block"
+        className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] md:w-[100%] lg:w-[95%] xl:w-[90%] h-[110%] hidden lg:block"
         enableMouseFollow={true}
       />
 
@@ -23,40 +55,41 @@ export default function Hero() {
 
       <div className="container flex flex-col justify-center items-center mx-auto px-4 sm:px-6 lg:px-8 relative z-10 gap-[42px]">
         <div className="flex flex-col justify-start items-center gap-8 sm:w-3/4 2xl:w-1/2 w-full">
-          <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-4 sm:mb-6">
-            <span className="xl:text-[#FFFFFF] text-[#222222]">
-              Turn Your Online Store into
-            </span>{' '}
-            <span className="text-[#1DEFFA]">A</span>
-            <br />
-            <span className="text-[#1DEFFA]">Omnichannel</span>{' '}
-            <span className="xl:text-[#FFFFFF] text-[#222222]">
-              Empire
-            </span>
-          </h1>
+          {titleText && (
+            <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-4 sm:mb-6">
+              {renderTitle()}
+            </h1>
+          )}
 
-          <p className="text-base lg:text-lg xl:text-xl xl:text-[#FFFFFF] text-[#222222] text-center leading-relaxed px-4 max-w-2xl">
-            Get 20-80% revenue increases with professional Shopify POS setup. We handle everything so you can start selling in-person immediately. No consultations. No endless meetings. Just results.
-          </p>
+          {description && (
+            <p className="text-base lg:text-lg xl:text-xl xl:text-[#FFFFFF] text-[#222222] text-center leading-relaxed px-4 max-w-2xl">
+              {description}
+            </p>
+          )}
         </div>
 
         {/* Stats Card */}
-        <div className="bg-[#E8FAFA] border border-[#00BFC8]/30 rounded-lg px-8 py-6 mt-4">
-          <div className="flex items-center gap-12 lg:gap-16">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-2xl lg:text-3xl font-bold text-[#00BFC8] mb-1">
-                  {stat.value}
+        {stats.length > 0 && (
+          <div className="bg-[#E8FAFA] border border-[#00BFC8]/30 rounded-lg px-8 py-6 mt-4">
+            <div className="flex items-center gap-12 lg:gap-16">
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center">
+                  {stat.value && (
+                    <div className="text-2xl lg:text-3xl font-bold text-[#00BFC8] mb-1">
+                      {stat.value}
+                    </div>
+                  )}
+                  {stat.label && (
+                    <div className="text-xs lg:text-sm text-gray-600">
+                      {stat.label}
+                    </div>
+                  )}
                 </div>
-                <div className="text-xs lg:text-sm text-gray-600">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   )
 }
-

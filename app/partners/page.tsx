@@ -4,16 +4,68 @@ import Hero from '@/components/sections/partners/Hero'
 import WhyOurPartnership from '@/components/sections/partners/WhyOurPartnership'
 import PartnersGrid from '@/components/sections/partners/PartnersGrid'
 import BecomeAPartner from '@/components/sections/partners/BecomeAPartner'
+import { client } from '@/sanity/lib/client'
+import { partnersPageQuery } from '@/sanity/lib/queries'
 
-export default function Partners() {
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
+interface PartnersPageData {
+  _id: string
+  pageTitle?: string
+  slug?: string
+  hero?: {
+    heroTitle?: {
+      text?: string
+      highlight?: string
+    }
+    heroDescription?: string
+  }
+  whyOurPartnership?: {
+    title?: string
+    features?: {
+      icon?: string
+      title?: string
+      description?: string
+    }[]
+  }
+  partnersGrid?: {
+    partners?: {
+      name?: string
+      category?: string
+      description?: string
+      benefits?: string[]
+      imageUrl?: string
+      logoUrl?: string
+    }[]
+  }
+  cta?: {
+    title?: string
+    description?: string
+    buttonText?: string
+    buttonLink?: string
+  }
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+  }
+}
+
+export default async function Partners() {
+  const pageData: PartnersPageData = await client.fetch(
+    partnersPageQuery,
+    {},
+    { next: { revalidate: 0 } }
+  )
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-grow">
-        <Hero />
-        <WhyOurPartnership />
-        <PartnersGrid />
-        <BecomeAPartner />
+        <Hero hero={pageData?.hero} />
+        <WhyOurPartnership whyOurPartnership={pageData?.whyOurPartnership} />
+        <PartnersGrid partnersGrid={pageData?.partnersGrid} />
+        <BecomeAPartner cta={pageData?.cta} />
         <Footer />
       </main>
     </div>

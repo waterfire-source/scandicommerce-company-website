@@ -2,7 +2,42 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { HiCalendar, HiClock } from 'react-icons/hi2'
 
-export default function FeaturedArticle() {
+interface TagData {
+  label?: string
+  isPrimary?: boolean
+}
+
+interface FeaturedArticleData {
+  imageUrl?: string
+  tags?: TagData[]
+  title?: string
+  description?: string
+  date?: string
+  readTime?: string
+  link?: string
+  buttonText?: string
+}
+
+interface FeaturedArticleProps {
+  featuredArticle?: FeaturedArticleData
+}
+
+// Default tags
+const defaultTags: TagData[] = [
+  { label: 'Shopify Tips', isPrimary: true },
+  { label: 'Featured', isPrimary: false },
+]
+
+export default function FeaturedArticle({ featuredArticle }: FeaturedArticleProps) {
+  const imageUrl = featuredArticle?.imageUrl || '/images/resources/featured_article/banner.png'
+  const tags = featuredArticle?.tags && featuredArticle.tags.length > 0 ? featuredArticle.tags : defaultTags
+  const title = featuredArticle?.title || '10 Essential Shopify Apps for Norwegian E-commerce in 2025'
+  const description = featuredArticle?.description || 'Discover the must-have apps that will transform your Norwegian Shopify store and boost conversions.'
+  const date = featuredArticle?.date || 'Jan 15, 2025'
+  const readTime = featuredArticle?.readTime || '8 min read'
+  const link = featuredArticle?.link || '/resources/10-essential-shopify-apps-norwegian-ecommerce-2025'
+  const buttonText = featuredArticle?.buttonText || 'Read Article'
+
   return (
     <section className="bg-white py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -10,8 +45,8 @@ export default function FeaturedArticle() {
           {/* Left Column - Laptop Image */}
           <div className="relative w-full h-[400px] lg:h-[450px] xl:h-[560px]">
             <Image
-              src="/images/resources/featured_article/banner.png"
-              alt="Shopify dashboard on laptop"
+              src={imageUrl}
+              alt={title}
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -22,25 +57,30 @@ export default function FeaturedArticle() {
           <div className="bg-white p-6 lg:p-8 border border-[#5654544D] h-full w-full flex flex-col justify-center items-start gap-10">
             {/* Tags */}
             <div className="flex flex-wrap gap-2">
-              <span className="px-3 py-1 bg-[#03C1CA] text-white text-sm font-medium">
-                Shopify Tips
-              </span>
-              <span className="px-3 py-1 bg-gray-200 text-gray-700 text-sm font-medium">
-                Featured
-              </span>
+              {tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className={`px-3 py-1 text-sm font-medium ${
+                    tag.isPrimary
+                      ? 'bg-[#03C1CA] text-white'
+                      : 'bg-gray-200 text-gray-700'
+                  }`}
+                >
+                  {tag.label}
+                </span>
+              ))}
             </div>
 
             <div className="flex flex-col justify-start items-start gap-7 sm:gap-[42px]">
               <div className="flex flex-col justify-start items-start gap-5 sm:gap-[30px]">
                 {/* Headline */}
                 <h2 className="text-lg sm:text-xl xl:text-2xl 2xl:text-[32px] font-bold text-[#1F1D1D]">
-                  10 Essential Shopify Apps for Norwegian E-commerce in 2025
+                  {title}
                 </h2>
 
                 {/* Description */}
                 <p className="text-xs sm:text-sm xl:text-sm 2xl:text-base text-[#565454] leading-relaxed">
-                  Discover the must-have apps that will transform your Norwegian
-                  Shopify store and boost conversions.
+                  {description}
                 </p>
               </div>
 
@@ -49,20 +89,20 @@ export default function FeaturedArticle() {
                 <div className="flex flex-wrap gap-4 text-sm text-[#565454]">
                   <div className="flex items-center gap-2">
                     <HiCalendar className="w-4 h-4" />
-                    <span>Jan 15, 2025</span>
+                    <span>{date}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <HiClock className="w-4 h-4" />
-                    <span>8 min read</span>
+                    <span>{readTime}</span>
                   </div>
                 </div>
 
                 {/* CTA Button */}
                 <Link
-                  href="/resources/10-essential-shopify-apps-norwegian-ecommerce-2025"
+                  href={link}
                   className="inline-block bg-black text-base text-white px-6 py-3 lg:px-8 lg:py-4 font-semibold hover:bg-gray-800 transition-colors"
                 >
-                  Read Article
+                  {buttonText}
                 </Link>
               </div>
             </div>

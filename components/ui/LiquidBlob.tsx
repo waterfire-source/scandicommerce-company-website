@@ -9,6 +9,8 @@ interface LiquidBlobProps {
   page?: BlobPage
   rotation?: number
   enableMouseFollow?: boolean
+  animationSpeed?: number // Multiplier for animation duration (higher = slower)
+  shapeScale?: number // Scale factor for shape variations (higher = more dramatic)
 }
 
 const pageShapes: Record<BlobPage, {
@@ -19,16 +21,16 @@ const pageShapes: Record<BlobPage, {
 }> = {
   homepage: {
     blob1: {
-      shape1: 'M500,200 C750,200 950,350 950,500 C950,650 750,800 500,800 C250,800 50,650 50,500 C50,350 250,200 500,200 Z',
-      shape2: 'M520,180 C780,190 970,340 960,510 C950,680 740,820 480,810 C220,800 40,660 50,490 C60,320 280,170 520,180 Z',
-      shape3: 'M480,210 C730,200 940,360 930,520 C920,680 720,810 470,800 C220,790 40,640 60,480 C80,320 250,220 480,210 Z',
-      shape4: 'M510,190 C770,200 960,350 950,510 C940,670 740,810 490,800 C240,790 50,650 60,490 C70,330 270,180 510,190 Z',
+      shape1: 'M500,100 C650,100 800,150 900,300 C1000,450 1000,600 900,750 C800,900 650,950 500,950 C350,950 200,900 100,750 C0,600 0,450 100,300 C200,150 350,100 500,100 Z',
+      shape2: 'M520,120 C680,80 850,180 950,350 C1050,520 1020,700 900,850 C780,1000 600,1020 450,980 C300,940 150,850 80,680 C10,510 50,340 150,220 C250,100 380,140 520,120 Z',
+      shape3: 'M480,80 C620,120 780,200 880,380 C980,560 960,750 840,890 C720,1030 550,1050 400,1000 C250,950 120,820 60,640 C0,460 40,280 160,160 C280,40 360,50 480,80 Z',
+      shape4: 'M510,100 C670,90 830,170 930,340 C1030,510 1010,690 890,840 C770,990 590,1030 440,990 C290,950 140,840 70,660 C0,480 40,300 160,180 C280,60 370,110 510,100 Z',
     },
     blob2: {
-      shape1: 'M500,220 C740,220 930,360 930,510 C930,660 740,790 500,790 C260,790 70,660 70,510 C70,360 260,220 500,220 Z',
-      shape2: 'M520,200 C770,210 950,350 940,510 C930,670 730,800 480,790 C230,780 50,640 70,480 C90,320 290,190 520,200 Z',
-      shape3: 'M480,230 C720,220 920,370 910,520 C900,670 710,790 460,780 C210,770 40,630 60,470 C80,310 260,240 480,230 Z',
-      shape4: 'M510,210 C760,220 950,360 940,520 C930,680 730,800 480,790 C230,780 50,640 70,480 C90,320 280,200 510,210 Z',
+      shape1: 'M750,200 C900,180 1050,280 1120,450 C1190,620 1140,800 1020,920 C900,1040 720,1060 580,1000 C440,940 340,820 320,650 C300,480 380,320 500,230 C620,140 620,220 750,200 Z',
+      shape2: 'M780,180 C940,150 1100,260 1160,440 C1220,620 1160,820 1030,950 C900,1080 700,1090 550,1020 C400,950 300,810 290,630 C280,450 370,280 510,190 C650,100 640,200 780,180 Z',
+      shape3: 'M720,220 C870,200 1020,300 1090,470 C1160,640 1110,830 980,960 C850,1090 670,1100 530,1030 C390,960 300,830 300,660 C300,490 390,330 530,240 C670,150 590,240 720,220 Z',
+      shape4: 'M760,190 C910,170 1070,270 1140,450 C1210,630 1150,820 1020,950 C890,1080 700,1100 560,1030 C420,960 320,830 310,655 C300,480 385,310 525,215 C665,120 630,210 760,190 Z',
     },
     shadow1: {
       shape1: 'M500,160 C790,160 1010,330 1010,520 C1010,710 790,880 500,880 C210,880 -10,710 -10,520 C-10,330 210,160 500,160 Z',
@@ -231,7 +233,9 @@ export default function LiquidBlob({
   className = '',
   page = 'homepage',
   rotation = 0,
-  enableMouseFollow = true
+  enableMouseFollow = false,
+  animationSpeed = 1,
+  shapeScale = 1
 }: LiquidBlobProps) {
   const blobRef = useRef<SVGSVGElement>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -241,6 +245,10 @@ export default function LiquidBlob({
   const shapes = pageShapes[page]
 
   const animationId = useMemo(() => page, [page])
+
+  // Calculate animation durations based on speed multiplier
+  const blob1Duration = 10 * animationSpeed
+  const blob2Duration = 11 * animationSpeed
 
   const generateKeyframes = useMemo(() => `
     @keyframes blob1-morph-${animationId} {
@@ -255,13 +263,6 @@ export default function LiquidBlob({
       25% { d: path("${shapes.blob2.shape2}"); }
       50% { d: path("${shapes.blob2.shape3}"); }
       75% { d: path("${shapes.blob2.shape4}"); }
-    }
-    
-    @keyframes highlight-float-${animationId} {
-      0%, 100% { transform: translate(0, 0); }
-      25% { transform: translate(30px, 40px); }
-      50% { transform: translate(-20px, 30px); }
-      75% { transform: translate(10px, -20px); }
     }
   `, [shapes, animationId])
 
@@ -348,45 +349,26 @@ export default function LiquidBlob({
           transition: isHovering ? 'none' : 'transform 0.8s ease-out',
         }}
       >
-        <path
-          fill="#03C1CA"
-          opacity="1"
-          d={shapes.blob1.shape1}
-          style={{
-            animation: `blob1-morph-${animationId} 10s ease-in-out infinite`,
-          }}
-        />
-        <g style={{ transform: 'translate(-40px, 30px)' }}>
+        <g transform="translate(-900, -140) scale(2.1, 1.05)">
           <path
-            fill="#03C1CA"
-            opacity="0.2"
+            fill="#1DEFFA"
+            opacity="0.3"
             d={shapes.blob2.shape1}
             style={{
-              animation: `blob2-morph-${animationId} 11s ease-in-out infinite`,
+              animation: `blob2-morph-${animationId} ${blob2Duration}s ease-in-out infinite`,
             }}
           />
         </g>
-        <ellipse
-          cx="420"
-          cy="420"
-          rx="120"
-          ry="80"
-          fill="white"
-          opacity="0.1"
-          style={{
-            animation: `highlight-float-${animationId} 8s ease-in-out infinite`,
-          }}
-        />
-        <circle
-          cx="360"
-          cy="360"
-          r="40"
-          fill="white"
-          opacity="0.08"
-          style={{
-            animation: `highlight-float-${animationId} 6s ease-in-out infinite reverse`,
-          }}
-        />
+        <g transform="translate(-240, 80) scale(1.5, 0.85)">
+          <path
+            fill="#03C1CA"
+            opacity="1"
+            d={shapes.blob1.shape1}
+            style={{
+              animation: `blob1-morph-${animationId} ${blob1Duration}s ease-in-out infinite`,
+            }}
+          />
+        </g>
       </svg>
     </div>
   )

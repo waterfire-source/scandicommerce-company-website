@@ -1,6 +1,34 @@
+'use client'
+
 import CaseStudy from './CaseStudy'
 
-const caseStudies = [
+interface Result {
+  value?: string
+  label?: string
+}
+
+interface Study {
+  title?: string
+  category?: string
+  tags?: string[]
+  challenge?: string
+  solution?: string
+  results?: Result[]
+  imageUrl?: string
+  imageAlt?: string
+  link?: string
+}
+
+interface CaseStudiesData {
+  studies?: Study[]
+}
+
+interface CaseStudiesProps {
+  caseStudies?: CaseStudiesData
+}
+
+// Default case studies
+const defaultStudies: Study[] = [
   {
     title: 'Nordic Fashion Co.',
     category: 'Fashion & Apparel',
@@ -12,7 +40,7 @@ const caseStudies = [
       { value: '-68%', label: 'Page load time' },
       { value: '+2.1M kr', label: 'Additional revenue' },
     ],
-    image: '/images/work/caseStudies/nordic.png',
+    imageUrl: '/images/work/caseStudies/nordic.png',
     imageAlt: 'Nordic Fashion Co. store interior',
   },
   {
@@ -26,7 +54,7 @@ const caseStudies = [
       { value: '3x', label: 'AOV increase' },
       { value: '+127%', label: 'B2B orders' },
     ],
-    image: '/images/work/caseStudies/oslo.jpg',
+    imageUrl: '/images/work/caseStudies/oslo.jpg',
     imageAlt: 'Oslo Electronics store',
   },
   {
@@ -40,20 +68,35 @@ const caseStudies = [
       { value: '2.8%', label: 'Conversion rate' },
       { value: '12k', label: 'Email subscribers' },
     ],
-    image: '/images/work/caseStudies/bergen.png',
+    imageUrl: '/images/work/caseStudies/bergen.png',
     imageAlt: 'Bergen Home Goods showroom',
   },
 ]
 
-export default function CaseStudies() {
+export default function CaseStudies({ caseStudies }: CaseStudiesProps) {
+  const studies = caseStudies?.studies && caseStudies.studies.length > 0
+    ? caseStudies.studies
+    : defaultStudies
+
   return (
     <section className="bg-white py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {caseStudies.map((study, index) => (
+        {studies.map((study, index) => (
           <CaseStudy
             key={index}
-            {...study}
+            title={study.title || ''}
+            category={study.category || ''}
+            tags={study.tags || []}
+            challenge={study.challenge || ''}
+            solution={study.solution || ''}
+            results={study.results?.map(r => ({
+              value: r.value || '',
+              label: r.label || ''
+            })) || []}
+            image={study.imageUrl || ''}
+            imageAlt={study.imageAlt || ''}
             imagePosition={index % 2 === 0 ? 'left' : 'right'}
+            link={study.link}
           />
         ))}
       </div>

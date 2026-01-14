@@ -2,13 +2,43 @@
 
 import LiquidBlob from '@/components/ui/LiquidBlob'
 
-export default function Hero() {
+interface HeroData {
+  heroTitle?: {
+    text?: string
+    highlight?: string
+  }
+  heroDescription?: string
+}
+
+interface HeroProps {
+  hero?: HeroData
+}
+
+export default function Hero({ hero }: HeroProps) {
+  const titleText = hero?.heroTitle?.text || 'Partnering with the tools that grow your store'
+  const titleHighlight = hero?.heroTitle?.highlight || 'grow your store'
+  const description = hero?.heroDescription || "We're certified partners with the best e-commerce tools. These partnerships mean better pricing, priority support, and deeper integrations for your store."
+
+  const renderTitle = () => {
+    if (!titleHighlight || !titleText.includes(titleHighlight)) {
+      return <span className="xl:text-[#FFFFFF] text-[#222222] leading-[130%]">{titleText}</span>
+    }
+    const parts = titleText.split(titleHighlight)
+    return (
+      <>
+        <span className="xl:text-[#FFFFFF] text-[#222222] leading-[130%]">{parts[0]}</span>
+        <span className="text-[#1DEFFA] leading-[130%]">{titleHighlight}</span>
+        <span className="xl:text-[#FFFFFF] text-[#222222] leading-[130%]">{parts[1]}</span>
+      </>
+    )
+  }
+
   return (
     <section className="relative bg-[#F8F8F8] py-16 lg:py-24 overflow-hidden min-h-[calc(100vh-80px)] flex items-center justify-center">
       <LiquidBlob
-        page="partners"
-        rotation={-3}
-        className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] md:w-[120%] lg:w-[115%] xl:w-[110%] h-[130%] hidden lg:block"
+        page="homepage"
+        rotation={0}
+        className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] md:w-[100%] lg:w-[95%] xl:w-[90%] h-[110%] hidden lg:block"
         enableMouseFollow={true}
       />
 
@@ -17,15 +47,10 @@ export default function Hero() {
 
       <div className="container flex flex-col justify-center items-center mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-[960px]">
         <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-4 sm:mb-6">
-          <span className="xl:text-[#FFFFFF] text-[#222222] leading-[130%]">
-            Partnering with the tools that
-          </span>{' '}
-          <span className="text-[#1DEFFA] leading-[130%]">grow your store</span>
+          {renderTitle()}
         </h1>
         <p className="text-base lg:text-lg xl:text-xl xl:text-[#FFFFFF] text-[#222222] text-center leading-relaxed px-4">
-          We&apos;re certified partners with the best e-commerce tools. These
-          partnerships mean better pricing, priority support, and deeper
-          integrations for your store.
+          {description}
         </p>
       </div>
     </section>

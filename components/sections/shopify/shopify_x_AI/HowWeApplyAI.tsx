@@ -1,85 +1,75 @@
 'use client'
 
 interface ApplicationArea {
-  title: string
-  description: string
-  features: string[]
-  benefit: string
+  title?: string
+  description?: string
+  features?: string[]
+  benefit?: string
 }
 
-const applicationAreas: ApplicationArea[] = [
-  {
-    title: 'For E-commerce Optimization',
-    description: 'We help retailers enhance their stores with:',
-    features: [
-      'Smart product recommendation integrations',
-      'AI-assisted content creation for product pages',
-      'Abandoned cart recovery optimization',
-    ],
-    benefit: 'Potential benefit: Improved conversion rates and AOV',
-  },
-  {
-    title: 'For Development Efficiency',
-    description: 'We accelerate store development through:',
-    features: [
-      'AI-assisted code generation for custom features',
-      'Rapid theme customization',
-      'Automated testing and optimization',
-    ],
-    benefit: 'Potential benefit: Improved conversion rates and AOV',
-  },
-  {
-    title: 'For Store Management',
-    description: 'We implement tools that help with:',
-    features: [
-      'AI-powered customer service solutions',
-      'Intelligent inventory management',
-      'Automated marketing campaign optimization',
-    ],
-    benefit: 'Potential benefit: Streamlined operations',
-  },
-]
+interface HowWeApplyAiData {
+  title?: string
+  applicationAreas?: ApplicationArea[]
+}
 
-export default function HowWeApplyAI() {
+interface HowWeApplyAIProps {
+  howWeApplyAi?: HowWeApplyAiData
+}
+
+export default function HowWeApplyAI({ howWeApplyAi }: HowWeApplyAIProps) {
+  const title = howWeApplyAi?.title
+  const applicationAreas = howWeApplyAi?.applicationAreas || []
+
   return (
     <section className="bg-[#1F1D1D] py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 lg:mb-16">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
-            How We Apply AI Tools in Shopify Projects
-          </h2>
+          {title && (
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
+              {title}
+            </h2>
+          )}
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
-          {applicationAreas.map((area, index) => (
-            <div
-              key={index}
-              className="bg-[#2A2828] p-6 lg:p-8"
-            >
-              <h3 className="text-lg lg:text-xl font-bold text-white mb-3">
-                {area.title}
-              </h3>
-              <p className="text-sm lg:text-base text-white/80 mb-6">
-                {area.description}
-              </p>
-              <ul className="space-y-4 mb-6">
-                {area.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-start text-white">
-                    <span className="mr-3 text-white">•</span>
-                    <span className="text-sm">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="text-[#1DEFFA] text-sm font-medium mt-auto">
-                {area.benefit}
-              </p>
-            </div>
-          ))}
-        </div>
+        {applicationAreas.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
+            {applicationAreas.map((area, index) => (
+              <div
+                key={index}
+                className="bg-[#2A2828] p-6 lg:p-8"
+              >
+                {area.title && (
+                  <h3 className="text-lg lg:text-xl font-bold text-white mb-3">
+                    {area.title}
+                  </h3>
+                )}
+                {area.description && (
+                  <p className="text-sm lg:text-base text-white/80 mb-6">
+                    {area.description}
+                  </p>
+                )}
+                {area.features && area.features.length > 0 && (
+                  <ul className="space-y-4 mb-6">
+                    {area.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-start text-white">
+                        <span className="mr-3 text-white">•</span>
+                        <span className="text-sm">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {area.benefit && (
+                  <p className="text-[#1DEFFA] text-sm font-medium mt-auto">
+                    {area.benefit}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )
 }
-

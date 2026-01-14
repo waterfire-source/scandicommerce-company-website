@@ -1,18 +1,27 @@
 'use client'
 
 interface AICapability {
-  title: string
-  description: string
-  features: string[]
-  bgColor: string
-  impact: {
-    title: string
-    paragraphs: string[]
-    link: string
-  }
+  title?: string
+  description?: string
+  features?: string[]
+  bgColor?: string
+  impactTitle?: string
+  impactParagraph1?: string
+  impactParagraph2?: string
+  linkText?: string
 }
 
-const capabilities: AICapability[] = [
+interface HowWeLeverageAiData {
+  title?: string
+  capabilities?: AICapability[]
+}
+
+interface HowWeLeverageAIProps {
+  howWeLeverageAi?: HowWeLeverageAiData
+}
+
+// Default capabilities data
+const defaultCapabilities: AICapability[] = [
   {
     title: 'Enhanced Development Efficiency',
     description: 'We use AI-powered development tools to streamline the Shopify implementation process:',
@@ -23,14 +32,10 @@ const capabilities: AICapability[] = [
       'Streamlined problem-solving and debugging',
     ],
     bgColor: 'bg-[#03C1CA]',
-    impact: {
-      title: 'The Impact:',
-      paragraphs: [
-        'By incorporating AI-powered tools into our development workflow, we can complete projects more efficiently while maintaining high quality standards.',
-        'For you, this means getting your Shopify store up and running faster, implementing new features more quickly, and staying ahead of market trends.',
-      ],
-      link: 'Significantly reduced development timelines',
-    },
+    impactTitle: 'The Impact:',
+    impactParagraph1: 'By incorporating AI-powered tools into our development workflow, we can complete projects more efficiently while maintaining high quality standards.',
+    impactParagraph2: 'For you, this means getting your Shopify store up and running faster, implementing new features more quickly, and staying ahead of market trends.',
+    linkText: 'Significantly reduced development timelines',
   },
   {
     title: 'Improved Customer Experiences',
@@ -42,14 +47,10 @@ const capabilities: AICapability[] = [
       'Automated email marketing tools that adapt to customer actions',
     ],
     bgColor: 'bg-[#1F1D1D]',
-    impact: {
-      title: 'The Impact:',
-      paragraphs: [
-        'These tools help create more relevant shopping experiences that respond to customer preferences and behaviors, potentially increasing engagement and conversion rates.',
-        'By strategically implementing these proven solutions, we help you offer the kind of personalized experience customers have come to expect from leading e-commerce brands.',
-      ],
-      link: 'Enhanced customer engagement through personalization',
-    },
+    impactTitle: 'The Impact:',
+    impactParagraph1: 'These tools help create more relevant shopping experiences that respond to customer preferences and behaviors, potentially increasing engagement and conversion rates.',
+    impactParagraph2: 'By strategically implementing these proven solutions, we help you offer the kind of personalized experience customers have come to expect from leading e-commerce brands.',
+    linkText: 'Enhanced customer engagement through personalization',
   },
   {
     title: 'Efficient Store Management',
@@ -61,25 +62,26 @@ const capabilities: AICapability[] = [
       'Data analysis tools for business insights',
     ],
     bgColor: 'bg-[#03C1CA]',
-    impact: {
-      title: 'The Impact:',
-      paragraphs: [
-        'These tools help reduce the time spent on routine tasks, allowing you to focus more on business strategy and growth opportunities.',
-        'By automating repetitive aspects of store management, you can operate more efficiently while still providing excellent customer service.',
-      ],
-      link: 'More efficient operations and resource allocation',
-    },
+    impactTitle: 'The Impact:',
+    impactParagraph1: 'These tools help reduce the time spent on routine tasks, allowing you to focus more on business strategy and growth opportunities.',
+    impactParagraph2: 'By automating repetitive aspects of store management, you can operate more efficiently while still providing excellent customer service.',
+    linkText: 'More efficient operations and resource allocation',
   },
 ]
 
-export default function HowWeLeverageAI() {
+export default function HowWeLeverageAI({ howWeLeverageAi }: HowWeLeverageAIProps) {
+  const title = howWeLeverageAi?.title || 'How We Leverage AI-Powered Tools in Shopify'
+  const capabilities = howWeLeverageAi?.capabilities && howWeLeverageAi.capabilities.length > 0 
+    ? howWeLeverageAi.capabilities 
+    : defaultCapabilities
+
   return (
     <section className="bg-[#F8F8F8] py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#222222] mb-4">
-            How We Leverage AI-Powered Tools in Shopify
+            {title}
           </h2>
         </div>
 
@@ -89,35 +91,49 @@ export default function HowWeLeverageAI() {
             <div key={index} className="bg-white">
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 {/* Left Column - Dynamic Background Color */}
-                <div className={`${capability.bgColor} p-8 lg:p-10`}>
-                  <h3 className="text-xl lg:text-2xl font-bold text-white mb-4">
-                    {capability.title}
-                  </h3>
-                  <p className="text-white/90 mb-6 text-sm lg:text-base">
-                    {capability.description}
-                  </p>
-                  <ul className="space-y-3">
-                    {capability.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-start text-white">
-                        <span className="mr-3 text-white">•</span>
-                        <span className="text-sm lg:text-base">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+                <div className={`${capability.bgColor || 'bg-[#03C1CA]'} p-8 lg:p-10`}>
+                  {capability.title && (
+                    <h3 className="text-xl lg:text-2xl font-bold text-white mb-4">
+                      {capability.title}
+                    </h3>
+                  )}
+                  {capability.description && (
+                    <p className="text-white/90 mb-6 text-sm lg:text-base">
+                      {capability.description}
+                    </p>
+                  )}
+                  {capability.features && capability.features.length > 0 && (
+                    <ul className="space-y-3">
+                      {capability.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-start text-white">
+                          <span className="mr-3 text-white">•</span>
+                          <span className="text-sm lg:text-base">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
 
                 {/* Right Column - White Background */}
                 <div className="p-6 lg:p-8 flex flex-col justify-center">
-                  <p className="text-base lg:text-lg text-[#565454] mb-4">
-                    <span className="font-bold text-[#222222]">{capability.impact.title}</span>{' '}
-                    {capability.impact.paragraphs[0]}
-                  </p>
-                  <p className="text-base lg:text-lg text-[#565454] mb-6">
-                    {capability.impact.paragraphs[1]}
-                  </p>
-                  <a href="/contact" className="text-[#03C1CA] hover:underline font-medium">
-                    {capability.impact.link}
-                  </a>
+                  {capability.impactParagraph1 && (
+                    <p className="text-base lg:text-lg text-[#565454] mb-4">
+                      {capability.impactTitle && (
+                        <span className="font-bold text-[#222222]">{capability.impactTitle}</span>
+                      )}{' '}
+                      {capability.impactParagraph1}
+                    </p>
+                  )}
+                  {capability.impactParagraph2 && (
+                    <p className="text-base lg:text-lg text-[#565454] mb-6">
+                      {capability.impactParagraph2}
+                    </p>
+                  )}
+                  {capability.linkText && (
+                    <a href="/contact" className="text-[#03C1CA] hover:underline font-medium">
+                      {capability.linkText}
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -127,4 +143,3 @@ export default function HowWeLeverageAI() {
     </section>
   )
 }
-
