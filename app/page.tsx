@@ -1,7 +1,7 @@
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import { client } from '@/sanity/lib/client'
-import { homepageQuery } from '@/sanity/lib/queries'
+import { homepageQuery, allPackagesPageQuery } from '@/sanity/lib/queries'
 
 // Original homepage sections - now connected to Sanity
 import Hero from '@/components/sections/homepage/Hero'
@@ -54,12 +54,17 @@ interface HomepageData {
       description?: string
       price?: string
       link?: string
+      linkText?: string
     }>
     packages?: Array<{
-      tier?: string
-      description?: string
+      title: string
+      subtitle?: string
       price: string
-      features?: string[]
+      priceType?: string
+      timeline?: string
+      rating?: number
+      ratingValue?: string
+      bestFor?: string[]
       buttonText?: string
       buttonLink?: string
     }>
@@ -118,8 +123,41 @@ async function getHomepage(): Promise<HomepageData | null> {
   }
 }
 
+interface AllPackagesData {
+  packages?: {
+    packagesItems?: Array<{
+      title: string
+      subtitle: string
+      price: string
+      priceType: string
+      timeline: string
+      rating: number
+      ratingValue: string
+      bestFor: string[]
+      included: string[]
+      description: string
+      href: string
+    }>
+  }
+}
+
+async function getAllPackages(): Promise<AllPackagesData | null> {
+  try {
+    const data = await client.fetch<AllPackagesData>(
+      allPackagesPageQuery,
+      {},
+      { next: { revalidate: 0 } }
+    )
+    return data
+  } catch (error) {
+    console.error('Error fetching all packages:', error)
+    return null
+  }
+}
+
 export default async function Home() {
   const homepage = await getHomepage()
+  const allPackages = await getAllPackages()
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -134,8 +172,23 @@ export default async function Home() {
         {/* Pain Points - uses Sanity content variables */}
         <PainPoints painPoints={homepage?.painPoints} />
         
-        {/* Services Packaged - uses Sanity content variables */}
-        <ServicesPackaged data={homepage?.servicesShowcase} />
+        {/* Services Packaged - uses packages from Landing Page, fallback to All Packages page */}
+        <ServicesPackaged 
+          data={homepage?.servicesShowcase} 
+          packages={homepage?.servicesShowcase?.packages?.length ? { packagesItems: homepage.servicesShowcase.packages.map(pkg => ({
+            title: pkg.title,
+            subtitle: pkg.subtitle || '',
+            price: pkg.price,
+            priceType: pkg.priceType || '',
+            timeline: pkg.timeline || '',
+            rating: pkg.rating || 0,
+            ratingValue: pkg.ratingValue || '',
+            bestFor: pkg.bestFor || [],
+            included: [],
+            description: '',
+            href: pkg.buttonLink || ''
+          })) } : allPackages?.packages} 
+        />
         
         {/* Results - uses Sanity content variables */}
         <Results data={homepage?.results} />

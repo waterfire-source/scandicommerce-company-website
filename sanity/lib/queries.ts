@@ -69,16 +69,20 @@ export const landingPageQuery = groq`
         icon,
         description,
         price,
-        link
+        link,
+        linkText
       },
       packages[] {
-        tier,
-        description,
+        title,
+        subtitle,
         price,
-        features,
+        priceType,
+        timeline,
+        rating,
+        ratingValue,
+        bestFor,
         buttonText,
-        buttonLink,
-        featured
+        buttonLink
       }
     },
     results {
@@ -177,16 +181,20 @@ export const homepageQuery = groq`
         icon,
         description,
         price,
-        link
+        link,
+        linkText
       },
       packages[] {
-        tier,
-        description,
+        title,
+        subtitle,
         price,
-        features,
+        priceType,
+        timeline,
+        rating,
+        ratingValue,
+        bestFor,
         buttonText,
-        buttonLink,
-        featured
+        buttonLink
       }
     },
     results {

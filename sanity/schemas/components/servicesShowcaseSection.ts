@@ -4,6 +4,7 @@ export const servicesShowcaseSection = defineField({
   name: "servicesShowcase",
   title: "Services Showcase Section",
   type: "object",
+  description: "Shopify services packaged like products.",
   fields: [
     defineField({
       name: "title",
@@ -20,6 +21,7 @@ export const servicesShowcaseSection = defineField({
           name: "highlight",
           title: "Highlighted Text",
           type: "string",
+          description: "This text will be highlighted in teal color",
         }),
       ],
     }),
@@ -32,6 +34,7 @@ export const servicesShowcaseSection = defineField({
       name: "categories",
       title: "Service Categories",
       type: "array",
+      description: "Optional service category cards displayed above packages (Build, Optimize, Support)",
       of: [
         defineArrayMember({
           name: "category",
@@ -71,7 +74,17 @@ export const servicesShowcaseSection = defineField({
               title: "Link URL",
               type: "string",
             }),
+            defineField({
+              name: "linkText",
+              title: "Link Text",
+              type: "string",
+              description: "e.g., 'View services'",
+              initialValue: "View services",
+            }),
           ],
+          preview: {
+            select: { title: "title", subtitle: "price" },
+          },
         }),
       ],
     }),
@@ -79,6 +92,7 @@ export const servicesShowcaseSection = defineField({
       name: "packages",
       title: "Package Cards",
       type: "array",
+      description: "Package cards (Foundation, Growth, Premium, Enterprise)",
       of: [
         defineArrayMember({
           name: "package",
@@ -86,28 +100,60 @@ export const servicesShowcaseSection = defineField({
           type: "object",
           fields: [
             defineField({
-              name: "tier",
-              title: "Tier Name",
+              name: "title",
+              title: "Title",
               type: "string",
-              description: "e.g., 'FOUNDATION'",
+              description: "e.g., 'Foundation', 'Growth', 'Premium', 'Enterprise'",
+              validation: (rule) => rule.required(),
             }),
             defineField({
-              name: "description",
-              title: "Short Description",
+              name: "subtitle",
+              title: "Subtitle",
               type: "string",
+              description: "e.g., 'Launch your Shopify store', 'Scale your existing store', 'Complex e-commerce solutions'",
             }),
             defineField({
               name: "price",
               title: "Price",
               type: "string",
+              description: "e.g., '89.000 kr' or 'Custom'",
               validation: (rule) => rule.required(),
             }),
             defineField({
-              name: "features",
-              title: "Features",
+              name: "priceType",
+              title: "Price Type",
+              type: "string",
+              description: "e.g., 'one-time', 'monthly'",
+              initialValue: "one-time",
+            }),
+            defineField({
+              name: "timeline",
+              title: "Timeline",
+              type: "string",
+              description: "e.g., '6-8 weeks', '8-10 weeks', '10-14 weeks'",
+              initialValue: "6-8 weeks",
+            }),
+            defineField({
+              name: "rating",
+              title: "Rating",
+              type: "number",
+              description: "Rating out of 5 (e.g., 4.9, 5)",
+              validation: (rule) => rule.min(1).max(5),
+              initialValue: 5,
+            }),
+            defineField({
+              name: "ratingValue",
+              title: "Rating Display",
+              type: "string",
+              description: "e.g., '4.9', '5'",
+              initialValue: "5",
+            }),
+            defineField({
+              name: "bestFor",
+              title: "Best For",
               type: "array",
-              of: [{ type: "string" }],
-              validation: (rule) => rule.max(4),
+              description: "Bullet points for who this package is best for (e.g., 'New brands launching D2C', 'Simple product catalogs')",
+              of: [defineArrayMember({ type: "string" })],
             }),
             defineField({
               name: "buttonText",
@@ -119,14 +165,12 @@ export const servicesShowcaseSection = defineField({
               name: "buttonLink",
               title: "Button Link",
               type: "string",
-            }),
-            defineField({
-              name: "featured",
-              title: "Featured",
-              type: "boolean",
-              initialValue: false,
+              description: "e.g., '/services/all_packages/foundation', '/services/all_packages/growth', '/services/all_packages/premium', '/services/all_packages/enterprise'",
             }),
           ],
+          preview: {
+            select: { title: "title", subtitle: "price" },
+          },
         }),
       ],
     }),
