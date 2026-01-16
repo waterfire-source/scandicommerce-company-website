@@ -2,11 +2,15 @@
 
 import Image from 'next/image'
 
-interface ProductDetailsProps {
+interface ProductDetailsData {
   title?: string
   description?: string
   bulletPoints?: string[]
-  image?: string
+  imageUrl?: string
+}
+
+interface ProductDetailsProps {
+  productDetails?: ProductDetailsData
 }
 
 const defaultBulletPoints = [
@@ -17,12 +21,14 @@ const defaultBulletPoints = [
   'Subtle embroidered ScandiCommerce logo',
 ]
 
-export default function ProductDetails({
-  title = 'Product Details',
-  description = 'Our Classic Crewneck Sweatshirt is built for comfort and designed to last. Made from a premium cotton-polyester blend, it offers the perfect balance of softness and durability.',
-  bulletPoints = defaultBulletPoints,
-  image = '/images/merch/product-lifestyle.png',
-}: ProductDetailsProps) {
+export default function ProductDetails({ productDetails }: ProductDetailsProps) {
+  const title = productDetails?.title || 'Product Details'
+  const description = productDetails?.description || 'Our Classic Crewneck Sweatshirt is built for comfort and designed to last. Made from a premium cotton-polyester blend, it offers the perfect balance of softness and durability.'
+  const bulletPoints = productDetails?.bulletPoints && productDetails.bulletPoints.length > 0 
+    ? productDetails.bulletPoints 
+    : defaultBulletPoints
+  const image = productDetails?.imageUrl || '/images/merch/product-lifestyle.png'
+
   return (
     <section className="bg-white py-0">
       <div className="flex flex-col lg:flex-row">

@@ -1,5 +1,5 @@
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import Hero from '@/components/sections/shopify/shopify_x_AI/Hero'
 import EnhancingWithAI from '@/components/sections/shopify/shopify_x_AI/EnhancingWithAI'
 import HowWeLeverageAI from '@/components/sections/shopify/shopify_x_AI/HowWeLeverageAI'
@@ -91,7 +91,7 @@ export default async function ShopifyXAIPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
         <Hero hero={pageData?.hero} />
         <EnhancingWithAI enhancingWithAi={pageData?.enhancingWithAi} />
@@ -102,7 +102,7 @@ export default async function ShopifyXAIPage() {
         <FAQ faq={pageData?.faq} />
         <CTA cta={pageData?.cta} />
       </main>
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

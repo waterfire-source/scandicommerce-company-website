@@ -1,19 +1,71 @@
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import Hero from '@/components/sections/merch/Hero'
 import ProductGrid from '@/components/sections/merch/ProductGrid'
 import QualityShowcase from '@/components/sections/merch/QualityShowcase'
 import Newsletter from '@/components/sections/merch/Newsletter'
 import { getShopifyProducts } from '@/lib/shopify'
 import { Product } from '@/components/sections/merch/ProductCard'
+import { client } from '@/sanity/lib/client'
+import { merchPageQuery } from '@/sanity/lib/queries'
 
-export const metadata = {
-  title: 'Merch | ScandiCommerce',
-  description: 'Wear the brand behind high-performance Shopify builds. Premium quality, minimal design, maximum comfort.',
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
+interface MerchPageData {
+  _id: string
+  pageTitle?: string
+  slug?: string
+  hero?: {
+    heroTitle?: {
+      text?: string
+      highlight?: string
+    }
+    heroDescription?: string
+  }
+  qualityShowcase?: {
+    title?: string
+    description?: string
+    products?: {
+      handle?: string
+      name?: string
+    }[]
+  }
+  newsletter?: {
+    title?: string
+    description?: string
+    emailPlaceholder?: string
+    buttonText?: string
+    successMessage?: string
+  }
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+  }
+}
+
+export async function generateMetadata() {
+  const data: MerchPageData = await client.fetch(
+    merchPageQuery,
+    {},
+    { next: { revalidate: 0 } }
+  )
+
+  return {
+    title: data?.seo?.metaTitle || 'Merch | ScandiCommerce',
+    description: data?.seo?.metaDescription || 'Wear the brand behind high-performance Shopify builds. Premium quality, minimal design, maximum comfort.',
+  }
 }
 
 export default async function Merch() {
   let shopifyProducts: Product[] = []
+
+  // Fetch Sanity data
+  const pageData: MerchPageData = await client.fetch(
+    merchPageQuery,
+    {},
+    { next: { revalidate: 0 } }
+  )
 
   try {
     const products = await getShopifyProducts()
@@ -38,13 +90,16 @@ export default async function Merch() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
-        <Hero />
+        <Hero hero={pageData?.hero} />
         <ProductGrid initialProducts={shopifyProducts} />
-        <QualityShowcase products={shopifyProducts} />
-        <Newsletter />
-        <Footer />
+        <QualityShowcase 
+          products={shopifyProducts} 
+          qualityShowcase={pageData?.qualityShowcase}
+        />
+        <Newsletter newsletter={pageData?.newsletter} />
+        <FooterWrapper />
       </main>
     </div>
   )

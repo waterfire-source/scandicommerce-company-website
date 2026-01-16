@@ -1,6 +1,6 @@
 import ArticlesGrid from '@/components/sections/resources/ArticlesGrid'
-import Footer from '@/components/layout/Footer'
-import Header from '@/components/layout/Header'
+import FooterWrapper from '@/components/layout/FooterWrapper'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FeaturedArticle from '@/components/sections/resources/FeaturedArticle'
 import Hero from '@/components/sections/resources/Hero'
 import GetShopifyInsitesDelivered from '@/components/sections/resources/GetShopifyInsitesDelivered'
@@ -68,13 +68,13 @@ export default async function Resources() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
         <Hero hero={pageData?.hero} />
         <FeaturedArticle featuredArticle={pageData?.featuredArticle} />
         <ArticlesGrid articlesGrid={pageData?.articlesGrid} />
         <GetShopifyInsitesDelivered newsletterCta={pageData?.newsletterCta} />
-        <Footer />
+        <FooterWrapper />
       </main>
     </div>
   )

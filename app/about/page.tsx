@@ -1,5 +1,5 @@
-import Footer from '@/components/layout/Footer'
-import Header from '@/components/layout/Header'
+import FooterWrapper from '@/components/layout/FooterWrapper'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import Hero from '@/components/sections/about/Hero'
 import MeetTheTeam from '@/components/sections/about/MeetTheTeam'
 import OurStory from '@/components/sections/about/OurStory'
@@ -93,7 +93,7 @@ export default async function About() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
         <Hero hero={pageData?.hero} />
         <WhyDifferent whyDifferent={pageData?.whyDifferent} />
@@ -102,7 +102,7 @@ export default async function About() {
         <MeetTheTeam meetTheTeam={pageData?.meetTheTeam} />
         <TrustedPartnerships trustedPartnerships={pageData?.trustedPartnerships} />
         <WantWorkWithUs cta={pageData?.cta} />
-        <Footer />
+        <FooterWrapper />
       </main>
     </div>
   )

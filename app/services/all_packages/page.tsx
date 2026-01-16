@@ -1,5 +1,5 @@
-import Footer from '@/components/layout/Footer'
-import Header from '@/components/layout/Header'
+import FooterWrapper from '@/components/layout/FooterWrapper'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import Hero from '@/components/sections/services/all_packages/Hero'
 import PricingPackages from '@/components/sections/services/all_packages/PricingPackages'
 import FAQ from '@/components/sections/services/all_packages/FAQ'
@@ -64,12 +64,12 @@ export default async function ServicesAllPackages() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
         <Hero hero={pageData?.hero} />
         <PricingPackages packages={pageData?.packages} />
         <FAQ faq={pageData?.faq} />
-        <Footer />
+        <FooterWrapper />
       </main>
     </div>
   )

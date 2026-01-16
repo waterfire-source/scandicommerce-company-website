@@ -14,18 +14,24 @@ interface RelatedProduct {
   slug: string
 }
 
+interface RelatedProductsSettingsData {
+  title?: string
+}
+
 interface RelatedProductsProps {
   products?: RelatedProduct[]
-  title?: string
+  relatedProductsSettings?: RelatedProductsSettingsData
 }
 
 export default function RelatedProducts({
   products = [],
-  title = 'You Might Also Like',
+  relatedProductsSettings,
 }: RelatedProductsProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
+
+  const title = relatedProductsSettings?.title || 'You Might Also Like'
 
   const checkScrollability = () => {
     if (scrollContainerRef.current) {

@@ -1,5 +1,5 @@
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import PackageHero from '@/components/sections/services/all_packages/PackageHero'
 import PackageTabs from '@/components/sections/services/all_packages/PackageTabs'
 import FrequentlyAddedTogether from '@/components/sections/services/all_packages/FrequentlyAddedTogether'
@@ -163,7 +163,7 @@ export default async function PackageDetailPage({
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
         <PackageHero pkg={pkg} />
         <PackageTabs pkg={pkg} />
@@ -173,7 +173,7 @@ export default async function PackageDetailPage({
           caseStudiesBanner={sanityData?.caseStudiesBanner}
         />
       </main>
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

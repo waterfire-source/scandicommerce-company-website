@@ -1,14 +1,21 @@
 'use client'
 
 interface SizeData {
-  size: string
-  chest: string
-  length: string
-  sleeve: string
+  size?: string
+  chest?: string
+  length?: string
+  sleeve?: string
+}
+
+interface SizeGuideData {
+  title?: string
+  description?: string
+  contactButtonText?: string
+  sizes?: SizeData[]
 }
 
 interface SizeGuideProps {
-  sizes?: SizeData[]
+  sizeGuide?: SizeGuideData
 }
 
 const defaultSizes: SizeData[] = [
@@ -20,19 +27,24 @@ const defaultSizes: SizeData[] = [
   { size: 'XXL', chest: '112-117 cm', length: '78 cm', sleeve: '94 cm' },
 ]
 
-export default function SizeGuide({ sizes = defaultSizes }: SizeGuideProps) {
+export default function SizeGuide({ sizeGuide }: SizeGuideProps) {
+  const title = sizeGuide?.title || 'Size Guide'
+  const description = sizeGuide?.description || 'All measurements in centimeters. Need help choosing?'
+  const contactButtonText = sizeGuide?.contactButtonText || 'Contact Support'
+  const sizes = sizeGuide?.sizes && sizeGuide.sizes.length > 0 ? sizeGuide.sizes : defaultSizes
+
   return (
     <section className="bg-white py-12 lg:py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-10 lg:mb-12">
           <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-[#222222] mb-4">
-            Size Guide
+            {title}
           </h2>
           <p className="text-[#666666]">
-            All measurements in centimeters. Need help choosing?{' '}
+            {description}{' '}
             <button className="text-[#666666] underline hover:text-[#03C1CA] transition-colors">
-              Contact Support
+              {contactButtonText}
             </button>
           </p>
         </div>
@@ -59,22 +71,22 @@ export default function SizeGuide({ sizes = defaultSizes }: SizeGuideProps) {
             <tbody>
               {sizes.map((sizeData, index) => (
                 <tr
-                  key={sizeData.size}
+                  key={sizeData.size || index}
                   className={`border-b border-[#E5E5E5] ${
                     index % 2 === 0 ? 'bg-[#FAFAFA]' : 'bg-white'
                   }`}
                 >
                   <td className="py-4 px-4 lg:px-6 text-sm text-[#222222] font-medium">
-                    {sizeData.size}
+                    {sizeData.size || ''}
                   </td>
                   <td className="py-4 px-4 lg:px-6 text-sm text-[#666666]">
-                    {sizeData.chest}
+                    {sizeData.chest || ''}
                   </td>
                   <td className="py-4 px-4 lg:px-6 text-sm text-[#666666]">
-                    {sizeData.length}
+                    {sizeData.length || ''}
                   </td>
                   <td className="py-4 px-4 lg:px-6 text-sm text-[#666666]">
-                    {sizeData.sleeve}
+                    {sizeData.sleeve || ''}
                   </td>
                 </tr>
               ))}

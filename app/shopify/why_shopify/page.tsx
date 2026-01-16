@@ -1,5 +1,5 @@
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import Hero from '@/components/sections/shopify/why_shopify/Hero'
 import WhatIsShopify from '@/components/sections/shopify/why_shopify/WhatIsShopify'
 import ShopifyFacts from '@/components/sections/shopify/why_shopify/ShopifyFacts'
@@ -77,7 +77,7 @@ export default async function WhyShopifyPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
         <Hero hero={pageData?.hero} />
         <WhatIsShopify whatIsShopify={pageData?.whatIsShopify} />
@@ -87,7 +87,7 @@ export default async function WhyShopifyPage() {
         <ShopifyAI shopifyAi={pageData?.shopifyAi} />
         <CTA cta={pageData?.cta} />
       </main>
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

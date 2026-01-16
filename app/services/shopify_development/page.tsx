@@ -1,5 +1,5 @@
-import Footer from '@/components/layout/Footer'
-import Header from '@/components/layout/Header'
+import FooterWrapper from '@/components/layout/FooterWrapper'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import Hero from '@/components/sections/services/shopify_development/Hero'
 import WhyShopifyWins from '@/components/sections/services/shopify_development/WhyShopifyWins'
 import CommonScenarios from '@/components/sections/services/shopify_development/CommonScenarios'
@@ -89,7 +89,7 @@ export default async function ServicesShopifyDevelopment() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
         <Hero hero={pageData?.hero} />
         <WhyShopifyWins whyShopify={pageData?.whyShopify} />
@@ -97,7 +97,7 @@ export default async function ServicesShopifyDevelopment() {
         <HowWeWork howWeWork={pageData?.howWeWork} />
         <Testimonial testimonial={pageData?.testimonial} />
         <ReadyToBuild cta={pageData?.cta} />
-        <Footer />
+        <FooterWrapper />
       </main>
     </div>
   )

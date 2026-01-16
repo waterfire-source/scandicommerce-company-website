@@ -1,5 +1,5 @@
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import Hero from '@/components/sections/shopify/shopify_x_PIM/Hero'
 import WhatIsPIM from '@/components/sections/shopify/shopify_x_PIM/WhatIsPIM'
 import IntegratingPIM from '@/components/sections/shopify/shopify_x_PIM/IntegratingPIM'
@@ -114,7 +114,7 @@ export default async function ShopifyXPIMPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
         <Hero hero={pageData?.hero} />
         <WhatIsPIM whatIsPim={pageData?.whatIsPim} />
@@ -125,7 +125,7 @@ export default async function ShopifyXPIMPage() {
         <CombinedSection combinedSection={pageData?.combinedSection} />
         <CTA cta={pageData?.cta} />
       </main>
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

@@ -21,11 +21,13 @@ interface HeroProps {
 }
 
 export default function Hero({ hero }: HeroProps) {
-  const titleText = hero?.heroTitle?.text
-  const titleHighlight = hero?.heroTitle?.highlight
-  const description = hero?.heroDescription
+  // Content variables from Sanity
+  const titleText = hero?.heroTitle?.text || 'Scandicommerce Quick Checkout for Vipps in Shopify'
+  const titleHighlight = hero?.heroTitle?.highlight || 'Vipps'
+  const description = hero?.heroDescription || 'Accept payments with Quick Checkout for Vipps in your online store'
   const buttons = hero?.heroButtons
 
+  // Helper to render title with highlight
   const renderTitle = () => {
     if (!titleText) return null
     if (!titleHighlight || !titleText.includes(titleHighlight)) {
@@ -55,44 +57,16 @@ export default function Hero({ hero }: HeroProps) {
             top: 28% !important;
           }
         }
-        @media (min-width: 375px) and (max-width: 401px) {
-          .liquid-blob-375-401 {
-            top: 26% !important;
-          }
-        }
-        @media (min-width: 406px) and (max-width: 424px) {
-          .liquid-blob-406-424 {
-            top: 26% !important;
-          }
-        }
         @media (min-width: 425px) and (max-width: 640px) {
           .liquid-blob-425-640-width {
             top: 32% !important;
           }
         }
-        @media (min-width: 425px) and (max-width: 460px) {
-          .liquid-blob-425-460 {
-            top: 26% !important;
-          }
-        }
-        @media (min-width: 640px) and (max-width: 640px) {
-          .liquid-blob-640-width {
-            top: 35% !important;
-          }
-        }
         @media (min-width: 641px) and (max-width: 767px) {
           .liquid-blob-large-width {
-            top: 40% !important;
-          }
-        }
-        @media (min-width: 641px) and (max-width: 684px) {
-          .liquid-blob-641-684 {
-            top: 35% !important;
-          }
-        }
-        @media (min-width: 685px) and (max-width: 767px) {
-          .liquid-blob-685-767 {
             top: 36% !important;
+            width: 72% !important;
+            height: 72% !important;
           }
         }
         @media (min-width: 768px) and (max-width: 768px) {
@@ -100,27 +74,20 @@ export default function Hero({ hero }: HeroProps) {
             top: 50% !important;
           }
         }
-        @media (min-width: 768px) and (max-width: 924px) {
-          .liquid-blob-768-924 {
-            width: 85% !important;
-            height: 85% !important;
-          }
-        }
-        @media (min-width: 925px) and (max-width: 1023px) {
-          .liquid-blob-925-1023 {
-            width: 88% !important;
-            height: 88% !important;
-          }
-        }
         @media (min-width: 1280px) and (max-width: 1629px) {
           .liquid-blob-xl-width {
-            width: 110% !important;
-            height: 110% !important;
+            width: 100% !important;
+            height: 100% !important;
           }
         }
         @media (min-width: 640px) and (max-width: 767px) {
           .hero-buttons-gap {
             margin-top: 80px !important;
+          }
+        }
+        @media (min-width: 640px) and (max-width: 640px) {
+          .liquid-blob-640-width {
+            top: 35% !important;
           }
         }
         @media (min-width: 536px) and (max-width: 639px) {
@@ -131,40 +98,26 @@ export default function Hero({ hero }: HeroProps) {
           .hero-buttons-gap-536-639 {
             margin-top: 60px !important;
           }
-        }
-        @media (min-width: 536px) and (max-width: 551px) {
-          .hero-content-536-551 {
-            width: 95% !important;
-            gap: 24px !important;
-          }
-          .liquid-blob-536-551 {
-            width: 80% !important;
-            height: 80% !important;
-            top: 35% !important;
-          }
-        }
-        @media (min-width: 566px) and (max-width: 598px) {
-          .hero-content-566-598 {
-            width: 78% !important;
-          }
-        }
-        @media (min-width: 461px) and (max-width: 565px) {
-          .hero-content-461-565 {
-            width: 78% !important;
+          .liquid-blob-536-639 {
+            top: 34% !important;
           }
         }
         @media (min-width: 461px) and (max-width: 535px) {
           .hero-content-461-535 {
-            width: 76% !important;
+            width: 85% !important;
             gap: 24px !important;
           }
           .hero-buttons-gap-461-535 {
             margin-top: 50px !important;
           }
           .liquid-blob-461-535 {
-            width: 85% !important;
-            height: 85% !important;
-            top: 34% !important;
+            width: 78% !important;
+            height: 78% !important;
+          }
+        }
+        @media (min-width: 474px) and (max-width: 535px) {
+          .liquid-blob-474-535 {
+            top: 33% !important;
           }
         }
         @media (min-width: 474px) and (max-width: 508px) {
@@ -181,11 +134,19 @@ export default function Hero({ hero }: HeroProps) {
           .hero-content-474-477 {
             width: 94% !important;
           }
+          .liquid-blob-474-477 {
+            top: 34% !important;
+          }
         }
         @media (min-width: 461px) and (max-width: 470px) {
           .hero-content-461-470 {
             width: 95% !important;
             gap: 20px !important;
+          }
+          .liquid-blob-461-470 {
+            top: 33% !important;
+            width: 82% !important;
+            height: 82% !important;
           }
         }
         @media (min-width: 406px) and (max-width: 460px) {
@@ -193,17 +154,18 @@ export default function Hero({ hero }: HeroProps) {
             width: 88% !important;
             gap: 80px !important;
           }
+          .liquid-blob-406-460 {
+            top: 22% !important;
+          }
         }
-        // @media (min-width: 402px) and (max-width: 405px) {
-        //   .hero-content-402-405 {
-        //     width: 88% !important;
-        //   }
-        // }
         @media (min-width: 375px) and (max-width: 405px) {
           .hero-content-375-405 {
             width: 100% !important;
             padding-left: 0 !important;
             padding-right: 0 !important;
+          }
+          .liquid-blob-375-405 {
+            top: 26% !important;
           }
         }
         @media (max-width: 1023px) {
@@ -215,7 +177,7 @@ export default function Hero({ hero }: HeroProps) {
       <LiquidBlob
         page="homepage"
         rotation={0}
-        className="liquid-blob-small-height liquid-blob-medium-width liquid-blob-375-401 liquid-blob-406-424 liquid-blob-425-460 liquid-blob-425-640-width liquid-blob-461-535 liquid-blob-536-551 liquid-blob-640-width liquid-blob-large-width liquid-blob-641-684 liquid-blob-685-767 liquid-blob-768-width liquid-blob-768-924 liquid-blob-925-1023 liquid-blob-xl-width top-[25%] sm:top-[35%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] h-[75%] md:w-[80%] md:h-[80%] lg:w-[95%] lg:h-[95%] xl:w-[90%] xl:h-[90%] 2xl:w-[85%] 2xl:h-[85%]"
+        className="liquid-blob-small-height liquid-blob-medium-width liquid-blob-375-405 liquid-blob-406-460 liquid-blob-425-640-width liquid-blob-640-width liquid-blob-461-470 liquid-blob-461-535 liquid-blob-474-477 liquid-blob-474-535 liquid-blob-536-639 liquid-blob-large-width liquid-blob-768-width liquid-blob-xl-width top-[25%] sm:top-[35%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] h-[75%] md:w-[80%] md:h-[80%] lg:w-[95%] lg:h-[95%] xl:w-[90%] xl:h-[90%] 2xl:w-[85%] 2xl:h-[85%]"
         enableMouseFollow={true}
       />
 
@@ -223,7 +185,7 @@ export default function Hero({ hero }: HeroProps) {
       <div className="absolute bottom-[44%] right-[32%] xl:block hidden w-[60px] h-[60px] rounded-full bg-[#1DEFFA33]"></div>
 
       <div className="container flex flex-col justify-center items-center mx-auto px-4 sm:px-6 lg:px-8 relative z-10 gap-[42px]">
-        <div className="hero-content-375-405 hero-content-402-405 hero-content-406-460 hero-content-461-470 hero-content-461-535 hero-content-461-565 hero-content-474-477 hero-content-474-492 hero-content-474-508 hero-content-536-551 hero-content-536-639 hero-content-566-598 flex flex-col justify-start items-center gap-[53px] sm:w-3/4 2xl:w-1/2 w-full">
+        <div className="hero-content-375-405 hero-content-406-460 hero-content-461-470 hero-content-461-535 hero-content-474-477 hero-content-474-492 hero-content-474-508 hero-content-536-639 flex flex-col justify-start items-center gap-[53px] sm:w-3/4 2xl:w-1/2 w-full">
           {titleText && (
             <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-4 sm:mb-6">
               {renderTitle()}

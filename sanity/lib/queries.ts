@@ -1228,3 +1228,139 @@ export const blogPageQuery = groq`
     }
   }
 `;
+
+// Merch Page Query
+export const merchPageQuery = groq`
+  *[_type == "merchPage"][0] {
+    _id,
+    pageTitle,
+    "slug": slug.current,
+    hero {
+      heroTitle {
+        text,
+        highlight
+      },
+      heroDescription
+    },
+    qualityShowcase {
+      title,
+      description,
+      products[] {
+        handle,
+        name
+      }
+    },
+    newsletter {
+      title,
+      description,
+      emailPlaceholder,
+      buttonText,
+      successMessage
+    },
+    seo {
+      metaTitle,
+      metaDescription
+    }
+  }
+`;
+
+// Merch Product Settings Query
+export const merchProductSettingsQuery = groq`
+  *[_type == "merchProductSettings"][0] {
+    _id,
+    settingsTitle,
+    productFeatures {
+      features[] {
+        title,
+        description
+      }
+    },
+    productDetails {
+      title,
+      description,
+      bulletPoints,
+      "imageUrl": image.asset->url
+    },
+    sizeGuide {
+      title,
+      description,
+      contactButtonText,
+      sizes[] {
+        size,
+        chest,
+        length,
+        sleeve
+      }
+    },
+    relatedProducts {
+      title,
+      products[] {
+        handle,
+        name
+      }
+    }
+  }
+`;
+
+// Header Settings Query
+export const headerSettingsQuery = groq`
+  *[_type == "headerSettings"][0] {
+    _id,
+    settingsTitle,
+    servicesMenu {
+      label,
+      items[] {
+        label,
+        href
+      }
+    },
+    shopifyMenu {
+      label,
+      items[] {
+        label,
+        href
+      }
+    },
+    mainNavLinks[] {
+      label,
+      href
+    },
+    ctaButton {
+      label,
+      href
+    }
+  }
+`;
+
+// Footer Settings Query
+export const footerSettingsQuery = groq`
+  *[_type == "footerSettings"][0] {
+    _id,
+    settingsTitle,
+    columns[] {
+      title,
+      links[] {
+        label,
+        href
+      }
+    },
+    connectSection {
+      title,
+      email,
+      phone,
+      socialLinks[] {
+        platform,
+        url
+      }
+    },
+    bottomSection {
+      badgeText,
+      orgNumber,
+      legalLinks[] {
+        label,
+        href
+      },
+      copyrightText
+    }
+  }
+`;

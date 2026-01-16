@@ -1,5 +1,5 @@
-import Footer from '@/components/layout/Footer'
-import Header from '@/components/layout/Header'
+import FooterWrapper from '@/components/layout/FooterWrapper'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import Hero from '@/components/sections/partners/Hero'
 import WhyOurPartnership from '@/components/sections/partners/WhyOurPartnership'
 import PartnersGrid from '@/components/sections/partners/PartnersGrid'
@@ -60,13 +60,13 @@ export default async function Partners() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
         <Hero hero={pageData?.hero} />
         <WhyOurPartnership whyOurPartnership={pageData?.whyOurPartnership} />
         <PartnersGrid partnersGrid={pageData?.partnersGrid} />
         <BecomeAPartner cta={pageData?.cta} />
-        <Footer />
+        <FooterWrapper />
       </main>
     </div>
   )

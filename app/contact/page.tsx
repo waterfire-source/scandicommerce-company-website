@@ -1,5 +1,5 @@
-import Footer from '@/components/layout/Footer'
-import Header from '@/components/layout/Header'
+import FooterWrapper from '@/components/layout/FooterWrapper'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import Hero from '@/components/sections/contact/Hero'
 import ContactCards from '@/components/sections/contact/ContactCards'
 import BookingSection from '@/components/sections/contact/BookingSection'
@@ -78,7 +78,7 @@ export default async function Contact() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
         <Hero hero={pageData?.hero} />
         <ContactCards contactCards={pageData?.contactCards} />
@@ -89,7 +89,7 @@ export default async function Contact() {
         />
         <MapSection mapSection={pageData?.mapSection} />
         <FAQ faq={pageData?.faq} />
-        <Footer />
+        <FooterWrapper />
       </main>
     </div>
   )

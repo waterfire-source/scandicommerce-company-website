@@ -1,5 +1,5 @@
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import ArticleHero from '@/components/sections/resources/article/ArticleHero'
 import ArticleContent from '@/components/sections/resources/article/ArticleContent'
 import AuthorBio from '@/components/sections/resources/article/AuthorBio'
@@ -31,7 +31,7 @@ export default async function ArticleDetailPage({
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
         <ArticleHero article={article} />
         <ArticleContent article={article} />
@@ -39,7 +39,7 @@ export default async function ArticleDetailPage({
         <ArticleCTA />
         <RelatedArticles articles={relatedArticlesWithImages} />
       </main>
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

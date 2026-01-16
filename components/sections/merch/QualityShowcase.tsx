@@ -4,31 +4,71 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Product } from '@/components/sections/merch/ProductCard'
 
-interface QualityShowcaseProps {
-  products?: Product[]
+interface SanityProduct {
+  handle?: string
+  name?: string
 }
 
-export default function QualityShowcase({ products = [] }: QualityShowcaseProps) {
-  const featuredProducts = products
-    .filter(product => {
-      if (!product.availableForSale || !product.image) return false
+interface QualityShowcaseData {
+  title?: string
+  description?: string
+  products?: SanityProduct[]
+}
 
-      const tags = product.tags || []
-      const isFeatured = tags.some(tag =>
-        tag.toLowerCase() === 'featured' ||
-        tag.toLowerCase() === 'quality-showcase' ||
-        tag.toLowerCase() === 'quality'
-      )
+interface QualityShowcaseProps {
+  products?: Product[]
+  qualityShowcase?: QualityShowcaseData
+}
 
-      return isFeatured
-    })
-    .slice(0, 4)
+export default function QualityShowcase({ products = [], qualityShowcase }: QualityShowcaseProps) {
+  const title = qualityShowcase?.title || 'Quality You Can Feel'
+  const description = qualityShowcase?.description || 'Every piece is carefully selected for comfort, durability, and that perfect Scandinavian aesthetic.'
+  const sanityProducts = qualityShowcase?.products
 
-  const displayProducts = featuredProducts.length > 0
-    ? featuredProducts
-    : products
-      .filter(product => product.availableForSale && product.image)
+  // If Sanity has specific products defined, filter and order based on those handles
+  let displayProducts: Product[] = []
+
+  if (sanityProducts && sanityProducts.length > 0) {
+    // Get products in the order specified by Sanity
+    displayProducts = sanityProducts
+      .map(sanityProduct => {
+        const shopifyProduct = products.find(p => p.slug === sanityProduct.handle)
+        if (shopifyProduct) {
+          return {
+            ...shopifyProduct,
+            // Override name if provided in Sanity
+            name: sanityProduct.name || shopifyProduct.name,
+          }
+        }
+        return null
+      })
+      .filter((p): p is Product => p !== null && p.image !== undefined)
       .slice(0, 4)
+  }
+
+  // If no Sanity products or none found, fall back to tag-based selection
+  if (displayProducts.length === 0) {
+    const featuredProducts = products
+      .filter(product => {
+        if (!product.availableForSale || !product.image) return false
+
+        const tags = product.tags || []
+        const isFeatured = tags.some(tag =>
+          tag.toLowerCase() === 'featured' ||
+          tag.toLowerCase() === 'quality-showcase' ||
+          tag.toLowerCase() === 'quality'
+        )
+
+        return isFeatured
+      })
+      .slice(0, 4)
+
+    displayProducts = featuredProducts.length > 0
+      ? featuredProducts
+      : products
+        .filter(product => product.availableForSale && product.image)
+        .slice(0, 4)
+  }
 
   if (displayProducts.length === 0) {
     return null
@@ -39,10 +79,10 @@ export default function QualityShowcase({ products = [] }: QualityShowcaseProps)
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-[#222222] mb-4">
-            Quality You Can Feel
+            {title}
           </h2>
           <p className="text-base lg:text-lg text-[#666666] max-w-2xl mx-auto">
-            Every piece is carefully selected for comfort, durability, and that perfect Scandinavian aesthetic.
+            {description}
           </p>
         </div>
 
@@ -79,4 +119,3 @@ export default function QualityShowcase({ products = [] }: QualityShowcaseProps)
     </section>
   )
 }
-

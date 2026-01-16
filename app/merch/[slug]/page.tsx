@@ -1,12 +1,52 @@
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import ProductHero from '@/components/sections/merch/ProductHero'
 import ProductFeatures from '@/components/sections/merch/ProductFeatures'
 import ProductDetails from '@/components/sections/merch/ProductDetails'
 import SizeGuide from '@/components/sections/merch/SizeGuide'
 import RelatedProducts from '@/components/sections/merch/RelatedProducts'
-import { getShopifyProductByHandle, getShopifyRelatedProducts } from '@/lib/shopify'
+import { getShopifyProductByHandle, getShopifyRelatedProducts, getShopifyProducts } from '@/lib/shopify'
 import { notFound } from 'next/navigation'
+import { client } from '@/sanity/lib/client'
+import { merchProductSettingsQuery } from '@/sanity/lib/queries'
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
+interface MerchProductSettingsData {
+  _id: string
+  settingsTitle?: string
+  productFeatures?: {
+    features?: {
+      title?: string
+      description?: string
+    }[]
+  }
+  productDetails?: {
+    title?: string
+    description?: string
+    bulletPoints?: string[]
+    imageUrl?: string
+  }
+  sizeGuide?: {
+    title?: string
+    description?: string
+    contactButtonText?: string
+    sizes?: {
+      size?: string
+      chest?: string
+      length?: string
+      sleeve?: string
+    }[]
+  }
+  relatedProducts?: {
+    title?: string
+    products?: {
+      handle?: string
+      name?: string
+    }[]
+  }
+}
 
 export default async function ProductDetailPage({
   params,
@@ -21,7 +61,39 @@ export default async function ProductDetailPage({
     notFound()
   }
 
-  const relatedProducts = await getShopifyRelatedProducts(shopifyProduct.id)
+  // Fetch Sanity settings
+  const settings: MerchProductSettingsData = await client.fetch(
+    merchProductSettingsQuery,
+    {},
+    { next: { revalidate: 0 } }
+  )
+
+  // Get related products from Shopify API
+  let relatedProducts = await getShopifyRelatedProducts(shopifyProduct.id)
+
+  // If Sanity has specific products defined, fetch all products to filter
+  const sanityRelatedHandles = settings?.relatedProducts?.products
+  if (sanityRelatedHandles && sanityRelatedHandles.length > 0) {
+    const allProducts = await getShopifyProducts()
+    
+    // Filter and order products based on Sanity handles
+    const sanityRelated = sanityRelatedHandles
+      .map(sanityProduct => {
+        const found = allProducts.find(p => p.handle === sanityProduct.handle)
+        if (found) {
+          return {
+            ...found,
+            title: sanityProduct.name || found.title,
+          }
+        }
+        return null
+      })
+      .filter((p): p is NonNullable<typeof p> => p !== null)
+
+    if (sanityRelated.length > 0) {
+      relatedProducts = sanityRelated
+    }
+  }
 
   const product = {
     name: shopifyProduct.title,
@@ -50,15 +122,18 @@ export default async function ProductDetailPage({
 
   return (
     <>
-      <Header />
+      <HeaderWrapper />
       <main>
         <ProductHero product={product} />
-        <ProductFeatures />
-        <ProductDetails />
-        <SizeGuide />
-        <RelatedProducts products={formattedRelatedProducts} />
+        <ProductFeatures productFeatures={settings?.productFeatures} />
+        <ProductDetails productDetails={settings?.productDetails} />
+        <SizeGuide sizeGuide={settings?.sizeGuide} />
+        <RelatedProducts 
+          products={formattedRelatedProducts} 
+          relatedProductsSettings={settings?.relatedProducts}
+        />
       </main>
-      <Footer />
+      <FooterWrapper />
     </>
   )
 }

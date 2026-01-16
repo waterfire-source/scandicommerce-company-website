@@ -161,4 +161,52 @@ export const deskStructure = (S: StructureBuilder) =>
         .title("Partners Page")
         .schemaType("partnersPage")
         .child(S.documentTypeList("partnersPage").title("Partners Pages")),
+
+      // Merch Pages
+      S.listItem()
+        .title("Merch Pages")
+        .icon(CogIcon)
+        .child(
+          S.list()
+            .title("Merch Pages")
+            .items([
+              S.listItem()
+                .title("Merch Page")
+                .schemaType("merchPage")
+                .child(
+                  S.documentTypeList("merchPage").title("Merch Page")
+                ),
+              S.listItem()
+                .title("Merch Product Settings")
+                .schemaType("merchProductSettings")
+                .child(
+                  S.documentTypeList("merchProductSettings").title("Merch Product Settings")
+                ),
+            ])
+        ),
+
+      S.divider(),
+
+      // Site Settings
+      S.listItem()
+        .title("Site Settings")
+        .icon(CogIcon)
+        .child(
+          S.list()
+            .title("Site Settings")
+            .items([
+              S.listItem()
+                .title("Header Settings")
+                .schemaType("headerSettings")
+                .child(
+                  S.documentTypeList("headerSettings").title("Header Settings")
+                ),
+              S.listItem()
+                .title("Footer Settings")
+                .schemaType("footerSettings")
+                .child(
+                  S.documentTypeList("footerSettings").title("Footer Settings")
+                ),
+            ])
+        ),
     ]);

@@ -25,6 +25,10 @@ import {
   whyShopifyPage,
   partnersPage,
   packageDetailPage,
+  merchPage,
+  merchProductSettings,
+  headerSettings,
+  footerSettings,
 } from "./pages";
 
 // ============================================
@@ -56,4 +60,8 @@ export const schemaTypes = [
   whyShopifyPage,
   partnersPage,
   packageDetailPage,
+  merchPage,
+  merchProductSettings,
+  headerSettings,
+  footerSettings,
 ];

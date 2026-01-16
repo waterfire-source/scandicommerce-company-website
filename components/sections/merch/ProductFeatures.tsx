@@ -3,12 +3,16 @@
 import { HiCheckBadge } from 'react-icons/hi2'
 
 interface Feature {
-  title: string
-  description: string
+  title?: string
+  description?: string
+}
+
+interface ProductFeaturesData {
+  features?: Feature[]
 }
 
 interface ProductFeaturesProps {
-  features?: Feature[]
+  productFeatures?: ProductFeaturesData
 }
 
 const defaultFeatures: Feature[] = [
@@ -26,7 +30,11 @@ const defaultFeatures: Feature[] = [
   },
 ]
 
-export default function ProductFeatures({ features = defaultFeatures }: ProductFeaturesProps) {
+export default function ProductFeatures({ productFeatures }: ProductFeaturesProps) {
+  const features = productFeatures?.features && productFeatures.features.length > 0 
+    ? productFeatures.features 
+    : defaultFeatures
+
   return (
     <section className="bg-[#FFFFFF] py-12 lg:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -48,12 +56,12 @@ export default function ProductFeatures({ features = defaultFeatures }: ProductF
 
                 {/* Title */}
                 <h3 className="text-lg lg:text-xl font-bold text-[#222222] mb-2">
-                  {feature.title}
+                  {feature.title || ''}
                 </h3>
 
                 {/* Description */}
                 <p className="text-sm lg:text-base text-[#666666]">
-                  {feature.description}
+                  {feature.description || ''}
                 </p>
               </div>
             ))}

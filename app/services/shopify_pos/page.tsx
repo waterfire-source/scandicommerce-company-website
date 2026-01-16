@@ -1,5 +1,5 @@
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import Hero from '@/components/sections/services/shopify_pos/Hero'
 import OmnichannelFeatures from '@/components/sections/services/shopify_pos/OmnichannelFeatures'
 import PerfectFor from '@/components/sections/services/shopify_pos/PerfectFor'
@@ -66,13 +66,13 @@ export default async function ShopifyPOSPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
         <Hero hero={pageData?.hero} />
         <OmnichannelFeatures features={pageData?.features} />
         <PerfectFor perfectFor={pageData?.perfectFor} />
         <ReadyForOmnichannel cta={pageData?.cta} />
-        <Footer />
+        <FooterWrapper />
       </main>
     </div>
   )

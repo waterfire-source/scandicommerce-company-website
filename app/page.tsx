@@ -1,5 +1,5 @@
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import { client } from '@/sanity/lib/client'
 import { homepageQuery } from '@/sanity/lib/queries'
 
@@ -123,7 +123,7 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
         {/* Hero Section - uses Sanity content variables */}
         <Hero hero={homepage?.hero} />
@@ -149,7 +149,7 @@ export default async function Home() {
         {/* CTA - uses Sanity content variables */}
         <CTA data={homepage?.cta} />
       </main>
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

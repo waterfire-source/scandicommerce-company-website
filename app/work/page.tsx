@@ -1,5 +1,5 @@
-import Footer from '@/components/layout/Footer'
-import Header from '@/components/layout/Header'
+import FooterWrapper from '@/components/layout/FooterWrapper'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import CaseStudies from '@/components/sections/work/CaseStudies'
 import CTA from '@/components/sections/work/CTA'
 import Hero from '@/components/sections/work/Hero'
@@ -57,12 +57,12 @@ export default async function Work() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
         <Hero hero={pageData?.hero} />
         <CaseStudies caseStudies={pageData?.caseStudies} />
         <CTA cta={pageData?.cta} />
-        <Footer />
+        <FooterWrapper />
       </main>
     </div>
   )

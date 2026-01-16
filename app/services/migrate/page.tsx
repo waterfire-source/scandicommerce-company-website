@@ -1,5 +1,5 @@
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import Hero from '@/components/sections/services/migrate/Hero'
 import Platforms from '@/components/sections/services/migrate/Platforms'
 import RisksAndProtection from '@/components/sections/services/migrate/RisksAndProtection'
@@ -91,7 +91,7 @@ export default async function MigratePage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
         <Hero hero={pageData?.hero} />
         <Platforms platforms={pageData?.platforms} />
@@ -99,7 +99,7 @@ export default async function MigratePage() {
         <MigrationProcess process={pageData?.process} />
         <RealMigrationResults results={pageData?.results} />
         <MigrationCTA cta={pageData?.cta} />
-        <Footer />
+        <FooterWrapper />
       </main>
     </div>
   )

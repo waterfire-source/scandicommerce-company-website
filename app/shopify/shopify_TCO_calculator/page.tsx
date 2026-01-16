@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import Hero from '@/components/sections/shopify/shopify_TCO_calculator/Hero'
 import CalculatorForm from '@/components/sections/shopify/shopify_TCO_calculator/CalculatorForm'
 import { client } from '@/sanity/lib/client'
@@ -53,14 +53,14 @@ export default function ShopifyTCOCalculatorPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
         <Hero hero={pageData?.hero} onPlatformSelect={handlePlatformSelect} />
         <div id="calculator-form">
           <CalculatorForm selectedPlatform={selectedPlatform} />
         </div>
       </main>
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

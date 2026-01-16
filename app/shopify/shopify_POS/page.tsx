@@ -1,5 +1,5 @@
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import Hero from '@/components/sections/shopify/shopify_POS/Hero'
 import BleedingMoney from '@/components/sections/shopify/shopify_POS/BleedingMoney'
 import OmnichannelFeatures from '@/components/sections/shopify/shopify_POS/OmnichannelFeatures'
@@ -77,14 +77,14 @@ export default async function ShopifyPOSPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <main className="flex-grow">
         <Hero hero={pageData?.hero} />
         <BleedingMoney bleedingMoney={pageData?.bleedingMoney} />
         <OmnichannelFeatures omnichannelFeatures={pageData?.omnichannelFeatures} />
         <RevenueForm revenueForm={pageData?.revenueForm} />
       </main>
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }
