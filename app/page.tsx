@@ -39,6 +39,19 @@ interface HomepageData {
       price?: string
     }>
   }
+  trustedBy?: {
+    title?: string
+    brands?: Array<{
+      name: string
+      logo?: {
+        asset?: {
+          url?: string
+        }
+      }
+      alt?: string
+      link?: string
+    }>
+  }
   painPoints?: {
     painPointsTitle?: { text?: string; highlight?: string }
     painPointsItems?: Array<{ text: string }>
@@ -166,8 +179,8 @@ export default async function Home() {
         {/* Hero Section - uses Sanity content variables */}
         <Hero hero={homepage?.hero} />
         
-        {/* TrustedBy - static for now */}
-        <TrustedBy />
+        {/* TrustedBy - uses Sanity content variables */}
+        <TrustedBy trustedBy={homepage?.trustedBy} />
         
         {/* Pain Points - uses Sanity content variables */}
         <PainPoints painPoints={homepage?.painPoints} />
@@ -176,9 +189,9 @@ export default async function Home() {
         <ServicesPackaged 
           data={homepage?.servicesShowcase} 
           packages={homepage?.servicesShowcase?.packages?.length ? { packagesItems: homepage.servicesShowcase.packages.map(pkg => ({
-            title: pkg.title,
+            title: pkg.title || '',
             subtitle: pkg.subtitle || '',
-            price: pkg.price,
+            price: pkg.price || '',
             priceType: pkg.priceType || '',
             timeline: pkg.timeline || '',
             rating: pkg.rating || 0,
@@ -186,7 +199,8 @@ export default async function Home() {
             bestFor: pkg.bestFor || [],
             included: [],
             description: '',
-            href: pkg.buttonLink || ''
+            href: pkg.buttonLink || '',
+            buttonText: pkg.buttonText || 'View Details'
           })) } : allPackages?.packages} 
         />
         

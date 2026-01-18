@@ -1,11 +1,10 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 
 interface OrderFormData {
   title?: string
   description?: string
-  submitButtonText?: string
 }
 
 interface OrderFormProps {
@@ -13,34 +12,27 @@ interface OrderFormProps {
 }
 
 export default function OrderForm({ orderForm }: OrderFormProps) {
-  const [formData, setFormData] = useState({
-    companyName: '',
-    contactName: '',
-    email: '',
-    phone: '',
-    shopifyStoreUrl: '',
-    message: ''
-  })
-
   const title = orderForm?.title || 'Order Vipps Quick Checkout here'
   const description = orderForm?.description || 'Fill out the order form and we will respond via email'
-  const submitButtonText = orderForm?.submitButtonText || 'Send order'
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle form submission
-    console.log('Form submitted:', formData)
-  }
+  useEffect(() => {
+    // Load HubSpot forms script
+    const script = document.createElement('script')
+    script.src = 'https://js.hsforms.net/forms/embed/49119369.js'
+    script.defer = true
+    document.body.appendChild(script)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
+    return () => {
+      // Cleanup script on unmount
+      const existingScript = document.querySelector('script[src="https://js.hsforms.net/forms/embed/49119369.js"]')
+      if (existingScript) {
+        existingScript.remove()
+      }
+    }
+  }, [])
 
   return (
-    <section className="bg-[#03C1CA] py-16 lg:py-24">
+    <section id="order-form" className="bg-[#03C1CA] py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10">
@@ -52,114 +44,73 @@ export default function OrderForm({ orderForm }: OrderFormProps) {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="bg-white p-8 lg:p-12 shadow-lg">
-            <div className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                  <label htmlFor="companyName" className="block text-base lg:text-lg font-medium text-gray-700 mb-3">
-                    Company Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="companyName"
-                    name="companyName"
-                    value={formData.companyName}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-5 py-5 bg-[#F5F5F5] text-base lg:text-lg text-black outline-none focus:ring-2 focus:ring-[#03C1CA] transition-all"
-                    placeholder="Your Company Inc."
-                  />
-                </div>
-                <div>
-                  <label htmlFor="contactName" className="block text-base lg:text-lg font-medium text-gray-700 mb-3">
-                    Contact Person *
-                  </label>
-                  <input
-                    type="text"
-                    id="contactName"
-                    name="contactName"
-                    value={formData.contactName}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-5 py-5 bg-[#F5F5F5] text-base lg:text-lg text-black outline-none focus:ring-2 focus:ring-[#03C1CA] transition-all"
-                    placeholder="John Doe"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                  <label htmlFor="email" className="block text-base lg:text-lg font-medium text-gray-700 mb-3">
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-5 py-5 bg-[#F5F5F5] text-base lg:text-lg text-black outline-none focus:ring-2 focus:ring-[#03C1CA] transition-all"
-                    placeholder="john@yourcompany.com"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block text-base lg:text-lg font-medium text-gray-700 mb-3">
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-5 py-5 bg-[#F5F5F5] text-base lg:text-lg text-black outline-none focus:ring-2 focus:ring-[#03C1CA] transition-all"
-                    placeholder="+1 234 567 8900"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="shopifyStoreUrl" className="block text-base lg:text-lg font-medium text-gray-700 mb-3">
-                  Shopify Store URL *
-                </label>
-                <input
-                  type="url"
-                  id="shopifyStoreUrl"
-                  name="shopifyStoreUrl"
-                  value={formData.shopifyStoreUrl}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-5 py-5 bg-[#F5F5F5] text-base lg:text-lg text-black outline-none focus:ring-2 focus:ring-[#03C1CA] transition-all"
-                  placeholder="https://your-store.myshopify.com"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-base lg:text-lg font-medium text-gray-700 mb-3">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={6}
-                  className="w-full px-5 py-5 bg-[#F5F5F5] text-base lg:text-lg text-black outline-none focus:ring-2 focus:ring-[#03C1CA] transition-all resize-none"
-                  placeholder="Tell us a bit about your store..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-[#03C1CA] text-white py-5 font-semibold hover:bg-[#02a8b0] transition-colors text-lg lg:text-xl"
-              >
-                {submitButtonText}
-              </button>
-            </div>
-          </form>
+          <div className="bg-white p-8 lg:p-12 shadow-lg">
+            {/* HubSpot Form Embed */}
+            <div 
+              className="hs-form-frame hubspot-form-container" 
+              data-region="na1" 
+              data-form-id="10642b03-8cb9-4e6b-8fee-b000f8ccd434" 
+              data-portal-id="49119369"
+            />
+          </div>
         </div>
       </div>
+
+      <style jsx global>{`
+        .hubspot-form-container .hs-form-field {
+          margin-bottom: 1.5rem;
+        }
+        .hubspot-form-container .hs-form-field label {
+          display: block;
+          font-size: 1rem;
+          font-weight: 500;
+          color: #374151;
+          margin-bottom: 0.75rem;
+        }
+        .hubspot-form-container .hs-input {
+          width: 100%;
+          padding: 1.25rem;
+          background-color: #F5F5F5;
+          font-size: 1rem;
+          color: black;
+          outline: none;
+          border: none;
+          transition: all 0.2s;
+        }
+        .hubspot-form-container .hs-input:focus {
+          ring: 2px;
+          ring-color: #03C1CA;
+        }
+        .hubspot-form-container textarea.hs-input {
+          min-height: 150px;
+          resize: none;
+        }
+        .hubspot-form-container .hs-button {
+          width: 100%;
+          background-color: #03C1CA;
+          color: white;
+          padding: 1.25rem;
+          font-weight: 600;
+          font-size: 1.125rem;
+          cursor: pointer;
+          transition: background-color 0.2s;
+          border: none;
+        }
+        .hubspot-form-container .hs-button:hover {
+          background-color: #02a8b0;
+        }
+        .hubspot-form-container .hs-error-msgs {
+          color: #ef4444;
+          font-size: 0.875rem;
+          margin-top: 0.5rem;
+        }
+        .hubspot-form-container .submitted-message {
+          text-align: center;
+          padding: 2rem;
+          font-size: 1.125rem;
+          color: #03C1CA;
+        }
+      `}</style>
     </section>
   )
 }

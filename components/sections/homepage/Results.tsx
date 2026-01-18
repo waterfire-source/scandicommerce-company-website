@@ -1,8 +1,8 @@
 'use client'
 
-import React from 'react'
+import React, { useRef } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+import { motion, useInView } from 'framer-motion'
 
 interface ResultsData {
   title?: string
@@ -26,24 +26,78 @@ interface ResultsProps {
   data?: ResultsData
 }
 
+const headerVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1] as const
+    }
+  }
+}
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2
+    }
+  }
+}
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 50, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.1, 0.25, 1] as const
+    }
+  }
+}
+
+const statVariants = {
+  hidden: { opacity: 0, scale: 0.5 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1] as const,
+      delay: 0.2
+    }
+  }
+}
+
 export default function Results({ data }: ResultsProps) {
+  const headerRef = useRef<HTMLDivElement>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
+  
+  const headerInView = useInView(headerRef, { once: true, amount: 0.3 })
+  const gridInView = useInView(gridRef, { once: true, amount: 0.2 })
+
   // Content variables from Sanity
   const title = data?.title
   const subtitle = data?.subtitle
   const items = data?.items
 
   return (
-    <section className="bg-black py-16 lg:py-24">
+    <section className="relative bg-black py-16 lg:py-24 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {(title || subtitle) && (
-          <div className="text-center mb-12 lg:mb-16 relative">
-            <div
-              className="absolute top-0 left-1/4 w-32 h-32 rounded-full opacity-20 -z-10"
-              style={{
-                background: 'radial-gradient(circle, rgba(3, 193, 202, 0.3) 0%, transparent 70%)',
-                filter: 'blur(20px)',
-              }}
-            />
+          <motion.div 
+            ref={headerRef}
+            className="text-center mb-12 lg:mb-16 relative"
+            variants={headerVariants}
+            initial="hidden"
+            animate={headerInView ? "visible" : "hidden"}
+          >
             {title && (
               <h2 className="text-3xl lg:text-4xl font-bold text-white leading-tight mb-4">
                 {title}
@@ -54,37 +108,58 @@ export default function Results({ data }: ResultsProps) {
                 {subtitle}
               </p>
             )}
-          </div>
+          </motion.div>
         )}
 
         {items && items.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <motion.div 
+            ref={gridRef}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            animate={gridInView ? "visible" : "hidden"}
+          >
             {items.map((study, index) => (
-              <div
+              <motion.div
                 key={index}
+                variants={cardVariants}
+                whileHover={{ 
+                  y: -10,
+                  scale: 1.02,
+                  transition: { duration: 0.3 }
+                }}
                 className="bg-gray-900 rounded-lg p-6 hover:bg-gray-800 transition-colors"
               >
-                <div className="flex items-start justify-between mb-6">
-                  <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-gray-700">
+                <motion.div 
+                  className="flex items-start justify-between mb-6"
+                  initial={{ opacity: 0 }}
+                  animate={gridInView ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                >
+                  <div className="relative h-12 rounded-lg overflow-hidden">
                     {study.clientImage?.asset?.url ? (
-                      <Image
+                      <img
                         src={study.clientImage.asset.url}
                         alt={study.clientName}
-                        fill
-                        className="object-cover"
+                        className="h-full w-auto object-contain"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-gray-500">
+                      <div className="w-16 h-full flex items-center justify-center text-gray-500 bg-gray-700 rounded-lg">
                         <span className="text-2xl">👤</span>
                       </div>
                     )}
                   </div>
                   <span className="text-sm text-gray-400">{study.clientName}</span>
-                </div>
+                </motion.div>
 
                 <div className="mb-4">
                   {study.stat && (
-                    <p className="text-4xl font-bold text-white mb-2">{study.stat}</p>
+                    <motion.p 
+                      className="text-4xl font-bold text-white mb-2"
+                      variants={statVariants}
+                    >
+                      {study.stat}
+                    </motion.p>
                   )}
                   {study.metricName && (
                     <p className="text-white">{study.metricName}</p>
@@ -96,29 +171,33 @@ export default function Results({ data }: ResultsProps) {
                 )}
 
                 {study.ctaLink && (
-                  <Link
-                    href={study.ctaLink}
-                    className="inline-flex items-center gap-2 text-teal font-semibold hover:text-teal-light transition-colors"
-                  >
-                    {study.ctaText || 'Read case study'}
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                  <motion.div whileHover={{ x: 5 }}>
+                    <Link
+                      href={study.ctaLink}
+                      className="inline-flex items-center gap-2 text-teal font-semibold hover:text-teal-light transition-colors"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </Link>
+                      {study.ctaText || 'Read case study'}
+                      <motion.svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        animate={{ x: [0, 4, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                      </motion.svg>
+                    </Link>
+                  </motion.div>
                 )}
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
     </section>

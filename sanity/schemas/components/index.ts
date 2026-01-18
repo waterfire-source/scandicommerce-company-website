@@ -1,5 +1,6 @@
 // Section Components as defineField exports
 export { heroSection } from "./heroSection";
+export { trustedBySection } from "./trustedBySection";
 export { painPointsSection } from "./painPointsSection";
 export { servicesShowcaseSection } from "./servicesShowcaseSection";
 export { resultsSection } from "./resultsSection";

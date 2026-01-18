@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { heroSection } from "../components/heroSection";
+import { trustedBySection } from "../components/trustedBySection";
 import { painPointsSection } from "../components/painPointsSection";
 import { servicesShowcaseSection } from "../components/servicesShowcaseSection";
 import { resultsSection } from "../components/resultsSection";
@@ -37,6 +38,7 @@ export const landingPage = defineType({
     }),
     // Section Components
     heroSection,
+    trustedBySection,
     painPointsSection,
     servicesShowcaseSection,
     resultsSection,

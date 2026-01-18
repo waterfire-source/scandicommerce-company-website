@@ -102,6 +102,19 @@ export default function Hero({ hero }: HeroProps) {
             top: 34% !important;
           }
         }
+        @media (min-width: 574px) and (max-width: 602px) {
+          .hero-content-574-602 {
+            width: 80% !important;
+          }
+          .liquid-blob-574-602 {
+            top: 36% !important;
+          }
+        }
+        @media (min-width: 478px) and (max-width: 573px) {
+          .liquid-blob-478-573 {
+            top: 35% !important;
+          }
+        }
         @media (min-width: 461px) and (max-width: 535px) {
           .hero-content-461-535 {
             width: 85% !important;
@@ -120,9 +133,38 @@ export default function Hero({ hero }: HeroProps) {
             top: 33% !important;
           }
         }
+        @media (min-width: 521px) and (max-width: 535px) {
+          .hero-content-521-535 {
+            width: 76% !important;
+          }
+          .liquid-blob-521-535 {
+            top: 36% !important;
+          }
+        }
+        @media (min-width: 509px) and (max-width: 520px) {
+          .liquid-blob-509-520 {
+            top: 35% !important;
+          }
+        }
         @media (min-width: 474px) and (max-width: 508px) {
           .hero-content-474-508 {
             width: 88% !important;
+          }
+        }
+        @media (min-width: 504px) and (max-width: 508px) {
+          .hero-content-504-508 {
+            width: 85% !important;
+          }
+          .liquid-blob-504-508 {
+            top: 35% !important;
+          }
+        }
+        @media (min-width: 493px) and (max-width: 503px) {
+          .hero-content-493-503 {
+            width: 88% !important;
+          }
+          .liquid-blob-493-503 {
+            top: 35% !important;
           }
         }
         @media (min-width: 474px) and (max-width: 492px) {
@@ -130,12 +172,25 @@ export default function Hero({ hero }: HeroProps) {
             width: 91% !important;
           }
         }
+        @media (min-width: 478px) and (max-width: 492px) {
+          .hero-content-478-492 {
+            width: 85% !important;
+          }
+          .liquid-blob-478-492 {
+            top: 36% !important;
+          }
+        }
         @media (min-width: 474px) and (max-width: 477px) {
           .hero-content-474-477 {
-            width: 94% !important;
+            width: 87% !important;
           }
           .liquid-blob-474-477 {
-            top: 34% !important;
+            top: 37% !important;
+          }
+        }
+        @media (min-width: 471px) and (max-width: 473px) {
+          .liquid-blob-471-473 {
+            top: 36% !important;
           }
         }
         @media (min-width: 461px) and (max-width: 470px) {
@@ -144,9 +199,24 @@ export default function Hero({ hero }: HeroProps) {
             gap: 20px !important;
           }
           .liquid-blob-461-470 {
-            top: 33% !important;
+            top: 35% !important;
             width: 82% !important;
             height: 82% !important;
+          }
+        }
+        @media (min-width: 470px) and (max-width: 470px) {
+          .hero-content-470 {
+            width: 92% !important;
+          }
+        }
+        @media (min-width: 324px) and (max-width: 460px) {
+          .liquid-blob-324-460 {
+            top: 30% !important;
+          }
+        }
+        @media (min-width: 375px) and (max-width: 460px) {
+          .liquid-blob-375-460 {
+            top: 42% !important;
           }
         }
         @media (min-width: 406px) and (max-width: 460px) {
@@ -177,7 +247,7 @@ export default function Hero({ hero }: HeroProps) {
       <LiquidBlob
         page="homepage"
         rotation={0}
-        className="liquid-blob-small-height liquid-blob-medium-width liquid-blob-375-405 liquid-blob-406-460 liquid-blob-425-640-width liquid-blob-640-width liquid-blob-461-470 liquid-blob-461-535 liquid-blob-474-477 liquid-blob-474-535 liquid-blob-536-639 liquid-blob-large-width liquid-blob-768-width liquid-blob-768-1023 liquid-blob-xl-width top-[25%] sm:top-[35%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] h-[75%] md:w-[80%] md:h-[80%] lg:w-[95%] lg:h-[95%] xl:w-[90%] xl:h-[90%] 2xl:w-[85%] 2xl:h-[85%]"
+        className="liquid-blob-small-height liquid-blob-medium-width liquid-blob-324-460 liquid-blob-375-405 liquid-blob-375-460 liquid-blob-406-460 liquid-blob-425-640-width liquid-blob-478-492 liquid-blob-478-573 liquid-blob-493-503 liquid-blob-504-508 liquid-blob-509-520 liquid-blob-521-535 liquid-blob-574-602 liquid-blob-640-width liquid-blob-461-470 liquid-blob-461-535 liquid-blob-471-473 liquid-blob-474-477 liquid-blob-474-535 liquid-blob-536-639 liquid-blob-large-width liquid-blob-768-width liquid-blob-768-1023 liquid-blob-xl-width top-[25%] sm:top-[35%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] h-[75%] md:w-[80%] md:h-[80%] lg:w-[95%] lg:h-[95%] xl:w-[90%] xl:h-[90%] 2xl:w-[85%] 2xl:h-[85%]"
         enableMouseFollow={true}
       />
 
@@ -185,7 +255,7 @@ export default function Hero({ hero }: HeroProps) {
       <div className="absolute bottom-[44%] right-[32%] xl:block hidden w-[60px] h-[60px] rounded-full bg-[#1DEFFA33]"></div>
 
       <div className="container flex flex-col justify-center items-center mx-auto px-4 sm:px-6 lg:px-8 relative z-10 gap-[42px]">
-        <div className="hero-content-375-405 hero-content-406-460 hero-content-461-470 hero-content-461-535 hero-content-474-477 hero-content-474-492 hero-content-474-508 hero-content-536-639 flex flex-col justify-start items-center gap-[53px] sm:w-3/4 2xl:w-1/2 w-full">
+        <div className="hero-content-375-405 hero-content-406-460 hero-content-461-470 hero-content-461-535 hero-content-470 hero-content-474-477 hero-content-474-492 hero-content-474-508 hero-content-478-492 hero-content-493-503 hero-content-504-508 hero-content-521-535 hero-content-536-639 hero-content-574-602 flex flex-col justify-start items-center gap-[53px] sm:w-3/4 2xl:w-1/2 w-full">
           {titleText && (
             <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-4 sm:mb-6">
               {renderTitle()}

@@ -44,6 +44,15 @@ export const landingPageQuery = groq`
         price
       }
     },
+    trustedBy {
+      title,
+      brands[] {
+        name,
+        logo { ${imageFragment} },
+        alt,
+        link
+      }
+    },
     painPoints {
       painPointsTitle {
         text,
@@ -154,6 +163,15 @@ export const homepageQuery = groq`
       heroPackages[] {
         title,
         price
+      }
+    },
+    trustedBy {
+      title,
+      brands[] {
+        name,
+        logo { ${imageFragment} },
+        alt,
+        link
       }
     },
     painPoints {
