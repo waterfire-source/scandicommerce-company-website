@@ -138,6 +138,7 @@ export default function Results({ data }: ResultsProps) {
                 >
                   <div className="relative h-12 rounded-lg overflow-hidden">
                     {study.clientImage?.asset?.url ? (
+                      /* eslint-disable-next-line @next/next/no-img-element */
                       <img
                         src={study.clientImage.asset.url}
                         alt={study.clientName}

@@ -169,6 +169,7 @@ export default function Hero({ hero }: HeroProps) {
                   {badge}
                 </span>
                 {/* Shopify Plus Partner Logo */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src="https://www.guidance.com/hubfs/svgexport-8.svg" 
                   alt="Shopify Plus Partner" 

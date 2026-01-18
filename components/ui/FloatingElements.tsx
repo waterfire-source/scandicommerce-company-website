@@ -162,22 +162,41 @@ export function FloatingCircles({ className = '' }: { className?: string }) {
 }
 
 export function FloatingDots({ className = '' }: { className?: string }) {
+  const positions = [
+    { top: '10%', left: '5%' },
+    { top: '20%', left: '17%' },
+    { top: '30%', left: '29%' },
+    { top: '40%', left: '41%' },
+    { top: '50%', left: '53%' },
+    { top: '60%', left: '65%' },
+    { top: '70%', left: '77%' },
+    { top: '0%', left: '89%' },
+  ]
+  
   return (
     <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
-      {[...Array(8)].map((_, i) => (
-        <FloatingElement
+      {positions.map((pos, i) => (
+        <motion.div
           key={i}
-          variant="dot"
-          size={4 + (i % 3) * 4}
-          color={`rgba(3, 193, 202, ${0.2 + (i % 4) * 0.1})`}
-          className={`top-[${10 + (i * 10) % 80}%] left-[${5 + (i * 12) % 90}%]`}
+          className="absolute rounded-full pointer-events-none"
           style={{
-            top: `${10 + (i * 10) % 80}%`,
-            left: `${5 + (i * 12) % 90}%`
+            top: pos.top,
+            left: pos.left,
+            width: 4 + (i % 3) * 4,
+            height: 4 + (i % 3) * 4,
+            background: `rgba(3, 193, 202, ${0.2 + (i % 4) * 0.1})`
           }}
-          duration={3 + (i % 3)}
-          delay={i * 0.3}
-          amplitude={5 + (i % 3) * 5}
+          animate={{
+            y: [-(5 + (i % 3) * 5), 5 + (i % 3) * 5],
+            x: [-(2.5 + (i % 3) * 2.5), 2.5 + (i % 3) * 2.5]
+          }}
+          transition={{
+            duration: 3 + (i % 3),
+            delay: i * 0.3,
+            repeat: Infinity,
+            repeatType: 'mirror',
+            ease: 'easeInOut'
+          }}
         />
       ))}
     </div>
