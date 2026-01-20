@@ -1,11 +1,11 @@
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
-import Hero from '@/components/sections/shopify/shopify_POS/Hero'
 import BleedingMoney from '@/components/sections/shopify/shopify_POS/BleedingMoney'
 import OmnichannelFeatures from '@/components/sections/shopify/shopify_POS/OmnichannelFeatures'
 import RevenueForm from '@/components/sections/shopify/shopify_POS/RevenueForm'
 import { client } from '@/sanity/lib/client'
 import { shopifyPosInfoPageQuery } from '@/sanity/lib/queries'
+import Hero from '@/components/layout/Hero'
 
 // Disable caching - always fetch fresh data from Sanity
 export const dynamic = 'force-dynamic'
@@ -79,9 +79,11 @@ export default async function ShopifyPOSPage() {
     <div className="flex flex-col min-h-screen">
       <HeaderWrapper />
       <main className="flex-grow">
-        <Hero hero={pageData?.hero} />
+        <Hero hero={pageData?.hero} isStats={true} />
         <BleedingMoney bleedingMoney={pageData?.bleedingMoney} />
-        <OmnichannelFeatures omnichannelFeatures={pageData?.omnichannelFeatures} />
+        <OmnichannelFeatures
+          omnichannelFeatures={pageData?.omnichannelFeatures}
+        />
         <RevenueForm revenueForm={pageData?.revenueForm} />
       </main>
       <FooterWrapper />

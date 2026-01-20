@@ -1,10 +1,11 @@
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
-import Hero from '@/components/sections/services/all_packages/Hero'
 import PricingPackages from '@/components/sections/services/all_packages/PricingPackages'
 import FAQ from '@/components/sections/services/all_packages/FAQ'
 import { client } from '@/sanity/lib/client'
 import { allPackagesPageQuery } from '@/sanity/lib/queries'
+import Hero from '@/components/layout/Hero'
+import { Button } from '@/components/ui'
 
 // Disable caching - always fetch fresh data from Sanity
 export const dynamic = 'force-dynamic'
@@ -59,6 +60,13 @@ async function getPageData(): Promise<AllPackagesPageData | null> {
   }
 }
 
+const buttonContents = [
+  'Woocommerce',
+  'Adobe (Magento)',
+  'Bigcommerce',
+  'Salesforce commerce cloud',
+]
+
 export default async function ServicesAllPackages() {
   const pageData = await getPageData()
 
@@ -66,7 +74,12 @@ export default async function ServicesAllPackages() {
     <div className="flex flex-col min-h-screen">
       <HeaderWrapper />
       <main className="flex-grow">
-        <Hero hero={pageData?.hero} />
+        <Hero
+          hero={{
+            ...pageData?.hero}}
+        >
+        </Hero>
+        {/* <Hero hero={pageData?.hero} /> */}
         <PricingPackages packages={pageData?.packages} />
         <FAQ faq={pageData?.faq} />
         <FooterWrapper />

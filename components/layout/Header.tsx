@@ -144,7 +144,7 @@ export default function Header({ settings }: HeaderProps) {
                   setIsServicesOpen(true)
                   setIsShopifyOpen(false)
                 }}
-                className="flex items-center gap-1 text-gray-900 hover:text-teal transition-colors font-medium"
+                className="flex items-center gap-1 text-gray-900 hover:text-teal transition-colors font-medium text-base"
               >
                 {servicesMenu.label}
                 <svg
@@ -167,7 +167,7 @@ export default function Header({ settings }: HeaderProps) {
                       key={index}
                       href={item.href || '#'}
                       onClick={() => setIsServicesOpen(false)}
-                      className="block px-6 py-3 text-gray-900 hover:text-teal hover:bg-gray-50 transition-colors font-medium"
+                      className="block px-6 py-3 text-gray-900 hover:text-teal hover:bg-gray-50 transition-colors font-medium text-base"
                     >
                       {item.label}
                     </Link>
@@ -187,7 +187,7 @@ export default function Header({ settings }: HeaderProps) {
                   setIsShopifyOpen(true)
                   setIsServicesOpen(false)
                 }}
-                className="flex items-center gap-1 text-gray-900 hover:text-teal transition-colors font-medium"
+                className="flex items-center gap-1 text-gray-900 hover:text-teal transition-colors font-medium text-base"
               >
                 {shopifyMenu.label}
                 <svg
@@ -210,7 +210,7 @@ export default function Header({ settings }: HeaderProps) {
                       key={index}
                       href={item.href || '#'}
                       onClick={() => setIsShopifyOpen(false)}
-                      className="block px-6 py-3 text-gray-900 hover:text-teal hover:bg-gray-50 transition-colors font-medium"
+                      className="block px-6 py-3 text-gray-900 hover:text-teal hover:bg-gray-50 transition-colors font-medium text-base"
                     >
                       {item.label}
                     </Link>
@@ -224,7 +224,7 @@ export default function Header({ settings }: HeaderProps) {
               <Link
                 key={index}
                 href={link.href || '#'}
-                className="text-gray-900 hover:text-teal transition-colors font-medium"
+                className="text-gray-900 hover:text-teal transition-colors font-medium text-base"
               >
                 {link.label}
               </Link>
@@ -234,7 +234,7 @@ export default function Header({ settings }: HeaderProps) {
           <div className="flex items-center gap-4">
             <Link
               href={ctaButton.href || '/get-started'}
-              className="hidden sm:inline-block bg-teal text-white px-6 py-2.5 font-semibold hover:bg-teal-dark transition-colors shadow-button"
+              className="hidden sm:inline-block bg-teal text-white px-6 py-2.5 font-semibold hover:bg-teal-dark transition-colors shadow-button text-base"
             >
               {ctaButton.label}
             </Link>
@@ -265,7 +265,7 @@ export default function Header({ settings }: HeaderProps) {
                     setIsServicesOpen(!isServicesOpen)
                     setIsShopifyOpen(false)
                   }}
-                  className="flex items-center justify-between text-gray-900 hover:text-teal transition-colors font-medium"
+                  className="flex items-center justify-between text-gray-900 hover:text-teal transition-colors font-medium text-base"
                 >
                   {servicesMenu.label}
                   <svg
@@ -283,7 +283,7 @@ export default function Header({ settings }: HeaderProps) {
                       <Link
                         key={index}
                         href={item.href || '#'}
-                        className="text-gray-600 hover:text-teal transition-colors text-sm"
+                        className="text-gray-600 hover:text-teal transition-colors text-base"
                         onClick={(e) => {
                           e.stopPropagation()
                           setIsMobileMenuOpen(false)
@@ -304,7 +304,7 @@ export default function Header({ settings }: HeaderProps) {
                     setIsShopifyOpen(!isShopifyOpen)
                     setIsServicesOpen(false)
                   }}
-                  className="flex items-center justify-between text-gray-900 hover:text-teal transition-colors font-medium"
+                  className="flex items-center justify-between text-gray-900 hover:text-teal transition-colors font-medium text-base"
                 >
                   {shopifyMenu.label}
                   <svg
@@ -322,7 +322,7 @@ export default function Header({ settings }: HeaderProps) {
                       <Link
                         key={index}
                         href={item.href || '#'}
-                        className="text-gray-600 hover:text-teal transition-colors text-sm"
+                        className="text-gray-600 hover:text-teal transition-colors text-base"
                         onClick={(e) => {
                           e.stopPropagation()
                           setIsMobileMenuOpen(false)
@@ -341,7 +341,7 @@ export default function Header({ settings }: HeaderProps) {
                 <Link
                   key={index}
                   href={link.href || '#'}
-                  className="text-gray-900 hover:text-teal transition-colors font-medium"
+                  className="text-gray-900 hover:text-teal transition-colors font-medium text-base"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -351,7 +351,7 @@ export default function Header({ settings }: HeaderProps) {
               {/* Mobile CTA */}
               <Link
                 href={ctaButton.href || '/get-started'}
-                className="bg-teal text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-teal-dark transition-colors text-center shadow-button"
+                className="bg-teal text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-teal-dark transition-colors text-center shadow-button text-base"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {ctaButton.label}

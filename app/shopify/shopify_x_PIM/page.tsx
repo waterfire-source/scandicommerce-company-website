@@ -1,6 +1,5 @@
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
-import Hero from '@/components/sections/shopify/shopify_x_PIM/Hero'
 import WhatIsPIM from '@/components/sections/shopify/shopify_x_PIM/WhatIsPIM'
 import IntegratingPIM from '@/components/sections/shopify/shopify_x_PIM/IntegratingPIM'
 import WhichBusinesses from '@/components/sections/shopify/shopify_x_PIM/WhichBusinesses'
@@ -10,6 +9,7 @@ import CombinedSection from '@/components/sections/shopify/shopify_x_PIM/Combine
 import CTA from '@/components/sections/shopify/shopify_x_PIM/CTA'
 import { client } from '@/sanity/lib/client'
 import { shopifyXPimPageQuery } from '@/sanity/lib/queries'
+import Hero from '@/components/layout/Hero'
 
 // Disable caching - always fetch fresh data from Sanity
 export const dynamic = 'force-dynamic'

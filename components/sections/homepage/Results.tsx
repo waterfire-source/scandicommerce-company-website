@@ -156,7 +156,7 @@ export default function Results({ data }: ResultsProps) {
                 <div className="mb-4">
                   {study.stat && (
                     <motion.p 
-                      className="text-4xl font-bold text-white mb-2"
+                      className="text-4xl font-bold text-white mb-2 font-mono tracking-tight"
                       variants={statVariants}
                     >
                       {study.stat}

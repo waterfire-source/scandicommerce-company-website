@@ -1390,3 +1390,66 @@ export const footerSettingsQuery = groq`
     }
   }
 `;
+
+// ============================================
+// Vipps Hurtigkasse Page Query
+// ============================================
+export const vippsHurtigkassePageQuery = groq`
+  *[_type == "vippsHurtigkassePage"][0] {
+    _id,
+    pageTitle,
+    "slug": slug.current,
+    hero {
+      heroTitle {
+        text,
+        highlight
+      },
+      heroDescription,
+      heroButtons[] {
+        text,
+        link,
+        variant
+      }
+    },
+    features {
+      title,
+      paragraphs,
+      demoStore {
+        text,
+        url,
+        password
+      },
+      productImage {
+        "src": image.asset->url,
+        alt
+      }
+    },
+    howToGetStarted {
+      title,
+      steps[] {
+        title,
+        description,
+        subSteps
+      }
+    },
+    pricing {
+      sectionTitle,
+      price,
+      priceNote,
+      supportText
+    },
+    orderForm {
+      title,
+      description
+    },
+    support {
+      title,
+      buttonText,
+      buttonLink
+    },
+    seo {
+      metaTitle,
+      metaDescription
+    }
+  }
+`;

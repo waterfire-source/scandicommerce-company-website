@@ -93,7 +93,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
               <p className="text-sm text-[#666666] mb-4">{product.subtitle}</p>
 
               <div className="flex flex-wrap items-center gap-4 mb-6">
-                <span className="text-2xl font-bold text-[#222222]">
+                <span className="text-2xl font-bold text-[#222222] font-mono tracking-tight">
                   {product.price} {product.currency}
                 </span>
                 <div className="flex items-center gap-2">
@@ -149,7 +149,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
                   >
                     <HiMinus className="w-4 h-4" />
                   </button>
-                  <div className="w-20 h-12 flex items-center justify-center border border-[#E5E5E5] text-[#222222] font-medium">
+                  <div className="w-20 h-12 flex items-center justify-center border border-[#E5E5E5] text-[#222222] font-medium font-mono">
                     {quantity}
                   </div>
                   <button

@@ -38,7 +38,7 @@ export default function RealMigrationResults({ results }: RealMigrationResultsPr
                 }`}
               >
                 {result.metric && (
-                  <div className="text-xl sm:text-2xl lg:text-3xl xl:text-[32px] font-bold text-[#03C1CA] mb-7">
+                  <div className="text-xl sm:text-2xl lg:text-3xl xl:text-[32px] font-bold text-[#03C1CA] mb-7 font-mono tracking-tight">
                     {result.metric}
                   </div>
                 )}

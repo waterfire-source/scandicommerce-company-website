@@ -73,10 +73,10 @@ export default function Hero({ hero }: HeroProps) {
         <div className="flex flex-row gap-3 sm:gap-12 lg:gap-16 items-start justify-center bg-white sm:px-8 px-3 py-4">
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-bold text-[#03C1CA] mb-2">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-bold text-[#03C1CA] mb-2 font-mono tracking-tight">
                 {stat.value}
               </div>
-              <div className="text-xs sm:text-sm md:text-base xl:text-lg text-[#565454]">
+              <div className="text-xs sm:text-sm md:text-base xl:text-lg text-[#565454] font-sans">
                 {stat.label}
               </div>
             </div>

@@ -29,6 +29,7 @@ import {
   merchProductSettings,
   headerSettings,
   footerSettings,
+  vippsHurtigkassePage,
 } from "./pages";
 
 // ============================================
@@ -64,4 +65,5 @@ export const schemaTypes = [
   merchProductSettings,
   headerSettings,
   footerSettings,
+  vippsHurtigkassePage,
 ];

@@ -1,12 +1,12 @@
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
-import Hero from '@/components/sections/shopify/shopify_platform/Hero'
 import BleedingMoney from '@/components/sections/shopify/shopify_platform/BleedingMoney'
 import ShopifyEmpires from '@/components/sections/shopify/shopify_platform/ShopifyEmpires'
 import RevenueForm from '@/components/sections/shopify/shopify_platform/RevenueForm'
 import SuccessStories from '@/components/sections/shopify/shopify_platform/SuccessStories'
 import { client } from '@/sanity/lib/client'
 import { shopifyPlatformPageQuery } from '@/sanity/lib/queries'
+import Hero from '@/components/layout/Hero'
 
 // Disable caching - always fetch fresh data from Sanity
 export const dynamic = 'force-dynamic'

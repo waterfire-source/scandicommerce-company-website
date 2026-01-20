@@ -119,25 +119,28 @@ export default function Footer({ settings }: FooterProps) {
 
   return (
     <footer className="w-full bg-black text-white mt-auto">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-12 mb-12">
-          {/* Logo */}
-          <div className="lg:col-span-1">
-            <Logo logoPath='/images/footer-logo.png' />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+        {/* Main Footer Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8 lg:gap-4 xl:gap-6 2xl:gap-8 mb-8 sm:mb-10 lg:mb-12">
+          {/* Logo - Full width on mobile, scales gradually on desktop */}
+          <div className="col-span-2 sm:col-span-3 lg:col-span-1 mb-4 sm:mb-6 lg:mb-0">
+            <div className="w-auto lg:w-[120px] xl:w-[150px] 2xl:w-[185px] [&_img]:w-full [&_img]:h-auto">
+              <Logo logoPath='/images/footer-logo.png' />
+            </div>
           </div>
 
           {/* Dynamic Columns */}
           {columns.map((column, index) => (
-            <div key={index}>
-              <h3 className="font-semibold text-base mb-4 pb-2 border-b border-gray-700">
+            <div key={index} className="col-span-1">
+              <h3 className="font-semibold text-sm sm:text-base mb-3 sm:mb-4 pb-2 border-b border-gray-700">
                 {column.title}
               </h3>
-              <ul className="space-y-3 text-sm">
+              <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
                 {column.links?.map((link, linkIndex) => (
                   <li key={linkIndex}>
                     <Link
                       href={link.href || '#'}
-                      className="text-white hover:text-teal transition-colors"
+                      className="text-gray-300 hover:text-teal transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -148,16 +151,16 @@ export default function Footer({ settings }: FooterProps) {
           ))}
 
           {/* Connect Section */}
-          <div>
-            <h3 className="font-semibold text-base mb-4 pb-2 border-b border-gray-700">
+          <div className="col-span-2 sm:col-span-1">
+            <h3 className="font-semibold text-sm sm:text-base mb-3 sm:mb-4 pb-2 border-b border-gray-700">
               {connectSection.title}
             </h3>
-            <div className="space-y-3 text-sm">
+            <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
               {connectSection.email && (
-                <p className="text-white">
+                <p className="text-gray-300">
                   <a
                     href={`mailto:${connectSection.email}`}
-                    className="hover:text-teal transition-colors"
+                    className="hover:text-teal transition-colors break-all sm:break-normal"
                   >
                     {connectSection.email}
                   </a>
@@ -175,14 +178,14 @@ export default function Footer({ settings }: FooterProps) {
               )}
             </div>
             {connectSection.socialLinks && connectSection.socialLinks.length > 0 && (
-              <div className="mt-6 flex gap-3">
+              <div className="mt-4 sm:mt-6 flex gap-2 sm:gap-3">
                 {connectSection.socialLinks.map((social, index) => (
                   <a
                     key={index}
                     href={social.url || '#'}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-teal transition-colors"
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-teal transition-colors"
                     aria-label={social.platform}
                   >
                     {getSocialIcon(social.platform)}
@@ -194,26 +197,28 @@ export default function Footer({ settings }: FooterProps) {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-gray-800 pt-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div className="border-t border-gray-800 pt-6 sm:pt-8">
+          <div className="flex flex-col gap-4 sm:gap-6 lg:flex-row lg:items-center lg:justify-between">
+            {/* Badge and Org Number */}
+            <div className="flex flex-col xs:flex-row items-start xs:items-center gap-3 sm:gap-4">
               {bottomSection.badgeText && (
-                <button className="bg-gray-800 text-white px-4 py-2 rounded text-sm font-medium hover:bg-gray-700 transition-colors">
+                <span className="bg-gray-800 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded text-xs sm:text-sm font-medium">
                   {bottomSection.badgeText}
-                </button>
+                </span>
               )}
               {bottomSection.orgNumber && (
-                <p className="text-white text-sm">{bottomSection.orgNumber}</p>
+                <p className="text-gray-400 text-xs sm:text-sm">{bottomSection.orgNumber}</p>
               )}
             </div>
 
+            {/* Legal Links */}
             {bottomSection.legalLinks && bottomSection.legalLinks.length > 0 && (
-              <div className="flex flex-wrap gap-6 text-sm">
+              <div className="flex flex-wrap gap-3 sm:gap-4 lg:gap-6 text-xs sm:text-sm">
                 {bottomSection.legalLinks.map((link, index) => (
                   <Link
                     key={index}
                     href={link.href || '#'}
-                    className="text-white hover:text-teal transition-colors"
+                    className="text-gray-400 hover:text-teal transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -222,9 +227,10 @@ export default function Footer({ settings }: FooterProps) {
             )}
           </div>
 
+          {/* Copyright */}
           {bottomSection.copyrightText && (
-            <div className="mt-8 text-center">
-              <p className="text-white text-sm">
+            <div className="mt-6 sm:mt-8 text-center sm:text-left lg:text-center">
+              <p className="text-gray-500 text-xs sm:text-sm">
                 {bottomSection.copyrightText}
               </p>
             </div>

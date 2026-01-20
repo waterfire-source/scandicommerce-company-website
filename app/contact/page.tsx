@@ -1,12 +1,12 @@
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
-import Hero from '@/components/sections/contact/Hero'
 import ContactCards from '@/components/sections/contact/ContactCards'
 import BookingSection from '@/components/sections/contact/BookingSection'
 import MapSection from '@/components/sections/contact/MapSection'
 import FAQ from '@/components/sections/contact/FAQ'
 import { client } from '@/sanity/lib/client'
 import { contactPageQuery } from '@/sanity/lib/queries'
+import Hero from '@/components/layout/Hero'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -80,7 +80,7 @@ export default async function Contact() {
     <div className="flex flex-col min-h-screen">
       <HeaderWrapper />
       <main className="flex-grow">
-        <Hero hero={pageData?.hero} />
+        <Hero hero={pageData.hero} />
         <ContactCards contactCards={pageData?.contactCards} />
         <BookingSection 
           bookingSection={pageData?.bookingSection}

@@ -1,11 +1,12 @@
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
-import Hero from '@/components/sections/services/shopify_pos/Hero'
 import OmnichannelFeatures from '@/components/sections/services/shopify_pos/OmnichannelFeatures'
 import PerfectFor from '@/components/sections/services/shopify_pos/PerfectFor'
 import ReadyForOmnichannel from '@/components/sections/services/shopify_pos/ReadyForOmnichannel'
 import { client } from '@/sanity/lib/client'
 import { shopifyPosPageQuery } from '@/sanity/lib/queries'
+import Hero from '@/components/layout/Hero'
+import { Button } from '@/components/ui'
 
 // Disable caching - always fetch fresh data from Sanity
 export const dynamic = 'force-dynamic'
@@ -68,7 +69,13 @@ export default async function ShopifyPOSPage() {
     <div className="flex flex-col min-h-screen">
       <HeaderWrapper />
       <main className="flex-grow">
-        <Hero hero={pageData?.hero} />
+        <Hero hero={pageData?.hero}>
+          <div className="grid grid-cols-1 lg:gap-4 gap-2">
+            <Button href={pageData?.hero?.heroButtonLink}>
+              {pageData?.hero?.heroButtonText}
+            </Button>
+          </div>
+        </Hero>
         <OmnichannelFeatures features={pageData?.features} />
         <PerfectFor perfectFor={pageData?.perfectFor} />
         <ReadyForOmnichannel cta={pageData?.cta} />

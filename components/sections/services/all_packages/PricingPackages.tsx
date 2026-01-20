@@ -27,7 +27,7 @@ interface PricingPackagesProps {
 function StarRating({ rating }: { rating: number }) {
   return (
     <div className="flex items-center gap-0.5 sm:gap-1">
-      {[1, 2, 3, 4, 5].map((star) => (
+      {[1, 2, 3, 4, 5].map(star => (
         <svg
           key={star}
           className={`w-4 h-4 sm:w-5 sm:h-5 ${star <= Math.floor(rating) ? 'text-amber-400' : 'text-gray-300'}`}
@@ -47,17 +47,23 @@ function PackageCard({ pkg }: { pkg: Package }) {
       {/* Header - Title & Subtitle */}
       <div className="text-center mb-5 sm:mb-6">
         {pkg.title && (
-          <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-1.5 sm:mb-2">{pkg.title}</h3>
+          <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-1.5 sm:mb-2">
+            {pkg.title}
+          </h3>
         )}
         {pkg.subtitle && (
-          <p className="text-xs sm:text-sm lg:text-base text-gray-500">{pkg.subtitle}</p>
+          <p className="text-xs sm:text-sm lg:text-base text-gray-500">
+            {pkg.subtitle}
+          </p>
         )}
       </div>
 
       {/* Description */}
       {pkg.description && (
         <div className="mb-4 sm:mb-5">
-          <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">{pkg.description}</p>
+          <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+            {pkg.description}
+          </p>
         </div>
       )}
 
@@ -67,10 +73,12 @@ function PackageCard({ pkg }: { pkg: Package }) {
         <div className="bg-gray-50 p-3 sm:p-4 lg:p-5">
           <div className="flex items-baseline gap-1 mb-1 flex-wrap">
             {pkg.price && (
-              <span className="text-lg sm:text-xl lg:text-2xl font-bold text-[#03C1CA]">{pkg.price}</span>
+              <span className="text-lg sm:text-xl lg:text-2xl font-bold text-[#03C1CA] font-mono tracking-tight">
+                {pkg.price}
+              </span>
             )}
             {pkg.priceType && (
-              <span className="text-xs text-gray-500">{pkg.priceType}</span>
+              <span className="text-xs text-gray-500 font-sans">{pkg.priceType}</span>
             )}
           </div>
           {pkg.timeline && (
@@ -84,7 +92,9 @@ function PackageCard({ pkg }: { pkg: Package }) {
         <div className="bg-gray-50 p-3 sm:p-4 lg:p-5 flex items-center justify-center gap-2 sm:gap-3">
           <StarRating rating={pkg.rating || 5} />
           {pkg.ratingValue && (
-            <span className="text-base sm:text-lg font-medium text-gray-700">{pkg.ratingValue}</span>
+            <span className="text-base sm:text-lg font-medium text-gray-700">
+              {pkg.ratingValue}
+            </span>
           )}
         </div>
       </div>
@@ -94,7 +104,9 @@ function PackageCard({ pkg }: { pkg: Package }) {
         {/* Best For Box */}
         {pkg.bestFor && pkg.bestFor.length > 0 && (
           <div className="bg-gray-50 p-3 sm:p-4 lg:p-5">
-            <h4 className="text-xs sm:text-sm lg:text-base font-semibold text-gray-900 mb-2 sm:mb-3">Best for:</h4>
+            <h4 className="text-xs sm:text-sm lg:text-base font-semibold text-gray-900 mb-2 sm:mb-3">
+              Best for:
+            </h4>
             <ul className="space-y-1.5 sm:space-y-2">
               {pkg.bestFor.map((item, index) => (
                 <li key={index} className="text-xs lg:text-sm text-gray-600">
@@ -108,7 +120,9 @@ function PackageCard({ pkg }: { pkg: Package }) {
         {/* What's Included Box */}
         {pkg.included && pkg.included.length > 0 && (
           <div className="bg-gray-50 p-3 sm:p-4 lg:p-5">
-            <h4 className="text-xs sm:text-sm lg:text-base font-semibold text-gray-900 mb-2 sm:mb-3">What&apos;s included:</h4>
+            <h4 className="text-xs sm:text-sm lg:text-base font-semibold text-gray-900 mb-2 sm:mb-3">
+              What&apos;s included:
+            </h4>
             <ul className="space-y-1.5 sm:space-y-2">
               {pkg.included.map((item, index) => (
                 <li key={index} className="text-xs lg:text-sm text-gray-600">
@@ -145,7 +159,7 @@ export default function PricingPackages({ packages }: PricingPackagesProps) {
   const items = packages?.packagesItems
 
   return (
-    <section className="bg-[#F8F8F8] py-16 lg:py-24">
+    <section className="bg-[#F8F8F8] pb-8 xs:pb-12 sm:pb-16 lg:pt-24 lg:pb-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {items && items.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">

@@ -122,7 +122,7 @@ export default function RelatedProducts({
                   <h3 className="text-lg font-medium text-white mb-2">
                     {product.name}
                   </h3>
-                  <span className="inline-block px-3 py-1 bg-black/50 backdrop-blur-sm rounded text-sm text-white">
+                  <span className="inline-block px-3 py-1 bg-black/50 backdrop-blur-sm rounded text-sm text-white font-mono">
                     {Math.round(product.price)} {product.currency}
                   </span>
                 </div>

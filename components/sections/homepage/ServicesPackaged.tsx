@@ -210,7 +210,7 @@ export default function ServicesPackaged({ data, packages: packagesData }: Servi
                   <p className="text-gray-600 mb-4">{category.description}</p>
                 )}
                 {category.price && (
-                  <p className="text-xl font-bold text-gray-900 mb-6">{category.price}</p>
+                  <p className="text-xl font-bold text-gray-900 mb-6 font-mono tracking-tight">{category.price}</p>
                 )}
                 {category.link && (
                   <motion.div whileHover={{ x: 5 }}>
@@ -272,15 +272,15 @@ export default function ServicesPackaged({ data, packages: packagesData }: Servi
                 {/* Price */}
                 <div className="mb-4">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-bold text-teal">
+                    <span className="text-2xl font-bold text-teal font-mono tracking-tight">
                       {pkg.price || 'Price'}
                     </span>
                     {pkg.priceType && (
-                      <span className="text-xs text-gray-500">{pkg.priceType}</span>
+                      <span className="text-xs text-gray-500 font-sans">{pkg.priceType}</span>
                     )}
                   </div>
                   {pkg.timeline && (
-                    <p className="text-xs text-gray-600 mt-1">Timeline: {pkg.timeline}</p>
+                    <p className="text-xs text-gray-600 mt-1 font-sans">Timeline: {pkg.timeline}</p>
                   )}
                 </div>
 

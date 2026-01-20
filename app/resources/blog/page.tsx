@@ -2,10 +2,10 @@ import ArticlesGrid from '@/components/sections/resources/ArticlesGrid'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FeaturedArticle from '@/components/sections/resources/FeaturedArticle'
-import Hero from '@/components/sections/resources/Hero'
 import GetShopifyInsitesDelivered from '@/components/sections/resources/GetShopifyInsitesDelivered'
 import { client } from '@/sanity/lib/client'
 import { blogPageQuery } from '@/sanity/lib/queries'
+import Hero from '@/components/layout/Hero'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -70,7 +70,13 @@ export default async function Resources() {
     <div className="flex flex-col min-h-screen">
       <HeaderWrapper />
       <main className="flex-grow">
-        <Hero hero={pageData?.hero} />
+        <Hero 
+         hero={{
+          ...pageData?.hero,
+          searchPlaceholder: 'Search for a package',
+        }}
+        searchable={true}
+        />
         <FeaturedArticle featuredArticle={pageData?.featuredArticle} />
         <ArticlesGrid articlesGrid={pageData?.articlesGrid} />
         <GetShopifyInsitesDelivered newsletterCta={pageData?.newsletterCta} />

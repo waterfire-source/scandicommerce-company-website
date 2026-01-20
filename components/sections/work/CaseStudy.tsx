@@ -107,10 +107,10 @@ export default function CaseStudy({
               <div className="flex justify-between items-center">
                 {results.map((result, index) => (
                   <div key={index} className="flex flex-col items-center">
-                    <div className="2xl:text-[32px] xl:text-2xl text-xl font-bold !leading-[166%] text-[#03C1CA]">
+                      <div className="2xl:text-[32px] xl:text-2xl text-xl font-bold !leading-[166%] text-[#03C1CA] font-mono tracking-tight">
                       {result.value}
                     </div>
-                    <div className="2xl:text-base xl:text-sm sm:text-xs text-[9px] text-[#565454] leading-tight">
+                    <div className="2xl:text-base xl:text-sm sm:text-xs text-[9px] text-[#565454] leading-tight font-sans">
                       {result.label}
                     </div>
                   </div>

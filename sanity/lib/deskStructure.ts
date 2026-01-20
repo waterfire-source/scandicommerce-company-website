@@ -134,6 +134,12 @@ export const deskStructure = (S: StructureBuilder) =>
                 .child(
                   S.documentTypeList("whyShopifyPage").title("Why Shopify Page")
                 ),
+              S.listItem()
+                .title("Vipps Hurtigkasse Page")
+                .schemaType("vippsHurtigkassePage")
+                .child(
+                  S.documentTypeList("vippsHurtigkassePage").title("Vipps Hurtigkasse Page")
+                ),
             ])
         ),
 

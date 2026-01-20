@@ -66,7 +66,7 @@ export default function FrequentlyAddedTogether({ addOns }: FrequentlyAddedToget
                 <p className="text-sm text-gray-500 mb-4">{addOn.description}</p>
                 
                 {/* Price */}
-                <p className="text-lg font-bold text-[#03C1CA]">
+                <p className="text-lg font-bold text-[#03C1CA] font-mono tracking-tight">
                   {addOn.price}
                 </p>
               </div>

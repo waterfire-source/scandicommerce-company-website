@@ -30,8 +30,8 @@ export default function Pricing({ pricing }: PricingProps) {
               PRICE
             </p>
             <div className="mb-4">
-              <span className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[#03C1CA]">{price}</span>
-              <span className="text-base lg:text-lg text-[#565454] ml-1">/{priceNote}</span>
+              <span className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[#03C1CA] font-mono tracking-tight">{price}</span>
+              <span className="text-base lg:text-lg text-[#565454] ml-1 font-sans">/{priceNote}</span>
             </div>
             <p className="text-base lg:text-lg text-[#565454]">
               {supportText}

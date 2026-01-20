@@ -1,6 +1,5 @@
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
-import Hero from '@/components/sections/merch/Hero'
 import ProductGrid from '@/components/sections/merch/ProductGrid'
 import QualityShowcase from '@/components/sections/merch/QualityShowcase'
 import Newsletter from '@/components/sections/merch/Newsletter'
@@ -8,6 +7,7 @@ import { getShopifyProducts } from '@/lib/shopify'
 import { Product } from '@/components/sections/merch/ProductCard'
 import { client } from '@/sanity/lib/client'
 import { merchPageQuery } from '@/sanity/lib/queries'
+import Hero from '@/components/layout/Hero'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -92,7 +92,7 @@ export default async function Merch() {
     <div className="flex flex-col min-h-screen">
       <HeaderWrapper />
       <main className="flex-grow">
-        <Hero hero={pageData?.hero} />
+        <Hero hero={pageData.hero} />
         <ProductGrid initialProducts={shopifyProducts} />
         <QualityShowcase 
           products={shopifyProducts} 

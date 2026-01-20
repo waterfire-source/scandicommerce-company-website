@@ -44,10 +44,10 @@ export default function ProductCard({ product }: ProductCardProps) {
       </Link>
       <div className="p-5 border-t border-[#E5E5E5]">
         <div className="flex items-start justify-between gap-2 mb-1">
-          <h3 className="text-base font-bold text-[#222222] leading-tight">
+          <h3 className="text-base font-bold text-[#222222] leading-tight font-sans">
             {product.name}
           </h3>
-          <span className="inline-flex items-center px-3 py-1 rounded text-xs font-medium bg-[#222222] text-white whitespace-nowrap">
+          <span className="inline-flex items-center px-3 py-1 rounded text-xs font-medium bg-[#222222] text-white whitespace-nowrap font-mono">
             {product.price} {product.currency}
           </span>
         </div>

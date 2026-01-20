@@ -1,6 +1,5 @@
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
-import Hero from '@/components/sections/services/migrate/Hero'
 import Platforms from '@/components/sections/services/migrate/Platforms'
 import RisksAndProtection from '@/components/sections/services/migrate/RisksAndProtection'
 import MigrationProcess from '@/components/sections/services/migrate/MigrationProcess'
@@ -8,6 +7,8 @@ import RealMigrationResults from '@/components/sections/services/migrate/RealMig
 import MigrationCTA from '@/components/sections/services/migrate/MigrationCTA'
 import { client } from '@/sanity/lib/client'
 import { migratePageQuery } from '@/sanity/lib/queries'
+import Hero from '@/components/layout/Hero'
+import { Button } from '@/components/ui'
 
 // Disable caching - always fetch fresh data from Sanity
 export const dynamic = 'force-dynamic'
@@ -93,7 +94,19 @@ export default async function MigratePage() {
     <div className="flex flex-col min-h-screen">
       <HeaderWrapper />
       <main className="flex-grow">
-        <Hero hero={pageData?.hero} />
+        <Hero hero={pageData?.hero}>
+          <div className="grid sm:grid-cols-2 grid-cols-1 lg:gap-4 gap-2">
+            {pageData?.hero?.heroButtons?.map((button, index) => (
+              <Button
+                key={index}
+                type={button.variant === 'primary' ? 'primary' : 'default'}
+                href={button.link}
+              >
+                {button.text}
+              </Button>
+            ))}
+          </div>
+        </Hero>
         <Platforms platforms={pageData?.platforms} />
         <RisksAndProtection risksProtection={pageData?.risksProtection} />
         <MigrationProcess process={pageData?.process} />

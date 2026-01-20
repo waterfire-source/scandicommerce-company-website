@@ -1,6 +1,5 @@
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
-import Hero from '@/components/sections/shopify/why_shopify/Hero'
 import WhatIsShopify from '@/components/sections/shopify/why_shopify/WhatIsShopify'
 import ShopifyFacts from '@/components/sections/shopify/why_shopify/ShopifyFacts'
 import WhyBusinessesChooseShopify from '@/components/sections/shopify/why_shopify/WhyBusinessesChooseShopify'
@@ -9,6 +8,7 @@ import ShopifyAI from '@/components/sections/shopify/why_shopify/ShopifyAI'
 import CTA from '@/components/sections/shopify/why_shopify/CTA'
 import { client } from '@/sanity/lib/client'
 import { whyShopifyPageQuery } from '@/sanity/lib/queries'
+import Hero from '@/components/layout/Hero'
 
 // Disable caching - always fetch fresh data from Sanity
 export const dynamic = 'force-dynamic'

@@ -8,6 +8,42 @@ interface PackageHeroProps {
   pkg: Package
 }
 
+// Star rating component
+function StarRating({ rating, maxStars = 5 }: { rating: number; maxStars?: number }) {
+  return (
+    <div className="flex items-center gap-0.5">
+      {[...Array(maxStars)].map((_, index) => {
+        const fillPercentage = Math.min(Math.max(rating - index, 0), 1) * 100
+        return (
+          <div key={index} className="relative w-5 h-5">
+            {/* Empty star (gray background) */}
+            <svg
+              className="absolute inset-0 w-5 h-5 text-gray-300"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+            {/* Filled star (clipped based on rating) */}
+            <div
+              className="absolute inset-0 overflow-hidden"
+              style={{ width: `${fillPercentage}%` }}
+            >
+              <svg
+                className="w-5 h-5 text-[#F59E0B]"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 export default function PackageHero({ pkg }: PackageHeroProps) {
   return (
     <section className="relative bg-[#F8F8F8] py-16 lg:py-20 overflow-hidden min-h-[600px]">
@@ -25,9 +61,19 @@ export default function PackageHero({ pkg }: PackageHeroProps) {
             <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-3">
               {pkg.title}
             </h1>
-            <p className="text-lg text-gray-600 mb-5">
+            <p className="text-lg text-gray-600 mb-4">
               {pkg.subtitle}
             </p>
+
+            {/* Rating and Reviews */}
+            {(pkg.rating > 0 || pkg.reviewCount > 0) && (
+              <div className="flex items-center gap-2 mb-5">
+                <StarRating rating={pkg.rating || 0} />
+                <span className="text-gray-600 text-sm">
+                  {pkg.ratingValue || pkg.rating?.toFixed(1) || '0'} ({pkg.reviewCount || 0} reviews)
+                </span>
+              </div>
+            )}
 
             {/* Description */}
             <p className="text-base text-gray-600 mb-8 leading-relaxed max-w-lg">
@@ -36,10 +82,10 @@ export default function PackageHero({ pkg }: PackageHeroProps) {
 
             {/* Price with inline payment type */}
             <div className="flex items-baseline gap-3 mb-1">
-              <span className="text-4xl font-bold text-gray-900">
+              <span className="text-4xl font-bold text-gray-900 font-mono tracking-tight">
                 {pkg.price}
               </span>
-              <span className="text-base text-gray-500">{pkg.priceType}</span>
+              <span className="text-base text-gray-500 font-sans">{pkg.priceType}</span>
             </div>
 
             {/* Timeline */}

@@ -1,6 +1,5 @@
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
-import Hero from '@/components/sections/services/shopify_development/Hero'
 import WhyShopifyWins from '@/components/sections/services/shopify_development/WhyShopifyWins'
 import CommonScenarios from '@/components/sections/services/shopify_development/CommonScenarios'
 import HowWeWork from '@/components/sections/services/shopify_development/HowWeWork'
@@ -8,6 +7,8 @@ import Testimonial from '@/components/sections/services/shopify_development/Test
 import ReadyToBuild from '@/components/sections/services/shopify_development/ReadyToBuild'
 import { client } from '@/sanity/lib/client'
 import { shopifyDevelopmentPageQuery } from '@/sanity/lib/queries'
+import Hero from '@/components/layout/Hero'
+import { Button } from '@/components/ui'
 
 // Disable caching - always fetch fresh data from Sanity
 export const dynamic = 'force-dynamic'
@@ -91,7 +92,19 @@ export default async function ServicesShopifyDevelopment() {
     <div className="flex flex-col min-h-screen">
       <HeaderWrapper />
       <main className="flex-grow">
-        <Hero hero={pageData?.hero} />
+        <Hero
+          hero={{
+            ...pageData?.hero,
+          }}
+        >
+          <div className="grid sm:grid-cols-2 grid-cols-1 lg:gap-4 gap-2">
+            {pageData?.hero?.heroButtons?.map((button, index) => (
+              <Button key={index} type={button.variant === 'primary' ? 'primary' : 'default'} href={button.link}>
+                {button.text}
+              </Button>
+            ))}
+          </div>
+        </Hero>
         <WhyShopifyWins whyShopify={pageData?.whyShopify} />
         <CommonScenarios scenarios={pageData?.scenarios} />
         <HowWeWork howWeWork={pageData?.howWeWork} />

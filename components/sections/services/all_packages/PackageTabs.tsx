@@ -24,13 +24,13 @@ export default function PackageTabs({ pkg }: PackageTabsProps) {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Tab Navigation */}
-          <div className="border-b border-gray-200 mb-8">
-            <div className="grid grid-cols-5 gap-0 w-full">
-              {tabs.map((tab, index) => (
+          <div className="border-b border-gray-200 mb-8 overflow-x-auto">
+            <div className="flex w-full min-w-max">
+              {tabs.map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`px-2 sm:px-4 py-4 text-xs sm:text-base font-medium transition-colors duration-200 border-l border-gray-200 first:border-l-0 ${
+                  className={`min-w-[120px] sm:min-w-[150px] flex-1 px-4 py-4 text-sm sm:text-base font-medium transition-colors duration-200 border-l border-gray-200 first:border-l-0 whitespace-nowrap ${
                     activeTab === tab.id
                       ? 'bg-[#03C1CA] text-white'
                       : 'bg-white text-gray-900 hover:bg-gray-50'

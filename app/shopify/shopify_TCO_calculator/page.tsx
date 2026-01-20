@@ -1,12 +1,11 @@
-'use client'
-
-import { useState, useEffect } from 'react'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
-import Hero from '@/components/sections/shopify/shopify_TCO_calculator/Hero'
-import CalculatorForm from '@/components/sections/shopify/shopify_TCO_calculator/CalculatorForm'
 import { client } from '@/sanity/lib/client'
 import { shopifyTcoCalculatorPageQuery } from '@/sanity/lib/queries'
+import TCOCalculatorClient from './TCOCalculatorClient'
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 interface ShopifyTcoCalculatorPageData {
   _id: string
@@ -22,43 +21,28 @@ interface ShopifyTcoCalculatorPageData {
   }
 }
 
-export default function ShopifyTCOCalculatorPage() {
-  const [selectedPlatform, setSelectedPlatform] = useState<string>('WooCommerce')
-  const [pageData, setPageData] = useState<ShopifyTcoCalculatorPageData | null>(null)
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await client.fetch<ShopifyTcoCalculatorPageData>(
-          shopifyTcoCalculatorPageQuery,
-          {},
-          { next: { revalidate: 0 } }
-        )
-        setPageData(data)
-      } catch (error) {
-        console.error('Error fetching TCO Calculator page:', error)
-      }
-    }
-    fetchData()
-  }, [])
-
-  const handlePlatformSelect = (platform: string) => {
-    setSelectedPlatform(platform)
-    // Scroll to calculator form
-    const formElement = document.getElementById('calculator-form')
-    if (formElement) {
-      formElement.scrollIntoView({ behavior: 'smooth' })
-    }
+async function getPageData(): Promise<ShopifyTcoCalculatorPageData | null> {
+  try {
+    const data = await client.fetch<ShopifyTcoCalculatorPageData>(
+      shopifyTcoCalculatorPageQuery,
+      {},
+      { next: { revalidate: 0 } }
+    )
+    return data
+  } catch (error) {
+    console.error('Error fetching TCO Calculator page:', error)
+    return null
   }
+}
+
+export default async function ShopifyTCOCalculatorPage() {
+  const pageData = await getPageData()
 
   return (
     <div className="flex flex-col min-h-screen">
       <HeaderWrapper />
       <main className="flex-grow">
-        <Hero hero={pageData?.hero} onPlatformSelect={handlePlatformSelect} />
-        <div id="calculator-form">
-          <CalculatorForm selectedPlatform={selectedPlatform} />
-        </div>
+        <TCOCalculatorClient hero={pageData?.hero} />
       </main>
       <FooterWrapper />
     </div>

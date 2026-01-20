@@ -4,8 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import ServiceCard from '@/components/ui/ServiceCard'
-import LiquidBlob from '@/components/ui/LiquidBlob'
-import { FloatingElement, GradientOrb, PulsingElement } from '@/components/ui/FloatingElements'
+import TorusKnotAnimation from '@/components/ui/TorusKnotAnimation'
 
 interface HeroData {
   heroBadge?: string
@@ -106,50 +105,8 @@ export default function Hero({ hero }: HeroProps) {
 
   return (
     <section className="relative bg-[#F8F8F8] py-16 lg:py-24 overflow-hidden min-h-[calc(100vh-80px)] flex items-center justify-center">
-      {/* Floating decorative elements */}
-      <FloatingElement
-        variant="ring"
-        size={60}
-        color="rgba(3, 193, 202, 0.25)"
-        className="top-[15%] left-[8%] hidden lg:block"
-        duration={6}
-        amplitude={20}
-      />
-      <FloatingElement
-        variant="dot"
-        size={10}
-        color="rgba(3, 193, 202, 0.4)"
-        className="top-[25%] left-[15%] hidden lg:block"
-        duration={4}
-        delay={1}
-        amplitude={12}
-      />
-      <FloatingElement
-        variant="dot"
-        size={6}
-        color="rgba(3, 193, 202, 0.5)"
-        className="bottom-[30%] left-[12%] hidden lg:block"
-        duration={3.5}
-        delay={0.5}
-        amplitude={8}
-      />
-      <PulsingElement
-        size={14}
-        color="rgba(3, 193, 202, 0.3)"
-        className="bottom-[20%] left-[5%] hidden lg:block"
-      />
-      <GradientOrb
-        size={400}
-        className="top-[-10%] left-[-15%] hidden lg:block"
-        colors={['rgba(3, 193, 202, 0.08)', 'rgba(3, 193, 202, 0.02)']}
-      />
-      
-      <LiquidBlob
-        page="homepage"
-        rotation={10}
-        className="top-[-5%] right-[-10%] w-[75%] h-[110%] hidden lg:block"
-        enableMouseFollow={true}
-      />
+      {/* Three.js Torus Knot Animation */}
+      <TorusKnotAnimation className="top-0 right-[-25%] w-[85%] h-[140%] hidden lg:block" />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12 lg:gap-16">
           <motion.div 

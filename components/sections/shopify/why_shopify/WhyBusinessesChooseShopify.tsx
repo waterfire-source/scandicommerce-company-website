@@ -25,7 +25,7 @@ export default function WhyBusinessesChooseShopify({ whyBusinessesChoose }: WhyB
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           {title && (
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center mb-12 lg:mb-16">
+            <h2 className="text-[5.8vw] xs:text-[4.3vw] sm:text-[4.2vw] md:text-[4vw] lg:text-4xl xl:text-[42px] font-bold text-white text-center mb-12 lg:mb-16">
               {title}
             </h2>
           )}

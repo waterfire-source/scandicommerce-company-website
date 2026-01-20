@@ -75,12 +75,12 @@ export default function Hero({ hero }: HeroProps) {
               {stats.map((stat, index) => (
                 <div key={index} className="text-center">
                   {stat.value && (
-                    <div className="text-2xl lg:text-3xl font-bold text-[#00BFC8] mb-1">
+                    <div className="text-2xl lg:text-3xl font-bold text-[#00BFC8] mb-1 font-mono tracking-tight">
                       {stat.value}
                     </div>
                   )}
                   {stat.label && (
-                    <div className="text-xs lg:text-sm text-gray-600">
+                    <div className="text-xs lg:text-sm text-gray-600 font-sans">
                       {stat.label}
                     </div>
                   )}

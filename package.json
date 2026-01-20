@@ -14,6 +14,7 @@
     "@sanity/image-url": "^1.1.0",
     "@sanity/structure": "^2.36.2",
     "@sanity/vision": "^3.99.0",
+    "@types/three": "^0.182.0",
     "framer-motion": "^12.26.1",
     "lucide-react": "^0.562.0",
     "motion": "^12.26.1",
@@ -23,7 +24,8 @@
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
     "sanity": "^3.99.0",
-    "styled-components": "^6.3.5"
+    "styled-components": "^6.3.5",
+    "three": "^0.182.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",

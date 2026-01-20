@@ -1,6 +1,5 @@
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
-import Hero from '@/components/sections/shopify/shopify_x_AI/Hero'
 import EnhancingWithAI from '@/components/sections/shopify/shopify_x_AI/EnhancingWithAI'
 import HowWeLeverageAI from '@/components/sections/shopify/shopify_x_AI/HowWeLeverageAI'
 import AIToolsToolkit from '@/components/sections/shopify/shopify_x_AI/AIToolsToolkit'
@@ -10,6 +9,7 @@ import FAQ from '@/components/sections/shopify/shopify_x_AI/FAQ'
 import CTA from '@/components/sections/shopify/shopify_x_AI/CTA'
 import { client } from '@/sanity/lib/client'
 import { shopifyXAiPageQuery } from '@/sanity/lib/queries'
+import Hero from '@/components/layout/Hero'
 
 // Disable caching - always fetch fresh data from Sanity
 export const dynamic = 'force-dynamic'
@@ -93,7 +93,8 @@ export default async function ShopifyXAIPage() {
     <div className="flex flex-col min-h-screen">
       <HeaderWrapper />
       <main className="flex-grow">
-        <Hero hero={pageData?.hero} />
+        <Hero hero={pageData?.hero}>
+        </Hero>
         <EnhancingWithAI enhancingWithAi={pageData?.enhancingWithAi} />
         <HowWeLeverageAI howWeLeverageAi={pageData?.howWeLeverageAi} />
         <AIToolsToolkit aiToolsToolkit={pageData?.aiToolsToolkit} />

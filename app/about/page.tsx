@@ -1,6 +1,6 @@
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
-import Hero from '@/components/sections/about/Hero'
+// import Hero from '@/components/sections/about/Hero'
 import MeetTheTeam from '@/components/sections/about/MeetTheTeam'
 import OurStory from '@/components/sections/about/OurStory'
 import OurValues from '@/components/sections/about/OurValues'
@@ -9,6 +9,7 @@ import WhyDifferent from '@/components/sections/about/WhyDifferent'
 import WantWorkWithUs from '@/components/sections/about/WantWorkWithUs'
 import { client } from '@/sanity/lib/client'
 import { aboutPageQuery } from '@/sanity/lib/queries'
+import Hero from '@/components/layout/Hero'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -95,7 +96,8 @@ export default async function About() {
     <div className="flex flex-col min-h-screen">
       <HeaderWrapper />
       <main className="flex-grow">
-        <Hero hero={pageData?.hero} />
+        {/* <Hero hero={pageData?.hero} /> */}
+        <Hero hero={pageData?.hero} isStats={true} />
         <WhyDifferent whyDifferent={pageData?.whyDifferent} />
         <OurStory ourStory={pageData?.ourStory} />
         <OurValues ourValues={pageData?.ourValues} />

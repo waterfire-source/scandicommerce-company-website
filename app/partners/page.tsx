@@ -1,11 +1,11 @@
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
-import Hero from '@/components/sections/partners/Hero'
 import WhyOurPartnership from '@/components/sections/partners/WhyOurPartnership'
 import PartnersGrid from '@/components/sections/partners/PartnersGrid'
 import BecomeAPartner from '@/components/sections/partners/BecomeAPartner'
 import { client } from '@/sanity/lib/client'
 import { partnersPageQuery } from '@/sanity/lib/queries'
+import Hero from '@/components/layout/Hero'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -62,7 +62,7 @@ export default async function Partners() {
     <div className="flex flex-col min-h-screen">
       <HeaderWrapper />
       <main className="flex-grow">
-        <Hero hero={pageData?.hero} />
+        <Hero hero={pageData.hero} />
         <WhyOurPartnership whyOurPartnership={pageData?.whyOurPartnership} />
         <PartnersGrid partnersGrid={pageData?.partnersGrid} />
         <BecomeAPartner cta={pageData?.cta} />

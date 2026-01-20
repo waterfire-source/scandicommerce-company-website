@@ -2,7 +2,7 @@ import FooterWrapper from '@/components/layout/FooterWrapper'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import CaseStudies from '@/components/sections/work/CaseStudies'
 import CTA from '@/components/sections/work/CTA'
-import Hero from '@/components/sections/work/Hero'
+import Hero from '@/components/layout/Hero'
 import { client } from '@/sanity/lib/client'
 import { workPageQuery } from '@/sanity/lib/queries'
 

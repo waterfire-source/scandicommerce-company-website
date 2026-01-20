@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '450px',
+      },
       colors: {
         teal: {
           DEFAULT: '#03C1CA',
@@ -27,7 +30,9 @@ const config: Config = {
         'header': '0px 4px 18px 0px rgba(0, 0, 0, 0.05)',
       },
       fontFamily: {
-        // sans: ['Inter', 'sans-serif'],
+        sans: ['Space Grotesk', 'var(--font-grotesque)', 'sans-serif'],
+        mono: ['JetBrains Mono', 'var(--font-mono)', 'monospace'],
+        grotesque: ['Space Grotesk', 'var(--font-grotesque)', 'sans-serif'],
       },
     },
   },

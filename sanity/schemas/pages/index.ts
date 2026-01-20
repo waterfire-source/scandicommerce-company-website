@@ -20,3 +20,4 @@ export { merchPage } from "./merchPage";
 export { merchProductSettings } from "./merchProductSettings";
 export { headerSettings } from "./headerSettings";
 export { footerSettings } from "./footerSettings";
+export { vippsHurtigkassePage } from "./vippsHurtigkassePage";
