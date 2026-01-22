@@ -60,6 +60,12 @@ interface PackageDetailPageData {
       price?: string
     }[]
   }
+  heroButtons?: {
+    primaryButtonText?: string
+    primaryButtonLink?: string
+    secondaryButtonText?: string
+    secondaryButtonLink?: string
+  }
   caseStudiesBanner?: {
     title?: string
     description?: string
@@ -109,6 +115,12 @@ function sanityToPackage(sanityData: PackageDetailPageData, slug: string): Packa
       comment: review.comment || '',
       title: review.title,
     })),
+    heroButtons: sanityData.heroButtons ? {
+      primaryButtonText: sanityData.heroButtons.primaryButtonText,
+      primaryButtonLink: sanityData.heroButtons.primaryButtonLink,
+      secondaryButtonText: sanityData.heroButtons.secondaryButtonText,
+      secondaryButtonLink: sanityData.heroButtons.secondaryButtonLink,
+    } : undefined,
   }
 }
 

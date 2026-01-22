@@ -109,6 +109,8 @@ export default async function ProductDetailPage({
     isNewArrival: shopifyProduct.tags.some(tag =>
       tag.toLowerCase().includes('new') || tag.toLowerCase().includes('arrival')
     ),
+    variants: shopifyProduct.variants || [],
+    productId: shopifyProduct.id,
   }
 
   const formattedRelatedProducts = relatedProducts.map(relatedProduct => ({

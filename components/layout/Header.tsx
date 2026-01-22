@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react'
 import Logo from '@/components/ui/Logo'
 import Link from 'next/link'
+import { HiShoppingBag } from 'react-icons/hi2'
+import { useCart } from '@/contexts/CartContext'
 
 interface MenuItem {
   label?: string
@@ -44,6 +46,7 @@ const defaultShopifyMenu: MenuSection = {
   items: [
     { label: 'Shopify', href: '/shopify/shopify_platform' },
     { label: 'Shopify POS', href: '/shopify/shopify_POS' },
+    { label: 'Shopify Migration', href: '/shopify/shopify_migration' },
     { label: 'Shopify TCO calculator', href: '/shopify/shopify_TCO_calculator' },
     { label: 'Shopify x PIM', href: '/shopify/shopify_x_PIM' },
     { label: 'Shopify X AI', href: '/shopify/shopify_x_AI' },
@@ -69,6 +72,8 @@ export default function Header({ settings }: HeaderProps) {
   const [isShopifyOpen, setIsShopifyOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  
+  const { cart, openCart } = useCart()
 
   // Use Sanity data or fallback to defaults
   const servicesMenu = settings?.servicesMenu?.items?.length 
@@ -232,6 +237,20 @@ export default function Header({ settings }: HeaderProps) {
           </div>
 
           <div className="flex items-center gap-4">
+            {/* Cart Icon */}
+            <button
+              onClick={openCart}
+              className="relative p-2 text-gray-900 hover:text-teal transition-colors"
+              aria-label="Open cart"
+            >
+              <HiShoppingBag className="w-6 h-6" />
+              {cart && cart.totalQuantity > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#03C1CA] text-white text-xs font-bold rounded-full flex items-center justify-center">
+                  {cart.totalQuantity > 99 ? '99+' : cart.totalQuantity}
+                </span>
+              )}
+            </button>
+            
             <Link
               href={ctaButton.href || '/get-started'}
               className="hidden sm:inline-block bg-teal text-white px-6 py-2.5 font-semibold hover:bg-teal-dark transition-colors shadow-button text-base"

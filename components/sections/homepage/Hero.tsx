@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import ServiceCard from '@/components/ui/ServiceCard'
 import TorusKnotAnimation from '@/components/ui/TorusKnotAnimation'
+import { Button } from '@/components/ui'
 
 interface HeroData {
   heroBadge?: string
@@ -106,11 +107,11 @@ export default function Hero({ hero }: HeroProps) {
   return (
     <section className="relative bg-[#F8F8F8] py-16 lg:py-24 overflow-hidden min-h-[calc(100vh-80px)] flex items-center justify-center">
       {/* Three.js Torus Knot Animation */}
-      <TorusKnotAnimation className="top-0 right-[-25%] w-[85%] h-[140%] hidden lg:block" />
+      <TorusKnotAnimation className="opacity-70 lg:right-[-25%] sm:right-[-4%] sm:top-0 top-[27vw] xs:top-2 lg:w-[100%] lg:h-[100%] md:w-[55vw] sm:w-[70vw] sm:h-[65vw] xs:w-[60%] xs:h-[40%] w-[90%] flex justify-center sm:justify-start`" />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12 lg:gap-16">
-          <motion.div 
-            className="relative space-y-14 w-full lg:w-3/5"
+          <motion.div
+            className="relative space-y-8 lg:space-y-14 w-full lg:w-3/5"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -119,44 +120,44 @@ export default function Hero({ hero }: HeroProps) {
             {badge && (
               <motion.div
                 variants={itemVariants}
-                className="inline-flex items-center gap-4 px-5 py-4 shadow-button relative z-10"
+                className="inline-flex items-center gap-4 px-4 sm:px-5 py-3 sm:py-4 shadow-button relative z-10"
                 style={{ backgroundColor: 'rgba(29, 239, 250, 0.102)' }}
               >
-                <span className="text-sm font-bold text-defaultText uppercase tracking-wide">
+                <span className="text-[10px] sm:text-sm font-bold text-defaultText uppercase tracking-wide">
                   {badge}
                 </span>
                 {/* Shopify Plus Partner Logo */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src="https://www.guidance.com/hubfs/svgexport-8.svg" 
-                  alt="Shopify Plus Partner" 
-                  className="h-10 w-auto"
+                <img
+                  src="https://www.guidance.com/hubfs/svgexport-8.svg"
+                  alt="Shopify Plus Partner"
+                  className="h-9 sm:h-10 w-auto"
                 />
               </motion.div>
             )}
 
             {titleText && (
-              <motion.h1 
+              <motion.h1
                 variants={itemVariants}
-                className="text-[32px] sm:text-[42px] md:text-[48px] lg:text-[64px] font-bold text-gray-900 leading-[130%] tracking-[0%] pr-0 sm:pr-8 lg:pr-[78px] relative z-10"
+                className="text-[6.3vw] xs:text-[24px] sm:text-[32px] md:text-[40px] lg:text-[46px] xl:text-[52px] 2xl:text-[64px] lg:text-start text-center font-bold text-gray-900 leading-[130%] tracking-[0%] pr-0 sm:pr-8 lg:pr-[78px] relative z-10"
               >
                 {renderTitle()}
               </motion.h1>
             )}
 
             {description && (
-              <motion.p 
+              <motion.p
                 variants={itemVariants}
-                className="text-base sm:text-lg text-gray-600 leading-relaxed pr-0 sm:pr-8 lg:pr-12 relative z-10"
+                className="text-[3.7vw] xs:text-sm sm:text-base lg:text-lg lg:text-start text-center text-gray-600 leading-relaxed pr-0 sm:pr-8 lg:pr-12 relative z-10"
               >
                 {description}
               </motion.p>
             )}
 
             {buttons && buttons.length > 0 && (
-              <motion.div 
+              <motion.div
                 variants={itemVariants}
-                className="flex flex-col sm:flex-row gap-4 sm:gap-7 relative z-10"
+                className="flex flex-col sm:flex-row sm:justify-center gap-3.5 sm:gap-5 lg:gap-7 relative z-10"
               >
                 {buttons.map((button, index) => (
                   <motion.div
@@ -164,25 +165,16 @@ export default function Hero({ hero }: HeroProps) {
                     whileHover={{ scale: 1.02, y: -2 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <Link
-                      href={button.link || '#'}
-                      className={`block px-8 sm:px-[53px] py-4 sm:py-[18px] font-semibold transition-colors shadow-button text-center ${
-                        button.variant === 'primary' || index === 0
-                          ? 'bg-teal text-white hover:bg-teal-dark'
-                          : 'bg-white text-gray-900'
-                      }`}
-                    >
-                      {button.text}
-                    </Link>
+                    <Button href={button.link || '#'} type={button.variant === 'primary' || index === 0 ? 'primary' : 'default'}>{button.text}</Button>
                   </motion.div>
                 ))}
               </motion.div>
             )}
 
             {tagline && (
-              <motion.p 
+              <motion.p
                 variants={itemVariants}
-                className="text-sm text-gray-500 relative z-10"
+                className="text-xs xs:text-sm text-gray-500 relative z-10 lg:text-start text-center"
               >
                 {tagline}
               </motion.p>
@@ -190,7 +182,7 @@ export default function Hero({ hero }: HeroProps) {
           </motion.div>
 
           {packages && packages.length > 0 && (
-            <motion.div 
+            <motion.div
               className="space-y-4 w-full lg:w-2/5 z-10"
               variants={cardContainerVariants}
               initial="hidden"
@@ -200,8 +192,8 @@ export default function Hero({ hero }: HeroProps) {
                 <motion.div
                   key={index}
                   variants={cardVariants}
-                  whileHover={{ 
-                    scale: 1.02, 
+                  whileHover={{
+                    scale: 1.02,
                     x: -5,
                     transition: { duration: 0.2 }
                   }}

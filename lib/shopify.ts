@@ -146,10 +146,180 @@ const PRODUCT_RECOMMENDATIONS_QUERY = `
   }
 `
 
+const CREATE_CART_MUTATION = `
+  mutation cartCreate($input: CartInput!) {
+    cartCreate(input: $input) {
+      cart {
+        id
+        checkoutUrl
+        totalQuantity
+        lines(first: 10) {
+          edges {
+            node {
+              id
+              quantity
+              merchandise {
+                ... on ProductVariant {
+                  id
+                  title
+                  price {
+                    amount
+                    currencyCode
+                  }
+                  product {
+                    title
+                    handle
+                    images(first: 1) {
+                      edges {
+                        node {
+                          url
+                          altText
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        cost {
+          totalAmount {
+            amount
+            currencyCode
+          }
+          subtotalAmount {
+            amount
+            currencyCode
+          }
+        }
+      }
+      userErrors {
+        field
+        message
+      }
+    }
+  }
+`
+
+const ADD_TO_CART_MUTATION = `
+  mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
+    cartLinesAdd(cartId: $cartId, lines: $lines) {
+      cart {
+        id
+        checkoutUrl
+        totalQuantity
+        lines(first: 10) {
+          edges {
+            node {
+              id
+              quantity
+              merchandise {
+                ... on ProductVariant {
+                  id
+                  title
+                  price {
+                    amount
+                    currencyCode
+                  }
+                  product {
+                    title
+                    handle
+                    images(first: 1) {
+                      edges {
+                        node {
+                          url
+                          altText
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        cost {
+          totalAmount {
+            amount
+            currencyCode
+          }
+          subtotalAmount {
+            amount
+            currencyCode
+          }
+        }
+      }
+      userErrors {
+        field
+        message
+      }
+    }
+  }
+`
+
+const GET_CART_QUERY = `
+  query getCart($cartId: ID!) {
+    cart(id: $cartId) {
+      id
+      checkoutUrl
+      lines(first: 50) {
+        edges {
+          node {
+            id
+            quantity
+            merchandise {
+              ... on ProductVariant {
+                id
+                title
+                price {
+                  amount
+                  currencyCode
+                }
+                product {
+                  title
+                  handle
+                  images(first: 1) {
+                    edges {
+                      node {
+                        url
+                        altText
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      cost {
+        totalAmount {
+          amount
+          currencyCode
+        }
+        subtotalAmount {
+          amount
+          currencyCode
+        }
+      }
+      totalQuantity
+    }
+  }
+`
+
 export interface ShopifyCollection {
   id: string
   title: string
   handle: string
+}
+
+export interface ShopifyVariant {
+  id: string
+  title: string
+  price: number
+  currencyCode: string
+  availableForSale: boolean
 }
 
 export interface ShopifyProduct {
@@ -167,6 +337,49 @@ export interface ShopifyProduct {
   availableForSale: boolean
   rating?: number
   reviewCount?: number
+  variants?: ShopifyVariant[]
+}
+
+export interface CartLine {
+  id: string
+  quantity: number
+  merchandise: {
+    id: string
+    title: string
+    price: {
+      amount: string
+      currencyCode: string
+    }
+    product: {
+      title: string
+      handle: string
+      images?: {
+        edges: Array<{
+          node: {
+            url: string
+            altText: string | null
+          }
+        }>
+      }
+    }
+  }
+}
+
+export interface ShopifyCart {
+  id: string
+  checkoutUrl: string
+  lines: CartLine[]
+  totalQuantity: number
+  cost: {
+    totalAmount: {
+      amount: string
+      currencyCode: string
+    }
+    subtotalAmount: {
+      amount: string
+      currencyCode: string
+    }
+  }
 }
 
 interface ShopifyResponse<T> {
@@ -490,6 +703,14 @@ export async function getShopifyProductByHandle(handle: string): Promise<Shopify
       product.tags
     )
 
+    const variants: ShopifyVariant[] = product.variants.edges.map(edge => ({
+      id: edge.node.id,
+      title: edge.node.title,
+      price: parseFloat(edge.node.price.amount),
+      currencyCode: edge.node.price.currencyCode,
+      availableForSale: edge.node.availableForSale,
+    }))
+
     return {
       id: product.id,
       title: product.title,
@@ -505,6 +726,7 @@ export async function getShopifyProductByHandle(handle: string): Promise<Shopify
       availableForSale: product.variants.edges[0]?.node.availableForSale ?? true,
       rating,
       reviewCount,
+      variants,
     }
   } catch (error) {
     console.error(`Error fetching Shopify product ${handle}:`, error)
@@ -542,5 +764,195 @@ export async function getShopifyRelatedProducts(productId: string): Promise<Shop
   } catch (error) {
     console.error(`Error fetching related products for ${productId}:`, error)
     return []
+  }
+}
+
+// Cart interfaces for API responses
+interface CartCreateData {
+  cartCreate: {
+    cart: {
+      id: string
+      checkoutUrl: string
+      totalQuantity: number
+      lines: {
+        edges: Array<{
+          node: CartLine
+        }>
+      }
+      cost: {
+        totalAmount: { amount: string; currencyCode: string }
+        subtotalAmount: { amount: string; currencyCode: string }
+      }
+    } | null
+    userErrors: Array<{ field: string[]; message: string }>
+  }
+}
+
+interface CartLinesAddData {
+  cartLinesAdd: {
+    cart: {
+      id: string
+      checkoutUrl: string
+      totalQuantity: number
+      lines: {
+        edges: Array<{
+          node: CartLine
+        }>
+      }
+      cost: {
+        totalAmount: { amount: string; currencyCode: string }
+        subtotalAmount: { amount: string; currencyCode: string }
+      }
+    } | null
+    userErrors: Array<{ field: string[]; message: string }>
+  }
+}
+
+interface CartData {
+  cart: {
+    id: string
+    checkoutUrl: string
+    lines: {
+      edges: Array<{
+        node: CartLine
+      }>
+    }
+    cost: {
+      totalAmount: { amount: string; currencyCode: string }
+      subtotalAmount: { amount: string; currencyCode: string }
+    }
+    totalQuantity: number
+  } | null
+}
+
+function transformCartResponse(cart: CartData['cart']): ShopifyCart | null {
+  if (!cart) return null
+  
+  return {
+    id: cart.id,
+    checkoutUrl: cart.checkoutUrl,
+    lines: cart.lines.edges.map(edge => edge.node),
+    totalQuantity: cart.totalQuantity || cart.lines.edges.reduce((acc, edge) => acc + edge.node.quantity, 0),
+    cost: cart.cost,
+  }
+}
+
+export async function createCart(
+  variantId: string,
+  quantity: number = 1
+): Promise<{ cart: ShopifyCart | null; checkoutUrl: string | null; error: string | null }> {
+  try {
+    const data = await shopifyFetch<CartCreateData>(CREATE_CART_MUTATION, {
+      input: {
+        lines: [
+          {
+            merchandiseId: variantId,
+            quantity,
+          },
+        ],
+      },
+    })
+
+    if (data.cartCreate.userErrors.length > 0) {
+      return {
+        cart: null,
+        checkoutUrl: null,
+        error: data.cartCreate.userErrors.map(e => e.message).join(', '),
+      }
+    }
+
+    if (!data.cartCreate.cart) {
+      return {
+        cart: null,
+        checkoutUrl: null,
+        error: 'Failed to create cart',
+      }
+    }
+
+    const cart: ShopifyCart = {
+      id: data.cartCreate.cart.id,
+      checkoutUrl: data.cartCreate.cart.checkoutUrl,
+      lines: data.cartCreate.cart.lines.edges.map(edge => edge.node),
+      totalQuantity: data.cartCreate.cart.totalQuantity ?? data.cartCreate.cart.lines.edges.reduce((acc, edge) => acc + edge.node.quantity, 0),
+      cost: data.cartCreate.cart.cost,
+    }
+
+    return {
+      cart,
+      checkoutUrl: data.cartCreate.cart.checkoutUrl,
+      error: null,
+    }
+  } catch (error) {
+    console.error('Error creating cart:', error)
+    return {
+      cart: null,
+      checkoutUrl: null,
+      error: error instanceof Error ? error.message : 'Failed to create cart',
+    }
+  }
+}
+
+export async function addToCart(
+  cartId: string,
+  variantId: string,
+  quantity: number = 1
+): Promise<{ cart: ShopifyCart | null; checkoutUrl: string | null; error: string | null }> {
+  try {
+    const data = await shopifyFetch<CartLinesAddData>(ADD_TO_CART_MUTATION, {
+      cartId,
+      lines: [
+        {
+          merchandiseId: variantId,
+          quantity,
+        },
+      ],
+    })
+
+    if (data.cartLinesAdd.userErrors.length > 0) {
+      return {
+        cart: null,
+        checkoutUrl: null,
+        error: data.cartLinesAdd.userErrors.map(e => e.message).join(', '),
+      }
+    }
+
+    if (!data.cartLinesAdd.cart) {
+      return {
+        cart: null,
+        checkoutUrl: null,
+        error: 'Failed to add to cart',
+      }
+    }
+
+    const cart: ShopifyCart = {
+      id: data.cartLinesAdd.cart.id,
+      checkoutUrl: data.cartLinesAdd.cart.checkoutUrl,
+      lines: data.cartLinesAdd.cart.lines.edges.map(edge => edge.node),
+      totalQuantity: data.cartLinesAdd.cart.totalQuantity ?? data.cartLinesAdd.cart.lines.edges.reduce((acc, edge) => acc + edge.node.quantity, 0),
+      cost: data.cartLinesAdd.cart.cost,
+    }
+
+    return {
+      cart,
+      checkoutUrl: data.cartLinesAdd.cart.checkoutUrl,
+      error: null,
+    }
+  } catch (error) {
+    console.error('Error adding to cart:', error)
+    return {
+      cart: null,
+      checkoutUrl: null,
+      error: error instanceof Error ? error.message : 'Failed to add to cart',
+    }
+  }
+}
+
+export async function getCart(cartId: string): Promise<ShopifyCart | null> {
+  try {
+    const data = await shopifyFetch<CartData>(GET_CART_QUERY, { cartId })
+    return transformCartResponse(data.cart)
+  } catch (error) {
+    console.error('Error fetching cart:', error)
+    return null
   }
 }

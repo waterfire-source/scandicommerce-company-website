@@ -1,8 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import Image from 'next/image'
 import { HiMinus, HiPlus, HiCheck, HiStar } from 'react-icons/hi2'
+import AddToCartDropdown from './AddToCartDropdown'
+
+interface Variant {
+  id: string
+  title: string
+  price: number
+  currencyCode: string
+  availableForSale: boolean
+}
 
 interface ProductHeroProps {
   product: {
@@ -15,10 +24,10 @@ interface ProductHeroProps {
     rating: number
     reviewCount: number
     isNewArrival?: boolean
+    variants?: Variant[]
+    productId?: string
   }
 }
-
-const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
 
 const badges = [
   { icon: HiCheck, text: 'Free Shipping' },
@@ -27,9 +36,13 @@ const badges = [
 ]
 
 export default function ProductHero({ product }: ProductHeroProps) {
-  const [selectedSize, setSelectedSize] = useState<string | null>(null)
+  const [selectedVariant, setSelectedVariant] = useState<Variant | null>(null)
   const [quantity, setQuantity] = useState(1)
   const [activeImage, setActiveImage] = useState(0)
+
+  const handleVariantSelect = useCallback((variant: Variant | null) => {
+    setSelectedVariant(variant)
+  }, [])
 
   const handleQuantityChange = (delta: number) => {
     setQuantity(prev => Math.max(1, prev + delta))
@@ -94,7 +107,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
 
               <div className="flex flex-wrap items-center gap-4 mb-6">
                 <span className="text-2xl font-bold text-[#222222] font-mono tracking-tight">
-                  {product.price} {product.currency}
+                  {selectedVariant ? selectedVariant.price : product.price} {selectedVariant ? selectedVariant.currencyCode : product.currency}
                 </span>
                 <div className="flex items-center gap-2">
                   <div className="flex">
@@ -116,30 +129,8 @@ export default function ProductHero({ product }: ProductHeroProps) {
                 {product.description}
               </p>
 
+              {/* Quantity Selector */}
               <div className="mb-6">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm font-medium text-[#222222]">Select Size</span>
-                  <button className="text-sm font-medium text-[#03C1CA] hover:text-[#02A8B0] transition-colors">
-                    Size Guide
-                  </button>
-                </div>
-                <div className="flex justify-between flex-wrap">
-                  {sizes.map(size => (
-                    <button
-                      key={size}
-                      onClick={() => setSelectedSize(size)}
-                      className={`w-1/6 h-12 flex items-center justify-center border text-sm font-medium transition-all ${selectedSize === size
-                        ? 'border-[#03C1CA] bg-[#03C1CA]/10 text-[#03C1CA]'
-                        : 'border-[#E5E5E5] text-[#222222] hover:border-[#03C1CA]'
-                        }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mb-8">
                 <span className="text-sm font-medium text-[#222222] mb-3 block">Quantity</span>
                 <div className="flex gap-3 items-center">
                   <button
@@ -162,13 +153,14 @@ export default function ProductHero({ product }: ProductHeroProps) {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3 mb-8">
-                <button className="flex-1 py-4 px-6 bg-[#03C1CA] text-white font-medium hover:bg-[#02A8B0] transition-colors">
-                  Add to Cart
-                </button>
-                <button className="flex-1 py-4 px-6 border border-[#E5E5E5] text-[#222222] font-medium hover:bg-[#F8F8F8] transition-colors">
-                  Save for Later
-                </button>
+              {/* Add to Cart Dropdown with Variant Selection */}
+              <div className="mb-8">
+                <AddToCartDropdown
+                  variants={product.variants || []}
+                  productTitle={product.name}
+                  quantity={quantity}
+                  onVariantSelect={handleVariantSelect}
+                />
               </div>
 
               <div className="flex flex-wrap justify-between items-center gap-4 sm:gap-6 pt-6 border-t border-[#5654544D]">

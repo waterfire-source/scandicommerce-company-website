@@ -30,6 +30,12 @@ export interface Package {
   processSteps?: ProcessStep[]
   faq?: { question: string; answer: string }[]
   reviews?: { name: string; rating: number; comment: string; date?: string; title?: string }[]
+  heroButtons?: {
+    primaryButtonText?: string
+    primaryButtonLink?: string
+    secondaryButtonText?: string
+    secondaryButtonLink?: string
+  }
 }
 
 export const packages: Package[] = [

@@ -54,8 +54,8 @@ export default function TorusKnotAnimation({ className = '' }: TorusKnotAnimatio
       uniforms: {
         color1: { value: new THREE.Color(0x7DF9FF) },
         color2: { value: new THREE.Color(0x21F5FF) },
-        color3: { value: new THREE.Color(0x00BBC4) },
-        color4: { value: new THREE.Color(0x006469) },
+        color3: { value: new THREE.Color(0x7DF9FF) },
+        color4: { value: new THREE.Color(0x7DF9FF) },
         lightPosition: { value: new THREE.Vector3(5, 5, 5) },
         time: { value: 0 }
       },
@@ -142,7 +142,7 @@ export default function TorusKnotAnimation({ className = '' }: TorusKnotAnimatio
       const width = window.innerWidth
 
       if (width <= 768) {
-        cameraRef.current.position.z = 2.5
+        cameraRef.current.position.z = 3
       } else if (width <= 1024) {
         cameraRef.current.position.z = 3
       } else {
@@ -177,10 +177,6 @@ export default function TorusKnotAnimation({ className = '' }: TorusKnotAnimatio
     <div
       ref={containerRef}
       className={`absolute pointer-events-none ${className}`}
-      style={{
-        width: '100%',
-        height: '100%'
-      }}
     />
   )
 }

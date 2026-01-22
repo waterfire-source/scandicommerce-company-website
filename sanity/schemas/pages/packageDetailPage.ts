@@ -39,6 +39,18 @@ export const packageDetailPage = defineType({
         defineField({ name: "description", title: "Description", type: "text", rows: 3 }),
       ],
     }),
+    // Hero Buttons
+    defineField({
+      name: "heroButtons",
+      title: "Hero Buttons",
+      type: "object",
+      fields: [
+        defineField({ name: "primaryButtonText", title: "Primary Button Text", type: "string", initialValue: "Book Discovery Call" }),
+        defineField({ name: "primaryButtonLink", title: "Primary Button Link", type: "string", initialValue: "/contact" }),
+        // defineField({ name: "secondaryButtonText", title: "Secondary Button Text", type: "string", initialValue: "Download Scope" }),
+        // defineField({ name: "secondaryButtonLink", title: "Secondary Button Link", type: "string" }),
+      ],
+    }),
     // Best For (short list for overview)
     defineField({
       name: "bestFor",

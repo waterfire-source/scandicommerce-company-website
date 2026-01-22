@@ -83,7 +83,7 @@ export default function TrustedBy({ trustedBy }: TrustedByProps) {
     const logoElement = (
       <motion.div
         key={`${prefix}-${index}`}
-        className="relative flex items-center justify-center h-20 flex-shrink-0"
+        className="relative flex items-center justify-center flex-shrink-0"
         whileHover={{ scale: 1.1 }}
         transition={{ duration: 0.2 }}
       >
@@ -92,9 +92,9 @@ export default function TrustedBy({ trustedBy }: TrustedByProps) {
             <Image
               src={logoUrl}
               alt={altText}
-              width={120}
-              height={80}
-              className="object-contain h-full w-auto"
+              width={150}
+              height={0}
+              className="object-contain w-auto h-auto"
               unoptimized={logoUrl.startsWith('/')}
             />
           </Link>
@@ -102,9 +102,9 @@ export default function TrustedBy({ trustedBy }: TrustedByProps) {
           <Image
             src={logoUrl}
             alt={altText}
-            width={120}
-            height={80}
-            className="object-contain h-full w-auto"
+            width={150}
+            height={0}
+            className="object-contain w-auto h-auto"
             unoptimized={logoUrl.startsWith('/')}
           />
         )}

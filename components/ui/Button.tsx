@@ -42,7 +42,7 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const baseStyles =
-    'min-w-[286px] lg:px-8 px-4 lg:py-4 py-2 transition-colors text-center w-full sm:w-auto'
+    'inline-block min-w-[286px] lg:px-8 px-4 lg:py-4 py-2 transition-colors text-center w-full sm:w-auto'
 
   const typeStyles =
     type === 'primary'

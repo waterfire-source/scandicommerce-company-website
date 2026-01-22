@@ -1157,6 +1157,12 @@ export const packageDetailPageQuery = groq`
       reviewCount,
       description
     },
+    heroButtons {
+      primaryButtonText,
+      primaryButtonLink,
+      secondaryButtonText,
+      secondaryButtonLink
+    },
     bestFor,
     idealFor,
     highlights,
